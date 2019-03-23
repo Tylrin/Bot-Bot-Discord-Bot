@@ -1,0 +1,8 @@
+/node_modules/*
+
+config.json
+database.json
+database.dev.json
+database.prod.json
+config.dev.json
+config.prod.json
