@@ -1,0 +1,7 @@
+{
+    "prefix": "!",
+
+    "banMessageColor": "#e43c59",
+    "kickMessageColor": "#a92a40",
+    "muteMessageColor": "#008e74"
+}
