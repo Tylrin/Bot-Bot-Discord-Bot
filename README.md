@@ -13,4 +13,4 @@ npm install giphy-api --save
 ```
 
 ## General Information
-[Dicord Dokumentation](https://discord.js.org/#/)
+[Discord Documetation](https://discord.js.org/#/)
