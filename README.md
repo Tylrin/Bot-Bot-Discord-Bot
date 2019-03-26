@@ -24,5 +24,16 @@ npm install ms
 npm install giphy-api --save
 ```
 
+## Start Up
+
+Add a config.json with the access tokens for your external services, in the root of your project folder.
+
+```json
+{
+    "token": "Discord-API-Token",
+    "giphyToken": "Giphy-API-TOKEN"
+}
+```
+
 ## General Information
 [Discord Documetation](https://discord.js.org/#/)

@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const errors = require('../utilities/errors.js');
 
 module.exports.run = async (client, message, arguments) => {
     if (message.member.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS'])) {
