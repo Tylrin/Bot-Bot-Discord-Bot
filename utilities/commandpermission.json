@@ -1,3 +1,4 @@
 {
-    "banPermission": "['KICK_MEMBERS', 'BAN_MEMBERS']"
+    "banPermission": ["KICK_MEMBERS", "BAN_MEMBERS"],
+    "kickPermission": ["KICK_MEMBERS", "BAN_MEMBERS"]
 }
