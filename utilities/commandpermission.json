@@ -8,9 +8,9 @@
     "clearPermission": ["MANAGE_MESSAGES"],
     "reportPermission": ["MANAGE_MESSAGES"],
     "gifPermission": ["MANAGE_MESSAGES"],
-    "sayPermission": ["MANAGE_GUILD"],
+    "sayPermission": ["MANAGE_MESSAGES"],
     
-    "8ballPermission": [],
+    "eightballPermission": [],
     "botinfoPermission": [],
     "serverinfoPermission": [],
     "pingPermission": [],

@@ -1,17 +1,23 @@
 const Discord = require('discord.js');
+const Permissions = require('../utilities/commandpermission.json');
+const Color = require('../utilities/commandcolor.json');
 
 module.exports.run = async (client, message, arguments) => {
-    await message.delete(); // Delete the command
+    if (!message.member.hasPermission(Permissions.botinfoPermission)) { // Check permission for the command.
+        message.reply("You don't have the right to see the bot information.")
+        return;
+    };
+    await message.delete().catch(); // Delete your own command.
     
     let botIcon = client.user.displayAvatarURL;
     let botEmbed = new Discord.RichEmbed()
     .setDescription('Bot Information')
-    .setColor('#141619')
+    .setColor(Color.botinfoColor)
     .setThumbnail(botIcon)
     .addField('Bot Name', client.user.username)
     .addField('Created On', client.user.createdAt);
 
-    message.channel.send(botEmbed); // Send the Embed
+    message.author.send(botEmbed);
 }
 
 module.exports.help = {

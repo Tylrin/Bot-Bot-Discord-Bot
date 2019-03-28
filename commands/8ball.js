@@ -1,16 +1,25 @@
 const Discord = require('discord.js');
+const Permissions = require('../utilities/commandpermission.json');
+const Color = require('../utilities/commandcolor.json');
 
 module.exports.run = async (client, message, arguments) => {
-    await message.delete(); // Delete the command
-    if (!arguments[2]) return message.reply('Please ask a full question!');
-    let replies = ['Yes.', 'No.', 'I don´t know.', 'Ask again later.'];
+    if (!message.member.hasPermission(Permissions.eightballPermission)) { // Check permission for the command.
+        message.reply("You don't have the right to ban someone.")
+        return;
+    };
+    await message.delete().catch(); // Delete your own command.
 
+    if (!arguments[2]) {
+        message.reply("Please ask a full question!");
+        return;
+    };
+    let replies = ["Yes.", "No.", "I don´t know.", "Ask again later."];
     let result = Math.floor((Math.random() * replies.length));
     let question = arguments.slice(0).join(" ").trim();
 
     let ballEmbed = new Discord.RichEmbed()
     .setAuthor(message.author.tag)
-    .setColor('#141619')
+    .setColor(Color.eightballColor)
     .addField('Question', question)
     .addField('Answer', replies[result]);
 
