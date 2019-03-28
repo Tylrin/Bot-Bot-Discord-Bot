@@ -19,7 +19,7 @@ module.exports.run = async (client, message, arguments) => {
     .addField('You Joined', message.member.joinedAt)
     .addField('Total Members', message.guild.memberCount);
 
-    message.channel.send(serverEmbed);
+    message.author.send(serverEmbed);
 };
 
 module.exports.help = {

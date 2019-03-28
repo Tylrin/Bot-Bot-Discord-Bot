@@ -3,7 +3,7 @@ const Permissions = require('../utilities/commandpermission.json');
 
 module.exports.run = async (client, message, arguments) => {
     if (!message.member.hasPermission(Permissions.addrolePermission)) { // Check permission for the command.
-        message.reply("You don't have the right to remove someones role.")
+        message.reply("You don't have the right to add a role to someone.")
         return;
     };
     let roleUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0])); // Get mentioned user.

@@ -1,5 +1,6 @@
 {
     "banPermission": ["KICK_MEMBERS", "BAN_MEMBERS"],
+    "unbanPermission": ["KICK_MEMBERS", "BAN_MEMBERS"],
     "kickPermission": ["KICK_MEMBERS", "BAN_MEMBERS"],
     "addrolePermission": ["MANAGE_ROLES"],
     "removerolePermission": ["MANAGE_ROLES"],

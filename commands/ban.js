@@ -13,7 +13,7 @@ module.exports.run = async (client, message, arguments) => {
         return; 
     };
     if (banUser.hasPermission(Permissions.banPermission)) { // Can the user be banned.
-        message.reply(`${bannUser} can't be banned!`)
+        message.reply(`${banUser} can't be banned!`)
         return; 
     };
     await message.delete().catch(); // Delete your own command
