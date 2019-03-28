@@ -40,7 +40,7 @@ client.on('guildMemberRemove', async member => { // On member removed
     welcomeChannel.send(`Hey everyone! ${member} left the channel`)
 });
 
-client.on('message', message => { // Trak all messages
+client.on('message', message => { // On all messages
     console.log(message.content);
     if (message.author == client.user) { // Prevent bot from responding to its own messages
         return;

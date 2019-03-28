@@ -26,8 +26,8 @@ npm install giphy-api --save
 
 ### Token
 
-[Discord Client Token](https://discordapp.com/developers/applications/555802582988357663/information)
-[GIPHY API Access Token](https://giphy.com/)
+- [Discord Client Token](https://discordapp.com/developers/applications/555802582988357663/information)
+- [GIPHY API Access Token](https://giphy.com/)
 
 ## Start Up
 

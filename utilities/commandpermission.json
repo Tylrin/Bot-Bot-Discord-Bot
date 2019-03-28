@@ -1,4 +1,18 @@
 {
     "banPermission": ["KICK_MEMBERS", "BAN_MEMBERS"],
-    "kickPermission": ["KICK_MEMBERS", "BAN_MEMBERS"]
+    "kickPermission": ["KICK_MEMBERS", "BAN_MEMBERS"],
+    "addrolePermission": ["MANAGE_ROLES"],
+    "removerolePermission": ["MANAGE_ROLES"],
+    "mutePermission": ["MUTE_MEMBERS"],
+    
+    "clearPermission": ["MANAGE_MESSAGES"],
+    "reportPermission": ["MANAGE_MESSAGES"],
+    "gifPermission": ["MANAGE_MESSAGES"],
+    "sayPermission": ["MANAGE_GUILD"],
+    
+    "8ballPermission": [],
+    "botinfoPermission": [],
+    "serverinfoPermission": [],
+    "pingPermission": [],
+    "dicePermission": []
 }
