@@ -6,7 +6,7 @@ module.exports.run = async (client, message, arguments) => {
         message.reply("You can't use the !say command.")
         return;
     };
-    await message.delete().catch(); // Delete your own command
+    await message.delete().catch(); // Delete your own command.
 
     let botMessage = arguments.join(' ').trim();
     message.channel.send(botMessage);

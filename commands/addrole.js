@@ -31,7 +31,7 @@ module.exports.run = async (client, message, arguments) => {
     await (roleUser.addRole(guildRole.id)); // Add the role.
     
     try {
-        await roleUser.send(`${guildRole.name} lost the role ${guildRole.name}`);
+        await roleUser.send(`You got the role ${guildRole.name} on the server ${message.guild.name}`);
     } catch(err) {
         message.channel.send(`The role ${guildRole.name} was taken from <@${roleUser.id}>`);
     }

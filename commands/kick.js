@@ -9,12 +9,16 @@ module.exports.run = async (client, message, arguments) => {
     };
     let kicknUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0])); // Get mentioned user.
     if (!kickUser) { // Check if the user exist.
-        message.reply("Couldn't find the user")
+        message.reply("Couldn't find the user.")
         return; 
     };
-    if (kickUser.hasPermission(Permissions.kickPermission)) { // Can the user be banned.
+    if (kickUser.hasPermission(Permissions.kickPermission)) { // Can the user be kicked.
         message.reply(`${kickUser} can't be kicked!`)
         return; 
+    };
+    if (!kickUser.kickable()) { // Is the client able to kick someone.
+        message.reply(`I am unable to kick ${kickUser}.`)
+        return;
     };
     await message.delete().catch(); // Delete your own command.
 
@@ -29,10 +33,19 @@ module.exports.run = async (client, message, arguments) => {
     .addField('Reasons', reason);
     
     let kickChannel = message.guild.channels.find(`name`, 'incidents');
-    if (!kickChannel) return message.channel.send('Couldn´t find incidents channel');
+    if (!kickChannel) {
+        message.channel.send('Couldn´t find incidents channel')
+        return;
+    };
     
     message.guild.member(kickUser).kick(reason);
     kickChannel.send(kickEmbed);
+
+    try {
+        await kickUser.send(`You got kicked from ${message.guild.name} because: ${reason}`);
+    } catch(err) {
+        console.log(`${kickUser} coudn't be DMed because of this error. ${err}`);
+    }
 }
 
 module.exports.help = {

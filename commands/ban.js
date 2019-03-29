@@ -16,6 +16,10 @@ module.exports.run = async (client, message, arguments) => {
         message.reply(`${banUser} can't be banned!`)
         return; 
     };
+    if (!banUser.bannable()) { // Is the client able to ban someone.
+        message.reply(`I am unable to ban ${banUser}.`)
+        return;
+    };
     await message.delete().catch(); // Delete your own command
 
     let reason = arguments.join(' ').slice(22).trim();
@@ -29,17 +33,19 @@ module.exports.run = async (client, message, arguments) => {
     .addField('Reasons', (!!reason ? reason : 'No reason named.'));
 
     let banChannel = message.guild.channels.find(`name`, 'incidents');
-    if (!banChannel) return message.channel.send('Couldn´t find incidents channel');
+    if (!banChannel) {
+        message.channel.send('Couldn´t find incidents channel')
+        return;
+    }; 
 
     message.guild.member(banUser).ban(reason);
     banChannel.send(banEmbed).catch();
 
     try {
-        await banUser.send(`You got because: ${reason}`);
+        await banUser.send(`You got banned from ${message.guild.name} because: ${reason}`);
     } catch(err) {
         console.log(`${banUser} coudn't be DMed because of this error. ${err}`);
     }
-
 }
 
 module.exports.help = {
