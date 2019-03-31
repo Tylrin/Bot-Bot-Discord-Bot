@@ -15,9 +15,9 @@ module.exports.run = async (client, message, arguments) => {
         
     message.channel.bulkDelete(fetched.size) // Delete messages.
     .then(() => {
-        message.channel.send(`${fetched.size} messages deleted`)
+        message.channel.send(`${fetched.size} messages deleted`).then(msg => msg.delete(5000));
     }).catch((err) => {
-        message.channel.send(`sssSorry coudn't delete the messages because of this error: ${err}`)
+        message.channel.send(`sssSorry coudn't delete the messages because of this error: ${err}`);
     }); 
 }
 

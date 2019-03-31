@@ -8,7 +8,7 @@ module.exports.run = async (client, message, arguments) => {
         return;
     };
     let banUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0])); // Get mentioned user.
-    if (!bannUser) { // Check if the user exist.
+    if (!banUser) { // Check if the user exist.
         message.reply("Couldn't find the user")
         return; 
     };

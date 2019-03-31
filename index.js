@@ -11,7 +11,7 @@ fs.readdir('./commands/', (err, files) => { // Check the file direktory for cons
 
     let jsfile = files.filter(f => f.split('.').pop() == 'js');
     if(jsfile.length <= 0) {
-        console.log('Cound´t find commands');
+        console.log('Cound´t find commands')
         return;
     }
     jsfile.forEach((f, i) => {
@@ -28,35 +28,40 @@ client.once('ready', () => { // Initialize Bot
 
 client.on('guildMemberAdd', async member => { // On member added
     console.log(`${member.id} joined the server`);
-    let welcomeChannel = member.guild.channels.find(`name`, 'welcome')
-    if (!welcomeChannel) return message.channel.send('Couldn´t find welcome channel');
-    welcomeChannel.send(`Hey everyone! ${member} joined the channel`)
+    let welcomeChannel = member.guild.channels.find(`name`, 'welcome');
+    if (!welcomeChannel) {
+        message.channel.send('Couldn´t find welcome channel')
+        return;
+    }; 
+    welcomeChannel.send(`Hey everyone! ${member} joined the channel`);
 });
 
 client.on('guildMemberRemove', async member => { // On member removed
     console.log(`${member.id} left the server`);
-    let welcomeChannel = member.guild.channels.find(`name`, 'welcome')
-    if (!welcomeChannel) return message.channel.send('Couldn´t find welcome channel');
-    welcomeChannel.send(`Hey everyone! ${member} left the channel`)
+    let welcomeChannel = member.guild.channels.find(`name`, 'welcome');
+    if (!welcomeChannel) {
+        message.channel.send('Couldn´t find welcome channel')
+        return;
+    }; 
+    welcomeChannel.send(`Hey everyone! ${member} left the channel`);
 });
 
 client.on('message', message => { // On all messages
     console.log(message.content);
     if (message.author == client.user) { // Prevent bot from responding to its own messages
         return;
-    }
-
+    };
     if (message.content.startsWith(botConfig.prefix)) { // It will listen for messages that will start with the set prefix
         processCommand(message);
-    }
+    };
 });
 
 function processCommand(message) {
-    let messageContent = message.content.toLowerCase() // Transforming the text to lower case
-    let fullCommand = messageContent.substr(1) // Remove the leading prefix mark
-    let splitCommand = fullCommand.split(' ') // Split the message up in to pieces for each space
-    let primaryCommand = splitCommand[0] // The first word directly after the prefix is the command
-    let arguments = splitCommand.slice(1) // All other words are arguments/parameters/options for the command 
+    let messageContent = message.content.toLowerCase(); // Transforming the text to lower case
+    let fullCommand = messageContent.substr(1); // Remove the leading prefix mark
+    let splitCommand = fullCommand.split(' '); // Split the message up in to pieces for each space
+    let primaryCommand = splitCommand[0]; // The first word directly after the prefix is the command
+    let arguments = splitCommand.slice(1); // All other words are arguments/parameters/options for the command 
 
     console.log('Command : ' + primaryCommand);
     console.log('Arguments: ' + arguments);
