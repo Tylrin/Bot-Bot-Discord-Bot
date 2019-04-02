@@ -1,9 +1,9 @@
-const Discord = require('discord.js');
-const Permissions = require('../utilities/commandpermission.json');
-const Color = require('../utilities/commandcolor.json');
+const Discord = require("discord.js");
+const Permissions = require("../utilities/commandpermission.json");
+const Color = require("../utilities/commandcolor.json");
 
 module.exports.run = async (client, message, arguments) => {
-    if (!message.member.hasPermission(Permissions.kickPermission)) { // Check permission for the command.
+    if (!message.member.hasPermission(Permissions.kick)) { // Check permission for the command.
         message.reply("You don't have the right to kick someone.")
         return;
     };
@@ -12,7 +12,7 @@ module.exports.run = async (client, message, arguments) => {
         message.reply("Couldn't find the user.")
         return; 
     };
-    if (kickUser.hasPermission(Permissions.kickPermission)) { // Can the user be kicked.
+    if (kickUser.hasPermission(Permissions.kick)) { // Can the user be kicked.
         message.reply(`${kickUser} can't be kicked!`)
         return; 
     };
@@ -22,19 +22,19 @@ module.exports.run = async (client, message, arguments) => {
     };
     await message.delete().catch(); // Delete your own command.
 
-    let reason = arguments.join(' ').slice(22).trim();
+    let reason = arguments.join(" ").slice(22).trim();
     let kickEmbed = new Discord.RichEmbed()
-    .setDescription('Kick')
+    .setDescription("Kick")
     .setColor(Color.kickColor)
-    .addField('Kick User', `${kickUser} with ID ${kickUser.id}`)
-    .addField('Kicked By', `<@${message.author.id}> with ID ${message.author.id}`)
-    .addField('Channel', message.channel)
-    .addField('Time', message.createdAt)
-    .addField('Reasons', reason);
+    .addField("Kick User", `${kickUser} with ID ${kickUser.id}`)
+    .addField("Kicked By", `<@${message.author.id}> with ID ${message.author.id}`)
+    .addField("Channel", message.channel)
+    .addField("Time", message.createdAt)
+    .addField("Reasons", reason);
     
     let kickChannel = message.guild.channels.find(`name`, 'incidents');
     if (!kickChannel) {
-        message.channel.send('Couldn´t find incidents channel')
+        message.channel.send("Couldn't find incidents channel")
         return;
     };
     
@@ -48,6 +48,7 @@ module.exports.run = async (client, message, arguments) => {
     }
 }
 
-module.exports.help = {
-    name: 'kick'
+module.exports.config = {
+    name: "kick",
+    aliases: []
 }

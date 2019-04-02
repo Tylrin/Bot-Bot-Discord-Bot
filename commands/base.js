@@ -1,8 +1,8 @@
-const Discord = require('discord.js');
-const Permissions = require('../utilities/commandpermission.json');
+const Discord = require("discord.js");
+const Permissions = require("../utilities/commandpermission.json");
 
 module.exports.run = async (client, message, arguments) => {
-    if (!message.member.hasPermission(Permissions.banPermission)) { // Check permission for the command.
+    if (!message.member.hasPermission(Permissions.ban)) { // Check permission for the command.
         message.reply("You don't have the right to ban someone.")
         return;
     };
@@ -18,6 +18,7 @@ module.exports.run = async (client, message, arguments) => {
     await message.delete().catch(); // Delete your own command.
 }
 
-module.exports.help = {
-    name: 'base'
+module.exports.config = {
+    name: "base",
+    aliases: []
 }

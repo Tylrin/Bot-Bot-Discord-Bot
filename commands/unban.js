@@ -1,9 +1,9 @@
-const Discord = require('discord.js');
-const Permissions = require('../utilities/commandpermission.json');
-const Color = require('../utilities/commandcolor.json');
+const Discord = require("discord.js");
+const Permissions = require("../utilities/commandpermission.json");
+const Color = require("../utilities/commandcolor.json");
 
 module.exports.run = async (client, message, arguments) => {
-    if (!message.member.hasPermission(Permissions.unbanPermission)) { // Check permission for the command.
+    if (!message.member.hasPermission(Permissions.unban)) { // Check permission for the command.
         message.reply("You don't have the right to unban someone.")
         return;
     };
@@ -12,7 +12,7 @@ module.exports.run = async (client, message, arguments) => {
         message.reply("Couldn't find the user")
         return; 
     };
-    if (unbanUser.hasPermission(Permissions.unbanPermission)) { // Can the user be unbanned.
+    if (unbanUser.hasPermission(Permissions.unban)) { // Can the user be unbanned.
         message.reply(`${unbanUser} can't be unbanned!`)
         return; 
     };
@@ -20,17 +20,17 @@ module.exports.run = async (client, message, arguments) => {
 
     let reason = arguments.join(' ').slice(22).trim();
     let unbanEmbed = new Discord.RichEmbed()
-    .setDescription('Unban')
-    .setColor(Color.banColor)
-    .addField('Unbanned User', `${unbanUser} with ID ${unbanUser.id}`)
-    .addField('Unbanned By', `<@${message.author.id}> with ID ${message.author.id}`)
-    .addField('Channel', message.channel)
-    .addField('Time', message.createdAt)
-    .addField('Reasons', (!!reason ? reason : 'No reason named.'));
+    .setDescription("Unban")
+    .setColor(Color.ban)
+    .addField("Unbanned User", `${unbanUser} with ID ${unbanUser.id}`)
+    .addField("Unbanned By", `<@${message.author.id}> with ID ${message.author.id}`)
+    .addField("Channel", message.channel)
+    .addField("Time", message.createdAt)
+    .addField("Reasons", (!!reason ? reason : 'No reason named.'));
 
     let unbanChannel = message.guild.channels.find(`name`, 'incidents');
     if (!unbanChannel) {
-        message.channel.send('Couldn´t find incidents channel')
+        message.channel.send("Couldn't find incidents channel")
         return;
     }; 
 
@@ -44,6 +44,7 @@ module.exports.run = async (client, message, arguments) => {
     }
 }
 
-module.exports.help = {
-    name: 'unban'
+module.exports.config = {
+    name: "unban",
+    aliases: []
 }

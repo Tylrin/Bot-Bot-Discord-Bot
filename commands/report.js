@@ -1,9 +1,9 @@
-const Discord = require('discord.js');
-const Permissions = require('../utilities/commandpermission.json');
-const Color = require('../utilities/commandcolor.json');
+const Discord = require("discord.js");
+const Permissions = require("../utilities/commandpermission.json");
+const Color = require("../utilities/commandcolor.json");
 
 module.exports.run = async (client, message, arguments) => {
-    if (!message.member.hasPermission(Permissions.reportPermission)) { // Check permission for the command.
+    if (!message.member.hasPermission(Permissions.report)) { // Check permission for the command.
         message.reply("You don't have the right to report someone.")
         return;
     };
@@ -12,7 +12,7 @@ module.exports.run = async (client, message, arguments) => {
         message.reply("Couldn't find the user")
         return; 
     };
-    if (reportUser.hasPermission(Permissions.reportPermission)) { // Can the user be banned.
+    if (reportUser.hasPermission(Permissions.report)) { // Can the user be banned.
         message.reply(`${reportUser} can't be reported!`)
         return; 
     };
@@ -21,22 +21,23 @@ module.exports.run = async (client, message, arguments) => {
     let reason = arguments.join(' ').slice(22).trim();
 
     let reportEmbed = new Discord.RichEmbed()
-    .setDescription('Reports')
-    .setColor(Color.reportColor)
-    .addField('Reported User', `${reportUser} with ID: ${reportUser.id}`)
-    .addField('Reported By', `${message.author} with ID: ${message.author.id}`)
-    .addField('Channel', message.channel)
-    .addField('Time', message.createdAt)
-    .addField('Reasons', reason);
+    .setDescription("Reports")
+    .setColor(Color.report)
+    .addField("Reported User", `${reportUser} with ID: ${reportUser.id}`)
+    .addField("Reported By", `${message.author} with ID: ${message.author.id}`)
+    .addField("Channel", message.channel)
+    .addField("Time", message.createdAt)
+    .addField("Reasons", reason);
     
     let reportsChannel = message.guild.channels.find(`name`, 'reports')
     if (!reportsChannel) {
-        message.channel.send('Couldn´t find reports channel')
+        message.channel.send("Couldn't find reports channel")
         return;
     }
     reportsChannel.send(reportEmbed);
 }
 
-module.exports.help = {
-    name: 'report'
+module.exports.config = {
+    name: "report",
+    aliases: []
 }

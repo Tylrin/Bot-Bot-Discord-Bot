@@ -1,8 +1,8 @@
-const Discord = require('discord.js');
-const Permissions = require('../utilities/commandpermission.json');
+const Discord = require("discord.js");
+const Permissions = require("../utilities/commandpermission.json");
 
 module.exports.run = async (client, message, arguments) => {
-    if (!message.member.hasPermission(Permissions.clearPermission)) { // Check permission for the command.
+    if (!message.member.hasPermission(Permissions.clear)) { // Check permission for the command.
         message.reply("You don't have the right to clear the chat.")
         return;
     };
@@ -21,6 +21,7 @@ module.exports.run = async (client, message, arguments) => {
     }); 
 }
 
-module.exports.help = {
-    name: 'clear'
+module.exports.config = {
+    name: "clear",
+    aliases: ["c", "purge"]
 }

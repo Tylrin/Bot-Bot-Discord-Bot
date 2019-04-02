@@ -1,8 +1,8 @@
-const Discord = require('discord.js');
-const Permissions = require('../utilities/commandpermission.json');
+const Discord = require("discord.js");
+const Permissions = require("../utilities/commandpermission.json");
 
 module.exports.run = async (client, message, arguments) => {
-    if (!message.member.hasPermission(Permissions.addrolePermission)) { // Check permission for the command.
+    if (!message.member.hasPermission(Permissions.addrole)) { // Check permission for the command.
         message.reply("You don't have the right to add a role to someone.")
         return;
     };
@@ -13,7 +13,7 @@ module.exports.run = async (client, message, arguments) => {
     };
     await message.delete().catch(); // Delete your own command.
     
-    let role = arguments.join('').slice(22); // Check for a specified role.
+    let role = arguments.join(" ").slice(22); // Check for a specified role.
     if (!role) {
         message.reply("Specify a role!")
         return;
@@ -37,6 +37,7 @@ module.exports.run = async (client, message, arguments) => {
     }
 }
 
-module.exports.help = {
-    name: 'addrole'
+module.exports.config = {
+    name: "addrole",
+    aliases: []
 }

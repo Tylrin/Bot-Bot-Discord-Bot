@@ -1,19 +1,20 @@
 {
-    "banPermission": ["KICK_MEMBERS", "BAN_MEMBERS"],
-    "unbanPermission": ["KICK_MEMBERS", "BAN_MEMBERS"],
-    "kickPermission": ["KICK_MEMBERS", "BAN_MEMBERS"],
-    "addrolePermission": ["MANAGE_ROLES"],
-    "removerolePermission": ["MANAGE_ROLES"],
-    "mutePermission": ["MUTE_MEMBERS"],
+    "ban": ["KICK_MEMBERS", "BAN_MEMBERS"],
+    "unban": ["KICK_MEMBERS", "BAN_MEMBERS"],
+    "kick": ["KICK_MEMBERS", "BAN_MEMBERS"],
+    "addrole": ["MANAGE_ROLES"],
+    "removerole": ["MANAGE_ROLES"],
+    "mute": ["MUTE_MEMBERS"],
     
-    "clearPermission": ["MANAGE_MESSAGES"],
-    "reportPermission": ["MANAGE_MESSAGES"],
-    "gifPermission": ["MANAGE_MESSAGES"],
-    "sayPermission": ["MANAGE_MESSAGES"],
+    "clear": ["MANAGE_MESSAGES"],
+    "report": ["MANAGE_MESSAGES"],
+    "gif": ["MANAGE_MESSAGES"],
+    "say": ["MANAGE_MESSAGES"],
     
-    "eightballPermission": [],
-    "botinfoPermission": [],
-    "serverinfoPermission": [],
-    "pingPermission": [],
-    "dicePermission": []
+    "eightball": [],
+    "botinfo": [],
+    "serverinfo": [],
+    "ping": [],
+    "dice": [],
+    "coinflip": []
 }

@@ -1,10 +1,10 @@
-const Discord = require('discord.js');
-const ms = require('ms');
-const Permissions = require('../utilities/commandpermission.json');
-const Color = require('../utilities/commandcolor.json');
+const Discord = require("discord.js");
+const ms = require("ms");
+const Permissions = require("../utilities/commandpermission.json");
+const Color = require("../utilities/commandcolor.json");
 
 module.exports.run = async (client, message, arguments) => {
-    if (!message.member.hasPermission(Permissions.mutePermission)) { // Check permission for the command.
+    if (!message.member.hasPermission(Permissions.mute)) { // Check permission for the command.
         message.reply("You don't have the right to mute someone.")
         return;
     };
@@ -13,7 +13,7 @@ module.exports.run = async (client, message, arguments) => {
         message.reply("Couldn't find the user")
         return; 
     };
-    if (muteUser.hasPermission(Permissions.mutePermission)) { // Can the user be banned.
+    if (muteUser.hasPermission(Permissions.mute)) { // Can the user be banned.
         message.reply(`${muteUser} can't be muted!`)
         return; 
     };
@@ -24,8 +24,8 @@ module.exports.run = async (client, message, arguments) => {
     if (!muteRole) {
         try {
             muteRole = await message.guild.createRole({
-                name: 'muted',
-                color: '#000000',
+                name: "muted",
+                color: "#000000",
                 permissions:[]
             })
             message.guild.channels.forEach(async (channel, id) => {
@@ -55,6 +55,7 @@ module.exports.run = async (client, message, arguments) => {
     }, ms(muteTime));
 }
 
-module.exports.help = {
-    name: 'mute'
+module.exports.config = {
+    name: "mute",
+    aliases: []
 }

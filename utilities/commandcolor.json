@@ -1,19 +1,20 @@
 {
-    "banColor": "#141619",
-    "unbanColor": "#141619",
-    "kickColor": "#141619",
-    "addroleColor": "#141619",
-    "removeroleColor": "#141619",
-    "muteColor": "#141619",
+    "ban": "#141619",
+    "unban": "#141619",
+    "kick": "#141619",
+    "addrole": "#141619",
+    "removerole": "#141619",
+    "mute": "#141619",
     
-    "clearColor": "#141619",
-    "reportColor": "#141619",
-    "gifColor": "#141619",
-    "sayColor": "#141619",
+    "clear": "#141619",
+    "report": "#141619",
+    "gif": "#141619",
+    "say": "#141619",
     
-    "eightballColor": "#141619",
-    "botinfoColor": "#141619",
-    "serverinfoColor": "#141619",
-    "pingColor": "#141619",
-    "diceColor": "#141619"
+    "eightball": "#141619",
+    "botinfo": "#141619",
+    "serverinfo": "#141619",
+    "ping": "#141619",
+    "dice": "#141619",
+    "coinflip": "#141619"
 }

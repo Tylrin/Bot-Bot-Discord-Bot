@@ -1,9 +1,9 @@
-const Discord = require('discord.js');
-const Permissions = require('../utilities/commandpermission.json');
-const Color = require('../utilities/commandcolor.json');
+const Discord = require("discord.js");
+const Permissions = require("../utilities/commandpermission.json");
+const Color = require("../utilities/commandcolor.json");
 
 module.exports.run = async (client, message, arguments) => {
-    if (!message.member.hasPermission(Permissions.eightballPermission)) { // Check permission for the command.
+    if (!message.member.hasPermission(Permissions.eightball)) { // Check permission for the command.
         message.reply("You don't have the right to ban someone.")
         return;
     };
@@ -19,13 +19,14 @@ module.exports.run = async (client, message, arguments) => {
 
     let ballEmbed = new Discord.RichEmbed()
     .setAuthor(message.author.tag)
-    .setColor(Color.eightballColor)
-    .addField('Question', question)
-    .addField('Answer', replies[result]);
+    .setColor(Color.eightball)
+    .addField("Question", question)
+    .addField("Answer", replies[result]);
 
     message.channel.send(ballEmbed);
 }
 
-module.exports.help = {
-    name: '8ball'
+module.exports.config = {
+    name: "8ball",
+    aliases: ["8"]
 }

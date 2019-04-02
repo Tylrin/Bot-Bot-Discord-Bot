@@ -1,8 +1,8 @@
-const Discord = require('discord.js');
-const Permissions = require('../utilities/commandpermission.json');
+const Discord = require("discord.js");
+const Permissions = require("../utilities/commandpermission.json");
 
 module.exports.run = async (client, message, arguments) => {
-    if (!message.member.hasPermission(Permissions.removerolePermission)) { // Check permission for the command.
+    if (!message.member.hasPermission(Permissions.removerole)) { // Check permission for the command.
         message.reply("You don't have the right to remove someones role.")
         return;
     };
@@ -37,6 +37,7 @@ module.exports.run = async (client, message, arguments) => {
     }
 }
 
-module.exports.help = {
-    name: 'removerole'
+module.exports.config = {
+    name: "removerole",
+    aliases: []
 }

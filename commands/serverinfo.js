@@ -1,9 +1,9 @@
-const Discord = require('discord.js');
-const Permissions = require('../utilities/commandpermission.json');
-const Color = require('../utilities/commandcolor.json');
+const Discord = require("discord.js");
+const Permissions = require("../utilities/commandpermission.json");
+const Color = require("../utilities/commandcolor.json");
 
 module.exports.run = async (client, message, arguments) => {
-    if (!message.member.hasPermission(Permissions.serverinfoPermission)) { // Check permission for the command.
+    if (!message.member.hasPermission(Permissions.serverinfo)) { // Check permission for the command.
         message.reply("You don't have the right to see the server information.")
         return;
     };
@@ -11,17 +11,18 @@ module.exports.run = async (client, message, arguments) => {
 
     let serverIcon = message.guild.iconURL;
     let serverEmbed = new Discord.RichEmbed()
-    .setDescription('Server Information')
-    .setColor(Color.serverinfoColor)
+    .setDescription("Server Information")
+    .setColor(Color.serverinfo)
     .setThumbnail(serverIcon)
-    .addField('Server Name', message.guild.name)
-    .addField('Created On', message.guild.createdAt)
-    .addField('You Joined', message.member.joinedAt)
-    .addField('Total Members', message.guild.memberCount);
+    .addField("Server Name", message.guild.name)
+    .addField("Created On", message.guild.createdAt)
+    .addField("You Joined", message.member.joinedAt)
+    .addField("Total Members", message.guild.memberCount);
 
     message.author.send(serverEmbed);
 };
 
-module.exports.help = {
-    name: 'serverinfo'
+module.exports.config = {
+    name: "serverinfo",
+    aliases: ["si","serverdescription"]
 };

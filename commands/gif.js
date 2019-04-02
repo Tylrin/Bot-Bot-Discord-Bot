@@ -1,18 +1,18 @@
-const Discord = require('discord.js');
-const config = require('../config.json');
-const giphy = require('giphy-api')(config.giphyToken);
-const Permissions = require('../utilities/commandpermission.json');
-const Color = require('../utilities/commandcolor.json');
+const Discord = require("discord.js");
+const config = require("../config.json");
+const giphy = require("giphy-api")(config.giphyToken);
+const Permissions = require("../utilities/commandpermission.json");
+const Color = require("../utilities/commandcolor.json");
 
 module.exports.run = async (client, message, arguments) => {
-    if (!message.member.hasPermission(Permissions.gifPermission)) { // Check permission for the command.
+    if (!message.member.hasPermission(Permissions.gif)) { // Check permission for the command.
         message.reply("You don't have the right to post gifs.")
         return;
     };
     await message.delete().catch(); // Delete your own command.
 
     if (!arguments[0]) {
-        message.channel.reply("Please put in a search term");
+        message.reply("Please put in a search term");
         return;
     };
     let searchTerm = arguments[0];
@@ -43,6 +43,7 @@ module.exports.run = async (client, message, arguments) => {
     });
 }
 
-module.exports.help = {
-    name: 'gif'
+module.exports.config = {
+    name: "gif",
+    aliases: []
 }
