@@ -25,7 +25,7 @@ module.exports.run = async (client, message, arguments) => {
     let reason = arguments.join(" ").slice(22).trim();
     let kickEmbed = new Discord.RichEmbed()
     .setDescription("Kick")
-    .setColor(Color.kickColor)
+    .setColor(Color.kick)
     .addField("Kick User", `${kickUser} with ID ${kickUser.id}`)
     .addField("Kicked By", `<@${message.author.id}> with ID ${message.author.id}`)
     .addField("Channel", message.channel)

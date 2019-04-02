@@ -46,16 +46,15 @@ module.exports.run = async (client, message, arguments) => {
     }
 
     await (muteUser.addRole(muteRole.id));
-    message.reply(`<@${muteUser.id}> has been muted for ${ms(ms(muteTime))}`);
 
-    // Remove mute role
-    setTimeout(function() {
-        muteUser.removeRole(muteRole.id);
-        message.channel.send(`<@${muteUser.id}> has been unmuted!`);
-    }, ms(muteTime));
+    try {
+        await muteUser.send(`You have been muted in ${message.guild.name} for ${ms(ms(muteTime))}`);
+    } catch(err) {
+        console.log(`${muteUser} coudn't be DMed because of this error. ${err}`);
+    }
 }
 
 module.exports.config = {
     name: "mute",
-    aliases: []
+    aliases: ["silence"]
 }

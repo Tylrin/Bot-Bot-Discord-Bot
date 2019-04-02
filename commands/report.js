@@ -24,7 +24,7 @@ module.exports.run = async (client, message, arguments) => {
     .setDescription("Reports")
     .setColor(Color.report)
     .addField("Reported User", `${reportUser} with ID: ${reportUser.id}`)
-    .addField("Reported By", `${message.author} with ID: ${message.author.id}`)
+    //.addField("Reported By", `${message.author} with ID: ${message.author.id}`)
     .addField("Channel", message.channel)
     .addField("Time", message.createdAt)
     .addField("Reasons", reason);

@@ -27,7 +27,7 @@ module.exports.run = async (client, message, arguments) => {
     .setDescription("Ban")
     .setColor(Color.ban)
     .addField("Banned User", `${banUser} with ID ${banUser.id}`)
-    .addField("Banned By", `<@${message.author.id}> with ID ${message.author.id}`)
+    //.addField("Banned By", `<@${message.author.id}> with ID ${message.author.id}`)
     .addField("Channel", message.channel)
     .addField("Time", message.createdAt)
     .addField("Reasons", (!!reason ? reason : "No reason named."));
@@ -38,17 +38,17 @@ module.exports.run = async (client, message, arguments) => {
         return;
     }; 
 
-    message.guild.member(banUser).ban(reason);
+    message.guild.ban(banUser, { day: 1, reason: reason}).catch(err => console.log(err));
     banChannel.send(banEmbed).catch();
 
     try {
         await banUser.send(`You got banned from ${message.guild.name} because: ${reason}`);
     } catch(err) {
-        console.log(`${banUser} coudn't be DMed because of this error. ${err}`);
+        console.log(`${banUser.user.tag} coudn't be DMed because of this error. ${err}`);
     }
 }
 
 module.exports.config = {
     name: "ban",
-    aliases: []
+    aliases: ["b", "banish", "remove"]
 }

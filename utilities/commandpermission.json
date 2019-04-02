@@ -1,10 +1,15 @@
 {
+    "reload": ["ADMINISTRATOR"],
+    "shutdown": ["ADMINISTRATOR"],
+    "uptime": ["ADMINISTRATOR"],
+    
     "ban": ["KICK_MEMBERS", "BAN_MEMBERS"],
     "unban": ["KICK_MEMBERS", "BAN_MEMBERS"],
     "kick": ["KICK_MEMBERS", "BAN_MEMBERS"],
     "addrole": ["MANAGE_ROLES"],
     "removerole": ["MANAGE_ROLES"],
     "mute": ["MUTE_MEMBERS"],
+    "unmute": ["MUTE_MEMBERS"],
     
     "clear": ["MANAGE_MESSAGES"],
     "report": ["MANAGE_MESSAGES"],

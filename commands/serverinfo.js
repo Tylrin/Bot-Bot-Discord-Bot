@@ -24,5 +24,5 @@ module.exports.run = async (client, message, arguments) => {
 
 module.exports.config = {
     name: "serverinfo",
-    aliases: ["si","serverdescription"]
+    aliases: ["si", "server", "serverdescription"]
 };
