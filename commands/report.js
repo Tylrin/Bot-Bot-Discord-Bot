@@ -1,9 +1,9 @@
 const Discord = require("discord.js");
-const Permissions = require("../utilities/commandpermission.json");
-const Color = require("../utilities/commandcolor.json");
+const permissions = require("../utilities/commandpermission.json");
+const color = require("../utilities/commandcolor.json");
 
 module.exports.run = async (client, message, arguments) => {
-    if (!message.member.hasPermission(Permissions.report)) { // Check permission for the command.
+    if (!message.member.hasPermission(permissions.report)) { // Check permission for the command.
         message.reply("You don't have the right to report someone.")
         return;
     };
@@ -12,7 +12,7 @@ module.exports.run = async (client, message, arguments) => {
         message.reply("Couldn't find the user")
         return; 
     };
-    if (reportUser.hasPermission(Permissions.report)) { // Can the user be banned.
+    if (reportUser.hasPermission(permissions.report)) { // Can the user be banned.
         message.reply(`${reportUser} can't be reported!`)
         return; 
     };
@@ -22,7 +22,7 @@ module.exports.run = async (client, message, arguments) => {
 
     let reportEmbed = new Discord.RichEmbed()
     .setDescription("Reports")
-    .setColor(Color.report)
+    .setColor(color.report)
     .addField("Reported User", `${reportUser} with ID: ${reportUser.id}`)
     //.addField("Reported By", `${message.author} with ID: ${message.author.id}`)
     .addField("Channel", message.channel)

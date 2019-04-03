@@ -1,18 +1,19 @@
 const Discord = require("discord.js");
-const Permissions = require("../utilities/commandpermission.json");
-const Color = require("../utilities/commandcolor.json");
+const permissions = require("../utilities/commandpermission.json");
+const color = require("../utilities/commandcolor.json");
 
 module.exports.run = async (client, message, arguments) => {
-    if (!message.member.hasPermission(Permissions.botinfo)) { // Check permission for the command.
-        message.reply("You don't have the right to see the bot information.")
-        return;
-    };
-    await message.delete().catch(); // Delete your own command.
+    // Check permission for the command.
+    if (!message.member.hasPermission(permissions.botinfo)) return message.reply("You don't have the right to see the bot information.");
+
+    // Delete your own command.
+    await message.delete().catch();
     
+    // Create embed.
     let botIcon = client.user.displayAvatarURL;
     let botEmbed = new Discord.RichEmbed()
     .setDescription("Bot Information")
-    .setColor(Color.botinfo)
+    .setColor(color.botinfo)
     .setThumbnail(botIcon)
     .addField("Bot Name", client.user.username)
     .addField("Created On", client.user.createdAt);

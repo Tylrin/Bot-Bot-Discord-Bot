@@ -1,23 +1,26 @@
 const Discord = require("discord.js");
-const Permissions = require("../utilities/commandpermission.json");
+const permissions = require("../utilities/commandpermission.json");
 
 module.exports.run = async (client, message, arguments) => {
-    if (!message.member.hasPermission(Permissions.clear)) { // Check permission for the command.
-        message.reply("You don't have the right to clear the chat.")
-        return;
-    };
-    await message.delete().catch(); // Delete your own command.
+    // Check permission for the command.
+    if (!message.member.hasPermission(permissions.clear)) return message.reply("You don't have the right to clear the chat.");
 
-    let fetchedAmount = arguments[0]; // Grab how many messages should be deleted.
-    console.log(`${fetchedAmount} messages in search`)
-    let fetched = await message.channel.fetchMessages({limit: fetchedAmount}); // Get all messages.
+    // Delete your own command.
+    await message.delete().catch();
+
+    // Get how many messages should be deleted.
+    let fetchedAmount = arguments[0]; 
+    console.log(`${fetchedAmount} messages in search`);
+    // Get all messages.
+    let fetched = await message.channel.fetchMessages({limit: fetchedAmount});
     console.log(`${fetched.size} messages found`);
-        
-    message.channel.bulkDelete(fetched.size) // Delete messages.
+
+    // Delete messages.
+    message.channel.bulkDelete(fetched.size)
     .then(() => {
         message.channel.send(`${fetched.size} messages deleted`).then(msg => msg.delete(5000));
     }).catch((err) => {
-        message.channel.send(`sssSorry coudn't delete the messages because of this error: ${err}`);
+        message.channel.send(`Sorry coudn't delete the messages because of this error: ${err}`);
     }); 
 }
 

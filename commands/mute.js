@@ -1,26 +1,24 @@
 const Discord = require("discord.js");
 const ms = require("ms");
-const Permissions = require("../utilities/commandpermission.json");
-const Color = require("../utilities/commandcolor.json");
+const permissions = require("../utilities/commandpermission.json");
 
 module.exports.run = async (client, message, arguments) => {
-    if (!message.member.hasPermission(Permissions.mute)) { // Check permission for the command.
-        message.reply("You don't have the right to mute someone.")
-        return;
-    };
-    let muteUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0])); // Get mentioned user.
-    if (!muteUser) { // Check if the user exist.
-        message.reply("Couldn't find the user")
-        return; 
-    };
-    if (muteUser.hasPermission(Permissions.mute)) { // Can the user be banned.
-        message.reply(`${muteUser} can't be muted!`)
-        return; 
-    };
-    await message.delete().catch(); // Delete your own command.
+    // Check permission for the command.
+    if (!message.member.hasPermission(permissions.mute)) return message.reply("You don't have the right to mute someone.");
 
+    // Get mentioned user.
+    let muteUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0]));
+    // Check if the user exist.
+    if (!muteUser) return message.reply("Couldn't find the user");
+    // Check mentioned user permission.
+    if (muteUser.hasPermission(permissions.mute)) return  message.reply(`${muteUser} can't be muted!`);
+
+    // Delete your own command.
+    await message.delete().catch(); 
+
+    // Get mute role.
     let muteRole = message.guild.roles.find(`name`, 'muted');
-    // Create mute role
+    // If it doesn't exist, create it.
     if (!muteRole) {
         try {
             muteRole = await message.guild.createRole({
@@ -34,23 +32,21 @@ module.exports.run = async (client, message, arguments) => {
                     ADD_REACTIONS: false
                 });
             });
-        } catch(e) {
-                console.log(e.stack);
+        } catch(err) {
+                console.log(err.stack);
         }
     }
     // Set mute time
     let muteTime = arguments[1];
-    if (!muteTime) {
-        message.reply("You didn't specify a time!");
-        return;
-    }
+    if (!muteTime) return message.reply("You didn't specify a time!");
 
+    // Add the role to the user.
     await (muteUser.addRole(muteRole.id));
 
     try {
         await muteUser.send(`You have been muted in ${message.guild.name} for ${ms(ms(muteTime))}`);
     } catch(err) {
-        console.log(`${muteUser} coudn't be DMed because of this error. ${err}`);
+        console.log(`${muteUser.user.tag} coudn't be DMed because of this error. ${err}`);
     }
 }
 

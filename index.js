@@ -58,7 +58,8 @@ client.on('message', message => { // On all messages
         return;
     };
     if (message.content.startsWith(botConfig.prefix)) { // It will listen for messages that will start with the set prefix
-        processCommand(message);
+        processCommand(message)
+        return;
     };
 });
 

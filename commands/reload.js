@@ -1,17 +1,18 @@
 const Discord = require("discord.js");
-const Permissions = require("../utilities/commandpermission.json");
+const permissions = require("../utilities/commandpermission.json");
 
 module.exports.run = async (client, message, arguments) => {
-    if (!message.member.hasPermission(Permissions.reload)) { // Check permission for the command.
-        message.reply("You don't have the right to reload a command file.")
-        return;
-    };
-    await message.delete().catch(); // Delete your own command.
+    // Check permission for the command.
+    if (!message.member.hasPermission(permissions.reload)) return message.reply("You don't have the right to reload a command file.");
+    
+    // Delete your own command.
+    await message.delete().catch();
 
+    // Check if there is a file name.
     if (!arguments[0]) return message.reply("Please provide a command to reload.");
 
+    // Try reloading the file.
     let commandName = arguments[0].toLowerCase()
-
     try {
         delete require.cache[require.resolve(`./${commandName}.js`)]
         client.commands.delete(commandName)
