@@ -20,7 +20,7 @@ module.exports.run = async (client, message, arguments) => {
 
         // Create embed.
         let pingEmbed = new Discord.RichEmbed()
-        .setDescription("Lateny")
+        .setDescription("Latency")
         .setColor(color.ping)
         .addField("Bot Latency", ping)
         .addField("API Lateny", Math.round(client.ping));

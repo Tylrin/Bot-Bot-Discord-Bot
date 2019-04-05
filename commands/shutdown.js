@@ -9,8 +9,8 @@ module.exports.run = async (client, message, arguments) => {
     await message.delete().catch();
 
     try {
-        await message.channel.send("The Bot is shuting down.");
-        process.exit
+        await message.channel.send("The Bot is shuting down.")
+        process.exit()
     } catch(err) {
         console.log(err);
         message.channel.send(`ERROR: ${err.message}`);

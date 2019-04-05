@@ -4,6 +4,8 @@ const botConfig = require("./config.bot.json");
 const fs = require("fs");
 
 const client = new Discord.Client({disableEveryone: true});
+require("./utilities/eventhandler.js")(client);
+
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 
@@ -25,11 +27,6 @@ fs.readdir("./commands/", (err, files) => { // Check the file direktory for cons
             client.aliases.set(alias, props.config.name)
         });
     });
-});
-
-client.once('ready', () => { // Initialize Bot
-    console.log(`${client.user.username} is online!`);
-    client.user.setActivity("source code", {type: "WATCHING"}); // Set Bots activity
 });
 
 client.on('guildMemberAdd', async member => { // On member added
@@ -64,10 +61,10 @@ client.on('message', message => { // On all messages
 });
 
 function processCommand(message) {
-    let messageContent = message.content.toLowerCase(); // Transforming the text to lower case
+    let messageContent = message.content; // Get message content.
     let fullCommand = messageContent.substr(botConfig.prefix.length); // Remove the leading prefix mark
     let splitCommand = fullCommand.split(" "); // Split the message up in to pieces for each space
-    let command = splitCommand[0]; // The first word directly after the prefix is the command
+    let command = splitCommand[0].toLowerCase(); // The first word directly after the prefix is the command
     let arguments = splitCommand.slice(1); // All other words are arguments/parameters/options for the command 
 
     console.log('Command : ' + command);
