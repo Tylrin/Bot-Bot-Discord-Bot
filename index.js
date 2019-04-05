@@ -4,12 +4,14 @@ const botConfig = require("./config.bot.json");
 const fs = require("fs");
 
 const client = new Discord.Client({disableEveryone: true});
-require("./utilities/eventhandler.js")(client);
+// require("./utilities/eventhandler.js")(client);
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 
-fs.readdir("./commands/", (err, files) => { // Check the file direktory for console commands
+
+// Check the file direktory for console commands
+fs.readdir("./commands/", (err, files) => { 
     if (err) {
         console.log(err)
         return;
@@ -29,53 +31,24 @@ fs.readdir("./commands/", (err, files) => { // Check the file direktory for cons
     });
 });
 
-client.on('guildMemberAdd', async member => { // On member added
-    console.log(`${member.id} joined the server`);
-    let welcomeChannel = member.guild.channels.find(`name`, "welcome");
-    if (!welcomeChannel) {
-        message.channel.send("Couldn´t find welcome channel")
+// Check the file direktory for events
+fs.readdir("./events/", (err, files) => {
+    if (err) {
+        console.log(err)
         return;
-    }; 
-    welcomeChannel.send(`Hey everyone! ${member} joined the channel`);
-});
-
-client.on('guildMemberRemove', async member => { // On member removed
-    console.log(`${member.id} left the server`);
-    let welcomeChannel = member.guild.channels.find(`name`, "welcome");
-    if (!welcomeChannel) {
-        message.channel.send("Couldn´t find welcome channel")
-        return;
-    }; 
-    welcomeChannel.send(`Hey everyone! ${member} left the channel`);
-});
-
-client.on('message', message => { // On all messages
-    console.log(message.content);
-    if (message.author == client.user) { // Prevent bot from responding to its own messages
-        return;
-    };
-    if (message.content.startsWith(botConfig.prefix)) { // It will listen for messages that will start with the set prefix
-        processCommand(message)
-        return;
-    };
-});
-
-function processCommand(message) {
-    let messageContent = message.content; // Get message content.
-    let fullCommand = messageContent.substr(botConfig.prefix.length); // Remove the leading prefix mark
-    let splitCommand = fullCommand.split(" "); // Split the message up in to pieces for each space
-    let command = splitCommand[0].toLowerCase(); // The first word directly after the prefix is the command
-    let arguments = splitCommand.slice(1); // All other words are arguments/parameters/options for the command 
-
-    console.log('Command : ' + command);
-    console.log('Arguments: ' + arguments);
-
-    let commandfile = client.commands.get(command) || client.commands.get(client.aliases.get(command)); // Get the command file
-    if (commandfile) {
-        commandfile.run(client, message, arguments); // If the file exists, call it
-    } else {
-        message.channel.send(`The command ${command} doesn´t exist`); // Notify if the command doesn´t exist
     }
-};
+    let jsfile = files.filter(f => f.split(".").pop() == "js");
+    if (jsfile.length <= 0) {
+        console.log("Cound't find events")
+        return;
+    }
+    jsfile.forEach((f, i) => {
+        let props = require(`./events/${f}`);
+        let fileName = f.split(".")[0];
+        console.log(`${fileName} loaded`);
+        client.on(fileName, props.bind(null, client));
+        delete require.cache[require.resolve(`./events/${f}`)];
+    });
+});
 
 client.login(config.token);
