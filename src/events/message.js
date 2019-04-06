@@ -1,9 +1,8 @@
 const Discord = require("discord.js");
-const botConfig = require("../config.bot.json");
 
 module.exports = (client, message) => {
+    const botConfig = client.botConfig;
 
-    console.log(message);
     // On all messages
     if (message.author == client.user) { // Prevent bot from responding to its own messages
         return;

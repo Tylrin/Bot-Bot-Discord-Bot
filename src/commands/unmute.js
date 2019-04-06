@@ -17,7 +17,7 @@ module.exports.run = async (client, message, arguments) => {
     await message.delete().catch();
 
     // Get mute role.
-    let muteRole = message.guild.roles.find(`name`, 'muted');
+    let muteRole = message.guild.roles.find("name", "muted");
     // Check if role exists.
     if (!muteRole) return message.channel.send("There is no mute role!")
 

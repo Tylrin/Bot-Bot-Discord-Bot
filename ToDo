@@ -1,3 +1,25 @@
-1) Weather System
-2) Wikipedia
-3) Youtube, Twitter and Reddit connection.
+1) Google Maps api
+https://www.programmableweb.com/api/google-maps
+
+2) Instagram
+https://www.programmableweb.com/api/instagram-graph
+
+3) Twitter
+https://www.programmableweb.com/api/twitter
+
+4) Facebook
+https://www.programmableweb.com/api/facebook
+
+5) Youtube
+https://www.programmableweb.com/api/youtube
+
+6) Wikipedia
+https://www.programmableweb.com/api/wikipedia
+
+7) Weather
+https://www.programmableweb.com/api/geonames
+
+Notizen
+
+graph.facebook.com/channel?field=id,name,likes
+maps.googleapis.com/maps/api/geocode/json?address=berlin&sensor=false

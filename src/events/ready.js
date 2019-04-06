@@ -1,7 +1,8 @@
 const Discord = require("discord.js");
-const botConfig = require("../config.bot.json");
 
 module.exports = client => { // Initialize Bot
+    const botConfig = client.botConfig;
+
     // Change status activity
     let statuses = [
         `${botConfig.prefix}help`,

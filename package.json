@@ -1,9 +1,9 @@
 {
-  "name": "BotBot",
+  "name": "The Source Bot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "author": "Till Gellien aka Tylrin",
+  "author": "Tylrin",
   "dependencies": {
     "discord.js": "^11.4.2",
     "giphy-api": "^2.0.1",
