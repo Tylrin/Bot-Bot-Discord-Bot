@@ -34,7 +34,7 @@ module.exports.run = async (client, message, arguments) => {
         // Create embed.
         let gifEmbed = new Discord.RichEmbed()
         .setDescription(response.data.title)
-        .setColor(color.gifColor)
+        .setColor(color.gif)
         .setImage(selectedImage);
 
         message.channel.send(gifEmbed);
@@ -46,5 +46,7 @@ module.exports.run = async (client, message, arguments) => {
 
 module.exports.config = {
     name: "gif",
-    aliases: []
+    aliases: [],
+    usage: "",
+    description: ""
 }

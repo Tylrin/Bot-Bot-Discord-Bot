@@ -18,5 +18,7 @@ module.exports.run = async (client, message, arguments) => {
 
 module.exports.config = {
     name: "base",
-    aliases: []
+    aliases: [],
+    usage: "",
+    description: ""
 }

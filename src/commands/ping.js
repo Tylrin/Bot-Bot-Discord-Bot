@@ -31,5 +31,7 @@ module.exports.run = async (client, message, arguments) => {
 
 module.exports.config = {
     name: "ping",
-    aliases: ["latency"]
+    aliases: ["latency"],
+    usage: "",
+    description: ""
 }

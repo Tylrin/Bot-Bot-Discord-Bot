@@ -52,5 +52,7 @@ module.exports.run = async (client, message, arguments) => {
 
 module.exports.config = {
     name: "mute",
-    aliases: ["silence"]
+    aliases: ["silence"],
+    usage: "",
+    description: ""
 }

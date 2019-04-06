@@ -29,5 +29,7 @@ module.exports.run = async (client, message, arguments) => {
 
 module.exports.config = {
     name: "8ball",
-    aliases: ["8"]
+    aliases: ["8"],
+    usage: `!8ball <your question>`,
+    description: ""
 }

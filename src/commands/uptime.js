@@ -19,5 +19,7 @@ module.exports.run = async (client, message, arguments) => {
 
 module.exports.config = {
     name: "uptime",
-    aliases: []
+    aliases: [],
+    usage: "",
+    description: ""
 }

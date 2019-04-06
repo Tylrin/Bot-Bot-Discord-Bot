@@ -26,5 +26,7 @@ module.exports.run = async (client, message, arguments) => {
 
 module.exports.config = {
     name: "clear",
-    aliases: ["c", "purge"]
+    aliases: ["c", "purge"],
+    usage: "",
+    description: ""
 }

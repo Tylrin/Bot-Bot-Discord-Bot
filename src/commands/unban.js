@@ -47,5 +47,7 @@ module.exports.run = async (client, message, arguments) => {
 
 module.exports.config = {
     name: "unban",
-    aliases: []
+    aliases: [],
+    usage: "",
+    description: ""
 }

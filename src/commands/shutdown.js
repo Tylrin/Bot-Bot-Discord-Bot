@@ -19,5 +19,7 @@ module.exports.run = async (client, message, arguments) => {
 
 module.exports.config = {
     name: "shutdown",
-    aliases: ["q", "quit", "exit"]
+    aliases: ["q", "quit", "exit"],
+    usage: "",
+    description: ""
 }

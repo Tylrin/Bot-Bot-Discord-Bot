@@ -28,5 +28,7 @@ module.exports.run = async (client, message, arguments) => {
 
 module.exports.config = {
     name: "reload",
-    aliases: []
+    aliases: [],
+    usage: "",
+    description: ""
 }

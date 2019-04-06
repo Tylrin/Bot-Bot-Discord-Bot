@@ -39,5 +39,7 @@ module.exports.run = async (client, message, arguments) => {
 
 module.exports.config = {
     name: "report",
-    aliases: []
+    aliases: [],
+    usage: "",
+    description: ""
 }
