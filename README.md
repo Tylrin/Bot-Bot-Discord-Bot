@@ -1,7 +1,10 @@
-# Bot-Bot Discord-Bot
+# The Source Bot
 This is a project of a basic discord bot. It is meant to be a pretty generic and bear bones discord bot that serves a starting ground for more custom bots.
 
-This project is largly based on the code from a youtube series by the name of [Discord.js Bot Development](https://www.youtube.com/watch?v=Z-tc91hArlM&list=PLdnyVeMcpY7-GfaXaWBOb3ZQkJxP53BIx) by [{TheSourceCode}](https://www.youtube.com/channel/UCNXt2MrZaqfIBknamqwzeXA).
+This project is largly based on the code from a couple of youtube series by the name of:
+- [Discord.js Bot Development](https://www.youtube.com/watch?v=Z-tc91hArlM&list=PLdnyVeMcpY7-GfaXaWBOb3ZQkJxP53BIx) by [{TheSourceCode}](https://www.youtube.com/channel/UCNXt2MrZaqfIBknamqwzeXA)
+- [Discord.JS Coding Tutorials](https://www.youtube.com/watch?v=UcLspwognk0&list=PLWnw41ah3I4ZfNLV3by7nB6JO2WcCc3Wj) by [[MenuDocs]](https://www.youtube.com/channel/UCpGGFqJP9vYvzFudqnQ-6IA)
+- [Coding Your Own Discord Bot - *NEW*](https://www.youtube.com/watch?v=RZ02rw3NZnk&list=PLS6sInD7ThM0MTsu88RyxhTI187ScqRmm) by [Dapper Dino - Coding Tutorials](https://www.youtube.com/channel/UCjCpZyil4D8TBb5nVTMMaUw).
 
 ## About
 
