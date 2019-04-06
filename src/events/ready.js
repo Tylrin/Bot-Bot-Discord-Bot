@@ -1,5 +1,3 @@
-const Discord = require("discord.js");
-
 module.exports = client => { // Initialize Bot
     const botConfig = client.botConfig;
 

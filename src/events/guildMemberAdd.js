@@ -1,5 +1,3 @@
-const Discord = require("discord.js");
-
 module.exports = (client, member) => {
     // On member added
     console.log(`${member.id} joined the server`);

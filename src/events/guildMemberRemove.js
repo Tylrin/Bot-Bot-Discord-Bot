@@ -1,5 +1,3 @@
-const Discord = require("discord.js");
-
 module.exports = (client, member) => {
     // On member removed or kicked
     console.log(`${member.id} left the server`);
