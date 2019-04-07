@@ -17,44 +17,59 @@ module.exports.run = async (client, message, arguments) => {
     if (arguments[0] == "list" || arguments.length <= 0) {
         // Check the file direktory for console commands
         fs.readdir("./src/commands", (err, files) => { 
+            let commandField = [];
             if (err) {
                 console.log(err)
                 return;
             }
             let jsfile = files.filter(f => f.split(".").pop() == "js");
             if (jsfile.length <= 0) return;
-            console.log(`file ${jsfile}`);
-            console.log(jsfile.length);
-      
-    
-        // Create embed.
-        let listEmbed = new Discord.RichEmbed()
-        .setDescription(`${client.botConfig.prefix}help `)
-        .setColor(color.help)
-        .addField("Prefix", `${client.botConfig.prefix}`)
-        .addField("Name", `${jsfile.join(", ")}`);
+            jsfile.forEach((f, i) => {
+                let props = require(`./${f}`);
+                let commandName = f.split(".")[0];
+                commandField.push({"name":commandName, "value":`${props.config.description || "invalid description"}`});
+            });
 
-        console.log("list");
-        message.author.send(listEmbed);
-        return;
+            // Create embed.
+            message.author.send({embed: {
+                color: (color.help, 1),
+                author: {
+                  name: client.user.username,
+                  icon_url: client.user.avatarURL
+                },
+                title: "A list of all commands",
+                description: "This is a test embed to showcase what they look like and what they can do.",
+                fields: commandField,
+                timestamp: new Date(),
+                footer: {
+                  icon_url: client.user.avatarURL,
+                  text: "Help Command"
+                }
+              }
+            });
+            return;
         })
     }
 
+    // Reply with the information of a specified command.
     if (arguments[0]) {
         // Get command
         let command = arguments[0];
-        console.log("specific");
         if (client.commands.has(command)) {
             command = client.commands.get(command);
+
             // Create embed.
             let helpEmbed = new Discord.RichEmbed()
-            .setDescription(`${client.botConfig.prefix}help `)
+            .setTitle(`${command.config.name} information`)
+            .setAuthor(client.user.username, client.user.avatarURL)
+            .setDescription(`${command.config.description || "invalid description"}`)
             .setColor(color.help)
             .addField("Prefix", `${client.botConfig.prefix}`)
             .addField("Name", `${command.config.name}`)
-            .addField("Aliases", `${command.config.aliases.join(", ") || "no aliases for this command"}`)
             .addField("Usage", `${command.config.usage || "invalid usage description"}`)
-            .addField("Description", `${command.config.description || "invalid description"}`);
+            .addField("Aliases", `${command.config.aliases.join(", ") || "no aliases for this command"}`)
+            .setTimestamp()
+            .setFooter("Help Command", client.user.avatarURL);
 
             message.author.send(helpEmbed);
             return;

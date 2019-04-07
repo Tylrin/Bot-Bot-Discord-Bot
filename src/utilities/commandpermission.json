@@ -15,6 +15,7 @@
     "report": ["MANAGE_MESSAGES"],
     "gif": ["MANAGE_MESSAGES"],
     "say": ["MANAGE_MESSAGES"],
+    "poll": ["MANAGE_MESSAGES"],
     
     "eightball": [],
     "botinfo": [],
