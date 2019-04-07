@@ -12,11 +12,13 @@ module.exports.run = async (client, message, arguments) => {
     // Create embed.
     let botIcon = client.user.displayAvatarURL;
     let botEmbed = new Discord.RichEmbed()
-    .setDescription("Bot Information")
+    .setTitle("Bot Information")
     .setColor(color.botinfo)
     .setThumbnail(botIcon)
     .addField("Bot Name", client.user.username)
     .addField("Created On", client.user.createdAt)
+    .addField("Version", client.botInfo.version)
+    .addField("Author", client.botInfo.author)
     .setTimestamp();
 
     message.author.send(botEmbed);

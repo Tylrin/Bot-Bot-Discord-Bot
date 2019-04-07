@@ -5,7 +5,7 @@ const superagent = require("superagent");
 
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.dog)) return message.reply("You don't have the right to post a dog image.");
+    if (!message.member.hasPermission(permissions.chucknorris)) return message.reply("You don't have the right to post a cat image.");
         
     // Delete your own command.
     await message.delete().catch();
@@ -15,23 +15,23 @@ module.exports.run = async (client, message, arguments) => {
 
     // Get data url.
     let {body} = await superagent
-    .get("https://random.dog/woof.json")
+    .get("https://api.chucknorris.io/jokes/random")
 
     // Check if body exist.
-    if (!body) return msg.reply("Sorry no dog image, there seems to be a problem with my connection");
+    if (!body) return msg.reply("Sorry no Chucknorris jokes, there seems to be a problem with my connection");
 
     // Create embed.
-    let dogEmbed = new Discord.RichEmbed()
-    .setTitle("Doggo :dog:")
-    .setColor(color.dog)
-    .setImage(body.url);
+    let chuckEmbed = new Discord.RichEmbed()
+    .setTitle("Chuck Norris Joke")
+    .setDescription(body.value)
+    .setColor(color.cat);
     
-    msg.edit(dogEmbed);  
+    msg.edit(chuckEmbed);
 }
 
 module.exports.config = {
-    name: "dog",
-    aliases: [],
-    usage: "<prefix>dog",
+    name: "chucknorris",
+    aliases: ["chuck"],
+    usage: "<prefix>chucknorris",
     description: ""
 }

@@ -5,7 +5,7 @@ const superagent = require("superagent");
 
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.meme)) return message.reply("You don't have the right to post a meme.");
+    if (!message.member.hasPermission(permissions.badmeme)) return message.reply("You don't have the right to post a meme.");
         
     // Delete your own command.
     await message.delete().catch();
@@ -13,7 +13,7 @@ module.exports.run = async (client, message, arguments) => {
     // Send preperation message.
     let msg = await message.channel.send("Generating...");
 
-    // Get image url.
+    // Get data url.
     let {body} = await superagent
     .get("https://api-to.get-a.life/meme")
 
@@ -23,7 +23,7 @@ module.exports.run = async (client, message, arguments) => {
     // Create embed.
     let memeEmbed = new Discord.RichEmbed()
     //.setTitle(body.text)
-    .setColor(color.dog)
+    .setColor(color.badmeme)
     .setImage(body.url)
     .setFooter("Meme", client.user.avatarURL);
     
@@ -31,8 +31,8 @@ module.exports.run = async (client, message, arguments) => {
 }
 
 module.exports.config = {
-    name: "meme",
+    name: "badmeme",
     aliases: [],
-    usage: "<prefix>meme",
+    usage: "<prefix>badmeme",
     description: ""
 }

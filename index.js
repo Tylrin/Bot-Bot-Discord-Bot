@@ -6,6 +6,7 @@ client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.config = require("./config.json");
 client.botConfig = require("./config.bot.json");
+client.botInfo = require("./package.json");
 
 // Check the file direktory for console commands
 fs.readdir("./src/commands/", (err, files) => { 

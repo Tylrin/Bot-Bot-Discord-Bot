@@ -11,7 +11,7 @@ module.exports.run = async (client, message, arguments) => {
 
     // Create embed.
     let gitEmbed = new Discord.RichEmbed()
-    .setTitle("The-Source-Bot Git reposetory")
+    .setTitle(`${client.botInfo.name} Git reposetory`)
     .setDescription("This is the reposetory where you can find the code that is used by this bot.")
     .setURL("https://github.com/Tylrin/The-Source-Bot")
     .setColor(color.git)

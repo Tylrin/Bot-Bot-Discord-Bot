@@ -13,7 +13,7 @@ module.exports.run = async (client, message, arguments) => {
     // Send preperation message.
     let msg = await message.channel.send("Generating...");
 
-    // Get image url.
+    // Get data url.
     let {body} = await superagent
     .get("http://aws.random.cat/meow")
 
