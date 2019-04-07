@@ -51,6 +51,6 @@ module.exports.run = async (client, message, arguments) => {
 module.exports.config = {
     name: "kick",
     aliases: [],
-    usage: "",
+    usage: "<prefix>kick <user> <reason>",
     description: ""
 }

@@ -30,15 +30,15 @@ module.exports.run = async (client, message, arguments) => {
                 commandField.push({"name":commandName, "value":`${props.config.description || "invalid description"}`});
             });
 
-            // Create embed.
+            // Create embed as json object.
             message.author.send({embed: {
-                color: (color.help, 1),
+                title: "A list of all commands",
                 author: {
                   name: client.user.username,
                   icon_url: client.user.avatarURL
                 },
-                title: "A list of all commands",
                 description: "This is a test embed to showcase what they look like and what they can do.",
+                color: (color.help, 1),
                 fields: commandField,
                 timestamp: new Date(),
                 footer: {
@@ -80,6 +80,6 @@ module.exports.run = async (client, message, arguments) => {
 module.exports.config = {
     name: "help",
     aliases: ["h", "info"],
-    usage: "",
+    usage: "<prefix>help <command or list>",
     description: ""
 }

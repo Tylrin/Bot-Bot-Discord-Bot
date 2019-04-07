@@ -40,6 +40,6 @@ module.exports.run = async (client, message, arguments) => {
 module.exports.config = {
     name: "removerole",
     aliases: [],
-    usage: "",
+    usage: "<prefix>removerole <user> <role>",
     description: ""
 }

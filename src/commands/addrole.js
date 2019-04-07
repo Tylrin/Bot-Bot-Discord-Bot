@@ -39,6 +39,6 @@ module.exports.run = async (client, message, arguments) => {
 module.exports.config = {
     name: "addrole",
     aliases: [],
-    usage: "",
+    usage: "<prefix>addrole <user> <role>",
     description: ""
 }

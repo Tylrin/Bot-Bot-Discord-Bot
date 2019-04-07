@@ -24,6 +24,6 @@ module.exports.run = async (client, message, arguments) => {
 module.exports.config = {
     name: "botinfo",
     aliases: ["bi", "bot"," botdescription"],
-    usage: "",
+    usage: "<prefix>botinfo",
     description: ""
 }

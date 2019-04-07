@@ -47,6 +47,6 @@ module.exports.run = async (client, message, arguments) => {
 module.exports.config = {
     name: "gif",
     aliases: [],
-    usage: "",
+    usage: "<prefix>gif <searchterm> <y, g, pg, pg-13, r",
     description: ""
 }

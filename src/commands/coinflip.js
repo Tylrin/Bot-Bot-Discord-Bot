@@ -25,6 +25,6 @@ module.exports.run = async (client, message, arguments) => {
 module.exports.config = {
     name: "coinflip",
     aliases: [],
-    usage: "",
+    usage: "<prefix>coinflip",
     description: ""
 }

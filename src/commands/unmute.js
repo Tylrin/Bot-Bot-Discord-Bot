@@ -34,6 +34,6 @@ module.exports.run = async (client, message, arguments) => {
 module.exports.config = {
     name: "unmute",
     aliases: [],
-    usage: "",
+    usage: "<prefix>unmute <user>",
     description: ""
 }

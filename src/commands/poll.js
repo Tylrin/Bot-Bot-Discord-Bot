@@ -21,6 +21,6 @@ module.exports.run = async (client, message, arguments) => {
 module.exports.config = {
     name: "poll",
     aliases: ["vote"],
-    usage: "",
+    usage: "<prefix>poll <question>",
     description: ""
 }
