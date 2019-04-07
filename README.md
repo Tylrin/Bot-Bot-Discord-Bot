@@ -25,6 +25,7 @@ Ignore any warnings about unmet peer dependencies, as they're all optional.
 npm install discord.js
 npm install ms
 npm install giphy-api --save
+npm install superagent --save
 ```
 
 ### Token
@@ -46,3 +47,4 @@ Add a config.json with the access tokens for your external services, in the root
 ## General Information
 - [Discord Documetation](https://discord.js.org/#/)
 - [GIPHY GitHub Project Documentation](https://github.com/austinkelleher/giphy-api)
+- [Superagent GitHub Documentation](https://github.com/visionmedia/superagent)

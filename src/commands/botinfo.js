@@ -16,7 +16,8 @@ module.exports.run = async (client, message, arguments) => {
     .setColor(color.botinfo)
     .setThumbnail(botIcon)
     .addField("Bot Name", client.user.username)
-    .addField("Created On", client.user.createdAt);
+    .addField("Created On", client.user.createdAt)
+    .setTimestamp();
 
     message.author.send(botEmbed);
 }

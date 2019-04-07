@@ -43,7 +43,7 @@ module.exports.run = async (client, message, arguments) => {
                 timestamp: new Date(),
                 footer: {
                   icon_url: client.user.avatarURL,
-                  text: "Help Command"
+                  text: `${client.botConfig.prefix}help`
                 }
               }
             });
@@ -69,7 +69,7 @@ module.exports.run = async (client, message, arguments) => {
             .addField("Usage", `${command.config.usage || "invalid usage description"}`)
             .addField("Aliases", `${command.config.aliases.join(", ") || "no aliases for this command"}`)
             .setTimestamp()
-            .setFooter("Help Command", client.user.avatarURL);
+            .setFooter(`${client.botConfig.prefix}help`, client.user.avatarURL);
 
             message.author.send(helpEmbed);
             return;

@@ -18,7 +18,8 @@ module.exports.run = async (client, message, arguments) => {
     .addField("Server Name", message.guild.name)
     .addField("Created On", message.guild.createdAt)
     .addField("You Joined", message.member.joinedAt)
-    .addField("Total Members", message.guild.memberCount);
+    .addField("Total Members", message.guild.memberCount)
+    .setTimestamp();
 
     message.author.send(serverEmbed);
 };
