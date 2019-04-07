@@ -46,7 +46,7 @@ module.exports.run = async (client, message, arguments) => {
     try {
         await muteUser.send(`You have been muted in ${message.guild.name} for ${ms(ms(muteTime))}`);
     } catch(err) {
-        console.log(`${muteUser.user.tag} coudn't be DMed because of this error. ${err}`);
+        console.log(`[error] ${muteUser.user.tag} coudn't be DMed because of this error. ${err}`);
     }
 }
 

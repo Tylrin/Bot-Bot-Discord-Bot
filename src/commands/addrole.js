@@ -32,7 +32,7 @@ module.exports.run = async (client, message, arguments) => {
         // Informe user directly over the added role.
         await roleUser.send(`You got the role ${guildRole.name} on the server ${message.guild.name}`);
     } catch(err) {
-        console.log(`The user ${roleUser.user.tag} couldn't be contacted because of this error: ${err}`);
+        console.log(`[error] The user ${roleUser.user.tag} couldn't be contacted because of this error: ${err}`);
     }
 }
 

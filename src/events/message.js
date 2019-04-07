@@ -17,8 +17,8 @@ module.exports = (client, message) => {
         let command = splitCommand[0].toLowerCase(); // The first word directly after the prefix is the command
         let arguments = splitCommand.slice(1); // All other words are arguments/parameters/options for the command 
     
-        console.log('Command : ' + command);
-        console.log('Arguments: ' + arguments);
+        console.log(`[cmd] Command: ${command}`);
+        console.log(`[cmd] Arguments: ${arguments}`);
     
         let commandfile = client.commands.get(command) || client.commands.get(client.aliases.get(command)); // Get the command file
         if (commandfile) {

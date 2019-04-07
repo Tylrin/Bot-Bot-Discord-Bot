@@ -33,7 +33,7 @@ module.exports.run = async (client, message, arguments) => {
         // Informe user directly over their guild role remove.
         await roleUser.send(`You lost the role ${guildRole.name} on the server ${message.guild.name}`);
     } catch(err) {
-        console.log(`${roelUser.user.tag} couldn't be contacted because of this error: ${err}`);
+        console.log(`[error] ${roelUser.user.tag} couldn't be contacted because of this error: ${err}`);
     }
 }
 

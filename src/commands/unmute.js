@@ -27,7 +27,7 @@ module.exports.run = async (client, message, arguments) => {
     try {
         await unmuteUser.send(`You have been unmuted in ${message.guild.name}`);
     } catch(err) {
-        console.log(`${unmuteUser.user.tag} coudn't be DMed because of this error. ${err}`);
+        console.log(`[error] ${unmuteUser.user.tag} coudn't be DMed because of this error. ${err}`);
     }
 }
 

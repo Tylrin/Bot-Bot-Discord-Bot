@@ -41,7 +41,7 @@ module.exports.run = async (client, message, arguments) => {
          // Informe user directly over their guild unban.
         await banUser.send(`You got unbanned from ${message.channel} because: ${reason}`);
     } catch(err) {
-        console.log(`${unbanUser.user.tag} couldn't be contacted because of this error: ${err}`);
+        console.log(`[error] ${unbanUser.user.tag} couldn't be contacted because of this error: ${err}`);
     }
 }
 

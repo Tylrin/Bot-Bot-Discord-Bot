@@ -44,7 +44,7 @@ module.exports.run = async (client, message, arguments) => {
         // Informe user directly over their guild kick.
         await kickUser.send(`You got kicked from ${message.guild.name} because: ${reason}`);
     } catch(err) {
-        console.log(`${kickUser.user.tag} couldn't be contacted because of this error: ${err}`);
+        console.log(`[error] ${kickUser.user.tag} couldn't be contacted because of this error: ${err}`);
     }
 }
 

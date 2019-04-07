@@ -13,7 +13,7 @@ module.exports.run = async (client, message, arguments) => {
     console.log(`${fetchedAmount} messages in search`);
     // Get all messages.
     let fetched = await message.channel.fetchMessages({limit: fetchedAmount});
-    console.log(`${fetched.size} messages found`);
+    console.log(`[cmd] ${fetched.size} messages found`);
 
     // Delete messages.
     message.channel.bulkDelete(fetched.size)

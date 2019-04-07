@@ -40,7 +40,7 @@ module.exports.run = async (client, message, arguments) => {
         message.channel.send(gifEmbed);
     }).catch((err) => {
         message.channel.send("Error ugh!");
-        console.log(`Couldn't send gif because of this error: ${err}`);
+        console.log(`[error] Couldn't send gif because of this error: ${err}`);
     });
 }
 

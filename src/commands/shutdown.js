@@ -13,7 +13,7 @@ module.exports.run = async (client, message, arguments) => {
         process.exit()
     } catch(err) {
         console.log(err);
-        message.channel.send(`ERROR: ${err.message}`);
+        message.channel.send(`[error] ${err.message}`);
     }
 }
 

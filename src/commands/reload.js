@@ -12,7 +12,9 @@ module.exports.run = async (client, message, arguments) => {
     if (!arguments[0]) return message.reply("Please provide a command to reload.");
 
     // Try reloading the file.
-    let commandName = arguments[0].toLowerCase()
+    let commandFile = client.commands.get(arguments[0].toLowerCase()) || client.commands.get(client.aliases.get(arguments[0].toLowerCase())); // Get the command file
+    let commandName = commandFile.config.name;
+
     try {
         delete require.cache[require.resolve(`./${commandName}.js`)]
         client.commands.delete(commandName)

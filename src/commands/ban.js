@@ -44,7 +44,7 @@ module.exports.run = async (client, message, arguments) => {
         // Informe user directly over their guild ban.
         await banUser.send(`You got banned from ${message.guild.name} because: ${reason}`);
     } catch(err) {
-        console.log(`${banUser.user.tag} couldn't be contacted because of this error: ${err}`);
+        console.log(`[error] ${banUser.user.tag} couldn't be contacted because of this error: ${err}`);
     }
 }
 
