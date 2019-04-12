@@ -27,7 +27,7 @@ module.exports.run = async (client, message, arguments) => {
             jsfile.forEach((f, i) => {
                 let props = require(`./${f}`);
                 let commandName = f.split(".")[0];
-                commandField.push({"name":commandName, "value":`${props.config.description || "invalid description"}\n${props.config.usage || "invalid usage"}\n alternative commands: ${props.config.aliases.join(", ") || "no aliases for this command"}`});
+                commandField.push({"name":commandName, "value":`${props.config.description || "invalid description"}\n\`${props.config.usage || "invalid usage"}\`\n alternative commands: \`${props.config.aliases.join(", ") || "no aliases for this command"}\``});
             });
 
             // Create embed as json object.

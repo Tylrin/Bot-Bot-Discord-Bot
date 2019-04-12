@@ -1,0 +1,37 @@
+{
+    "command": {
+        "eightball": {
+            "permission": [
+                "You don't have the right to play 8ball."
+            ],
+            "noquestion": [
+                "Please ask a full question!"
+            ],
+            "replies": [
+                "${message.author.tag}"
+            ]
+        },
+        "addrole": {
+            "permission": [
+                "You don't have the right to add a role to someone."
+            ],
+            "nouser": [
+                "Couldn't find the user"
+            ],
+            "nopermission": [
+                "You can add a role to ${roleUser}."
+            ]
+        },
+        "badmeme": {
+            "permission": [
+                "", "", ""
+            ],
+            "errorload": [
+                "", "", ""
+            ]
+        }
+    },
+    "events": {
+
+    }
+}

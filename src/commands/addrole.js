@@ -1,6 +1,9 @@
 const Discord = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 
+const response = require("../utilities/personalityhelperlibrary.js");
+const personality = require("../utilities/personalityresponse.json");
+
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
     if (!message.member.hasPermission(permissions.addrole)) return message.reply("You don't have the right to add a role to someone.");
