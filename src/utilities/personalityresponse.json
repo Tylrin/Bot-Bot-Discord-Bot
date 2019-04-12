@@ -8,7 +8,7 @@
                 "Please ask a full question!"
             ],
             "replies": [
-                "${message.author.tag}"
+                "{{custom}}"
             ]
         },
         "addrole": {

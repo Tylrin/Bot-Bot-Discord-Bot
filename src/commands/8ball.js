@@ -14,10 +14,10 @@ module.exports.run = async (client, message, arguments) => {
     // Get the question.
     let question = arguments.slice(0).join(" ").trim();
     // Was a valid question asked.
-    if (!question) return message.reply(response.chooseVoiceline(personality.command.eightball.noquestion));
+    if (!question) return message.reply(response.chooseVoiceline((personality.command.eightball.noquestion), message));
 
     // Calculate replies.
-    let replies =  response.chooseVoiceline(personality.command.eightball.replies);
+    let replies =  response.chooseVoiceline(personality.command.eightball.replies, message, question);
 
     // Create embed.
     let ballEmbed = new Discord.RichEmbed()
