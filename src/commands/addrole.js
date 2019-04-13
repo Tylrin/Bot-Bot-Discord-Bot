@@ -6,34 +6,34 @@ const personality = require("../utilities/personalityresponse.json");
 
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.addrole)) return message.reply("You don't have the right to add a role to someone.");
+    if (!message.member.hasPermission(permissions.addrole)) return message.reply(response.chooseMessageResponse(personality.command.addrole.permission, message));
 
     // Get mentioned user.
     let roleUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0]));
     // Check if the user exist.
-    if (!roleUser) return message.reply("Couldn't find the user");
+    if (!roleUser) return message.reply(response.chooseMessageResponse(personality.command.addrole.nouser, message));
     // Check mentioned user permission.
-    if (rolenUser.hasPermission(permissions.addrole)) return message.reply(`You can add a role to ${roleUser}.`);
+    if (rolenUser.hasPermission(permissions.addrole)) return message.reply(response.chooseMessageResponse(personality.command.addrole.nopermission, message));
 
     // Delete your own command.
     await message.delete().catch();
     
      // Get the specified role.
     let role = arguments.join(" ").slice(22);
-    if (!role) return message.reply("Specify a role!");
+    if (!role) return message.reply(personality.command.addrole.norole, message);
 
     // Check if the role exists.
     let guildRole = message.guild.roles.find(`name`, role); 
-    if (!guildRole) return message.reply("Cound't find that role");
+    if (!guildRole) return message.reply(personality.command.addrole.unfoundrole, message);
     
     // Check if the user has the role already.
-    if (!roleUser.roles.has(guildRole.id)) return message.reply("They already have that role.");
+    if (!roleUser.roles.has(guildRole.id)) return message.reply(response.chooseMessageResponse(personality.command.addrole.hasrole, message, guildRole.name));
     // Add the role to the user.
     await (roleUser.addRole(guildRole.id));
 
     try {
-        // Informe user directly over the added role.
-        await roleUser.send(`You got the role ${guildRole.name} on the server ${message.guild.name}`);
+        // Informe user directly over the added role.   guildRole.name
+        await roleUser.send(response.chooseMessageResponse(personality.command.addrole.notify, message, guildRole.name));
     } catch(err) {
         console.log(`[error] The user ${roleUser.user.tag} couldn't be contacted because of this error: ${err}`);
     }

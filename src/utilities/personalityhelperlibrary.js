@@ -1,5 +1,5 @@
 module.exports = {
-    chooseVoiceline: function (replies, message, custom) {
+    chooseMessageResponse: function (replies, message, custom) {
         const st = require("stjs");
 
         // Check for valid replies.
@@ -7,8 +7,9 @@ module.exports = {
 
         var data = {
             "author": `${message.author.username}`,
-            "guildName": message.guild.name,
-            "mentionUser": message.guild.member(message.mentions.users.first()),
+            "guild": `${message.guild.name}`,
+            "user": message.guild.member(message.mentions.users.first()),
+            "channel": `${message.channel}`,
             "custom": custom
         }
 
@@ -16,9 +17,14 @@ module.exports = {
         let index = Math.floor((Math.random() * replies.length));
         let template = replies[index];
         
+        // Fill in variables for template.
         let result = st.transform(template, data);
-        console.log(template);
+
         // Get result.
         return result;
     }
+
+    // chooseEventResponse: function (client) {}
+
+    
 }

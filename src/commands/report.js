@@ -2,21 +2,22 @@ const Discord = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 const color = require("../utilities/commandcolor.json");
 
+const response = require("../utilities/personalityhelperlibrary.js");
+const personality = require("../utilities/personalityresponse.json");
+
 module.exports.run = async (client, message, arguments) => {
-    if (!message.member.hasPermission(permissions.report)) { // Check permission for the command.
-        message.reply("You don't have the right to report someone.")
-        return;
-    };
-    let reportUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0])); // Get mentioned user.
-    if (!reportUser) { // Check if the user exist.
-        message.reply("Couldn't find the user")
-        return; 
-    };
-    if (reportUser.hasPermission(permissions.report)) { // Can the user be banned.
-        message.reply(`${reportUser} can't be reported!`)
-        return; 
-    };
-    await message.delete().catch(); // Delete your own command
+    // Check permission for the command.
+    if (!message.member.hasPermission(permissions.report)) return message.reply(response.chooseMessageResponse(personality.command.report.permission, message));
+
+    // Get mentioned user.
+    let reportUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0])); 
+    // Check if the user exist.
+    if (!reportUser) return message.reply(response.chooseMessageResponse(personality.command.report.nouser, message));
+    // Can the user be banned.
+    if (reportUser.hasPermission(permissions.report)) return message.reply(response.chooseMessageResponse(personality.command.report.nopermission, message));
+
+    // Delete your own command
+    await message.delete().catch();
     
     let reason = arguments.join(' ').slice(22).trim();
 
@@ -30,10 +31,8 @@ module.exports.run = async (client, message, arguments) => {
     .addField("Reasons", reason);
     
     let reportsChannel = message.guild.channels.find(`name`, 'reports')
-    if (!reportsChannel) {
-        message.channel.send("Couldn't find reports channel")
-        return;
-    }
+    if (!reportsChannel) return message.channel.send(response.chooseMessageResponse(personality.command.report.nochannel, message));
+    
     reportsChannel.send(reportEmbed);
 }
 

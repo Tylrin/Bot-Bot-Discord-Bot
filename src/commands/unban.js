@@ -2,17 +2,20 @@ const Discord = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 const color = require("../utilities/commandcolor.json");
 
+const response = require("../utilities/personalityhelperlibrary.js");
+const personality = require("../utilities/personalityresponse.json");
+
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.unban)) return message.reply("You don't have the right to unban someone.");
+    if (!message.member.hasPermission(permissions.unban)) return message.reply(response.chooseMessageResponse(personality.command.unban.permission, message));
 
     // Get mentioned user.
     let unbanUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0]));
     // Check if the user exist.
-    if (!unbannUser) return message.reply("Couldn't find the user");
+    if (!unbannUser) return message.reply(response.chooseMessageResponse(personality.command.unban.nouser, message));
 
     // Can the user be unbanned.
-    if (unbanUser.hasPermission(permissions.unban)) return message.reply(`${unbanUser} can't be unbanned!`);
+    if (unbanUser.hasPermission(permissions.unban)) return message.reply(response.chooseMessageResponse(personality.command.unban.nopermission, message));
 
     // Delete your own command.
     await message.delete().catch(); 
@@ -31,7 +34,7 @@ module.exports.run = async (client, message, arguments) => {
     // Get channel location.
     let unbanChannel = message.guild.channels.find(`name`, 'incidents');
     // Does the channel exist.
-    if (!unbanChannel) return message.channel.send("Couldn't find incidents channel");
+    if (!unbanChannel) return message.channel.send(response.chooseMessageResponse(personality.command.unban.nochannel, message));
 
     // Unban user and send embed.
     message.guild.member(unbanUser).unban(reason);
@@ -39,7 +42,7 @@ module.exports.run = async (client, message, arguments) => {
 
     try {
          // Informe user directly over their guild unban.
-        await banUser.send(`You got unbanned from ${message.channel} because: ${reason}`);
+        await banUser.send(response.chooseMessageResponse(personality.command.unban.notify, message, reason));
     } catch(err) {
         console.log(`[error] ${unbanUser.user.tag} couldn't be contacted because of this error: ${err}`);
     }

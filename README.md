@@ -26,6 +26,7 @@ npm install discord.js
 npm install ms
 npm install giphy-api --save
 npm install superagent --save
+npm install stjs
 ```
 
 ### Token
@@ -48,3 +49,4 @@ Add a config.json with the access tokens for your external services, in the root
 - [Discord Documetation](https://discord.js.org/#/)
 - [GIPHY GitHub Project Documentation](https://github.com/austinkelleher/giphy-api)
 - [Superagent GitHub Documentation](https://github.com/visionmedia/superagent)
+- [Selecttransform GitHub Documentation](https://selecttransform.github.io/site/)

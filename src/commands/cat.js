@@ -3,22 +3,25 @@ const permissions = require("../utilities/commandpermission.json");
 const color = require("../utilities/commandcolor.json");
 const superagent = require("superagent");
 
+const response = require("../utilities/personalityhelperlibrary.js");
+const personality = require("../utilities/personalityresponse.json");
+
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.cat)) return message.reply("You don't have the right to post a cat image.");
+    if (!message.member.hasPermission(permissions.cat)) return message.reply(response.chooseMessageResponse((personality.command.cat.permission), message));
         
     // Delete your own command.
     await message.delete().catch();
 
     // Send preperation message.
-    let msg = await message.channel.send("Generating...");
+    let msg = await message.channel.send(response.chooseMessageResponse((personality.command.cat.load), message));
 
     // Get data url.
     let {body} = await superagent
     .get("http://aws.random.cat/meow")
 
     // Check if body exist.
-    if (!body) return msg.reply("Sorry no cat image, there seems to be a problem with my connection");
+    if (!body) return msg.reply(response.chooseMessageResponse((personality.command.cat.errorload), message));
 
     // Create embed.
     let catEmbed = new Discord.RichEmbed()

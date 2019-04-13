@@ -2,21 +2,20 @@ const Discord = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 const color = require("../utilities/commandcolor.json");
 
+const response = require("../utilities/personalityhelperlibrary.js");
+const personality = require("../utilities/personalityresponse.json");
+
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.ping)) return message.reply("You don't have the right to test the ping.");
+    if (!message.member.hasPermission(permissions.ping)) return message.reply(response.chooseMessageResponse(personality.command.ping.permission, message));
 
     // Message channel.
     message.channel.send("Pinging...").then(msg => {
         // Measure the ping of the message.
         let ping = msg.createdTimestamp - message.createdTimestamp;
 
-        // Calculate response.
-        let choices = ["Is it really my ping?", "Is it okay? I can't look!", "I hope it isn't bad!"];
-        let response = choices[Math.floor(Math.random() * choices.length)];
-
         // Edit message
-        msg.edit(response);
+        msg.edit((response.chooseMessageResponse(personality.command.ping.notify, message)));
 
         // Create embed.
         let pingEmbed = new Discord.RichEmbed()

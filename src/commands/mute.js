@@ -2,16 +2,19 @@ const Discord = require("discord.js");
 const ms = require("ms");
 const permissions = require("../utilities/commandpermission.json");
 
+const response = require("../utilities/personalityhelperlibrary.js");
+const personality = require("../utilities/personalityresponse.json");
+
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.mute)) return message.reply("You don't have the right to mute someone.");
+    if (!message.member.hasPermission(permissions.mute)) return message.reply(response.chooseMessageResponse(personality.command.mute.permission, message));
 
     // Get mentioned user.
     let muteUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0]));
     // Check if the user exist.
-    if (!muteUser) return message.reply("Couldn't find the user");
+    if (!muteUser) return message.reply(response.chooseMessageResponse(personality.command.mute.nouser, message));
     // Check mentioned user permission.
-    if (muteUser.hasPermission(permissions.mute)) return  message.reply(`${muteUser} can't be muted!`);
+    if (muteUser.hasPermission(permissions.mute)) return  message.reply(response.chooseMessageResponse(personality.command.mute.nopermission, message));
 
     // Delete your own command.
     await message.delete().catch(); 
@@ -38,13 +41,13 @@ module.exports.run = async (client, message, arguments) => {
     }
     // Set mute time
     let muteTime = arguments[1];
-    if (!muteTime) return message.reply("You didn't specify a time!");
+    if (!muteTime) return message.reply(response.chooseMessageResponse(personality.command.mute.notime, message));
 
     // Add the role to the user.
     await (muteUser.addRole(muteRole.id));
 
-    try {
-        await muteUser.send(`You have been muted in ${message.guild.name} for ${ms(ms(muteTime))}`);
+    try {(
+        await muteUser.send(response.chooseMessageResponse(personality.command.mute.notify, message, ms(ms(muteTime)))));
     } catch(err) {
         console.log(`[error] ${muteUser.user.tag} coudn't be DMed because of this error. ${err}`);
     }

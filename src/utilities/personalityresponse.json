@@ -8,7 +8,7 @@
                 "Please ask a full question!"
             ],
             "replies": [
-                "{{custom}}"
+                "Yes", "No", "Maybe", "I don't know", "Ask me later!", "I have to think out it"
             ]
         },
         "addrole": {
@@ -16,18 +16,300 @@
                 "You don't have the right to add a role to someone."
             ],
             "nouser": [
-                "Couldn't find the user"
+                "Couldn't find the user."
             ],
             "nopermission": [
-                "You can add a role to ${roleUser}."
+                "You can add a role to {{user}}."
+            ],
+            "norole": [
+                "Specify a role."
+            ],
+            "unfoundrole": [
+                "Cound't find that role."
+            ],
+            "hasrole": [
+                "{{user}} already has the role {{custom}}."
+            ],
+            "notify": [
+                "You got the role {{custom}} on the server {{guild}}."
             ]
         },
         "badmeme": {
             "permission": [
-                "", "", ""
+                "You don't have the right to post a meme."
+            ],
+            "load": [
+                "Generating..."
             ],
             "errorload": [
-                "", "", ""
+                "Sorry no meme, there seems to be a problem with my connection"
+            ]
+        },
+        "ban": {
+            "permission": [
+                "You don't have the right to ban someone."
+            ],
+            "nouser": [
+                "Couldn't find the user."
+            ],
+            "nopermission": [
+                "{{user}} can't be banned."
+            ],
+            "unbannable": [
+                "I am unable to ban {{user}}."
+            ],
+            "nochannel": [
+                "Couldn't find incidents channel."
+            ],
+            "notify": [
+                "You got banned from {{guild}} because: {{custom}}"
+            ]
+        },
+        "botinfo": {
+            "permission": [
+                "You don't have the right to see the bot information."
+            ]
+        },
+        "cat": {
+            "permission": [
+                "You don't have the right to post a cat image."
+            ],
+            "load": [
+                "Generating..."
+            ],
+            "errorload": [
+                "Sorry no cat image, there seems to be a problem with my connection."
+            ]
+        },
+        "chucknorris": {
+            "permission": [
+                "You don't have the right to post a cat image."
+            ],
+            "load": [
+                "Generating..."
+            ],
+            "errorload": [
+                "Sorry no Chucknorris jokes, there seems to be a problem with my connection"
+            ]
+        },
+        "clear": {
+            "permission": [
+                "You don't have the right to clear the chat."
+            ],
+            "notify": [
+                "{{custom}} messages deleted"
+            ],
+            "error": [
+                "Sorry coudn't delete the messages because of this error: {{custom}}"
+            ]
+        },
+        "coinflip": {
+            "permission": [
+                "You don't have the right to flip a coin."
+            ]
+        },
+        "dice": {
+            "permission": [
+                "You don't have the right to roll dice."
+            ],
+            "replies": [
+                "You rolled a {{custom}}"
+            ]
+        },
+        "dog": {
+            "permission": [
+                "You don't have the right to post a dog image."
+            ],
+            "load": [
+                "Generating..."
+            ],
+            "errorload": [
+                "Sorry no dog image, there seems to be a problem with my connection."
+            ]
+        },
+        "gif": {
+            "permission": [
+                "You don't have the right to post gifs."
+            ],
+            "nosearchterm": [
+                "Please put in a search term."
+            ],
+            "load": [
+                "Generating..."
+            ],
+            "errorload": [
+                "Error ugh!: {{custom}}"
+            ]
+        },
+        "git": {
+            "permission": [
+                "You don't have the right to see the server information."
+            ]
+        },
+        "help": {
+            "permission": [
+                "You don't have the right to call for help."
+            ],
+            "doublehelp": [
+                "Use {{custom}}help <command> or list to get the information you want."
+            ]
+        },
+        "kick": {
+            "permission": [
+                "You don't have the right to kick someone."
+            ],
+            "nouser": [
+                "Couldn't find the user."
+            ],
+            "nopermission": [
+                "{{user}} can't be kicked."
+            ],
+            "unkickable": [
+                "I am unable to kick {{user}}."
+            ],
+            "nochannel": [
+                "Couldn't find incidents channel."
+            ],
+            "notify": [
+                "You got kicked from {{guild}} because: {{custom}}."
+            ]
+        },
+        "mute": {
+            "permission": [
+                "You don't have the right to mute someone."
+            ],
+            "nouser": [
+                "Couldn't find the user."
+            ],
+            "nopermission": [
+                "{{user}} can't be muted."
+            ],
+            "notime": [
+                "You didn't specify a time."
+            ],
+            "notify": [
+                "You have been muted in {{guild}} for {{custom}}."
+            ]
+        },
+        "ping": {
+            "permission": [
+                "You don't have the right to test the ping."
+            ],
+            "load": [
+                "Pinging..."
+            ],
+            "notify": [
+                "Is it really my ping?", "Is it okay? I can't look!", "I hope it isn't bad!"
+            ]
+        },
+        "poll": {
+            "permission": [
+
+            ]
+        },
+        "reload": {
+            "permission": [
+                "You don't have the right to reload a command file."
+            ],
+            "nofile": [
+                "Please provide a command to reload."
+            ],
+            "notify": [
+                "The command {{custom}} has been reloaded."
+            ]
+        },
+        "removerole": {
+            "permission": [
+                "You don't have the right to remove someones role."
+            ],
+            "nouser": [
+                "Couldn't find the user."
+            ],
+            "nopermission": [
+                "You can remove a role from {{user}}."
+            ],
+            "norole": [
+                "Specify a role."
+            ],
+            "unfoundrole": [
+                "Cound't find that role."
+            ],
+            "hasnotrole": [
+                "They don't have that role."
+            ],
+            "notify": [
+                "You lost the role {{custom}} on the server {{guild}}"
+            ]
+        },
+        "report": {
+            "permission": [
+                "You don't have the right to report someone."
+            ],
+            "nouser": [
+                "Couldn't find the user"
+            ],
+            "nopermission": [
+                "{{user}} can't be reported!"
+            ],
+            "nochannel": [
+                "Couldn't find reports channel"
+            ]
+        },
+        "say": {
+            "permission": [
+                "You can't use the !say command."
+            ]
+        },
+        "serverinfo": {
+            "permission": [
+                "You don't have the right to see the server information."
+            ]
+        },
+        "shutdown": {
+            "permission": [
+                "You don't have the right to shutdown the server."
+            ],
+            "notify": [
+                "The Bot is shuting down."
+            ]
+        },
+        "unban": {
+            "permission": [
+                "You don't have the right to unban someone."
+            ],
+            "nouser": [
+                "Couldn't find the user."
+            ],
+            "nopermission": [
+                "{{user}} can't be unbanned."
+            ],
+            "nochannel": [
+                "Couldn't find incidents channel"
+            ],
+            "notify": [
+                "You got unbanned from {{channel}} because: ${reason}"
+            ]
+        },
+        "unmute": {
+            "permission": [
+                "You don't have the right to unmute someone."
+            ],
+            "nouser": [
+                "Couldn't find the user."
+            ],
+            "norole": [
+                "There is no mute role!"
+            ],
+            "notify": [
+                "You have been unmuted in {{guild}}"
+            ]
+        },
+        "uptime": {
+            "permission": [
+                "You don't have the right to see the bot's uptime."
+            ],
+            "notify": [
+                "I have been online for: {{custom}}"
             ]
         }
     },

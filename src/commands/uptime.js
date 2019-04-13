@@ -1,9 +1,12 @@
 const Discord = require("discord.js");
 const Permissions = require("../utilities/commandpermission.json");
 
+const response = require("../utilities/personalityhelperlibrary.js");
+const personality = require("../utilities/personalityresponse.json");
+
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(Permissions.uptime)) return message.reply("You don't have the right to see the bot's uptime.");
+    if (!message.member.hasPermission(Permissions.uptime)) return message.reply(response.chooseMessageResponse(personality.command.uptime.permission, message));
 
     // Calculate time as string.
     function duration(ms) {
@@ -14,7 +17,7 @@ module.exports.run = async (client, message, arguments) => {
         return `${day.padStart(1, '0')} days, ${hrs.padStart(2, '0')} hours, ${min.padStart(2, '0')} minutes, ${sec.padStart(2, '0')} seconds`
     }
 
-    message.channel.send(`I have been online for: ${duration(client.uptime)}`);
+    message.channel.send(response.chooseMessageResponse(personality.command.uptime.notify, message, duration(client.uptime)));
 }
 
 module.exports.config = {

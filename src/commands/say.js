@@ -1,9 +1,12 @@
 const Discord = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 
+const response = require("../utilities/personalityhelperlibrary.js");
+const personality = require("../utilities/personalityresponse.json");
+
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.say)) return  message.reply("You can't use the !say command.");
+    if (!message.member.hasPermission(permissions.say)) return  message.reply(response.chooseMessageResponse(personality.command.say.permission, message));
 
     // Delete your own command.
     await message.delete().catch(); 

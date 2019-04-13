@@ -7,17 +7,17 @@ const personality = require("../utilities/personalityresponse.json");
 
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.eightball)) return message.reply("You don't have the right to play 8ball.");
+    if (!message.member.hasPermission(permissions.eightball)) return message.reply(response.chooseMessageResponse(personality.command.eightball.permission, message));
     // Delete your own command.
     await message.delete().catch();
 
     // Get the question.
     let question = arguments.slice(0).join(" ").trim();
     // Was a valid question asked.
-    if (!question) return message.reply(response.chooseVoiceline((personality.command.eightball.noquestion), message));
+    if (!question) return message.reply(response.chooseMessageResponse(personality.command.eightball.noquestion, message));
 
     // Calculate replies.
-    let replies =  response.chooseVoiceline(personality.command.eightball.replies, message, question);
+    let replies =  response.chooseMessageResponse(personality.command.eightball.replies, message, question);
 
     // Create embed.
     let ballEmbed = new Discord.RichEmbed()

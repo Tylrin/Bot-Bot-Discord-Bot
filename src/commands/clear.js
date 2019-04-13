@@ -1,9 +1,12 @@
 const Discord = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 
+const response = require("../utilities/personalityhelperlibrary.js");
+const personality = require("../utilities/personalityresponse.json");
+
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.clear)) return message.reply("You don't have the right to clear the chat.");
+    if (!message.member.hasPermission(permissions.clear)) return message.reply(response.chooseMessageResponse((personality.command.clear.permission), message));
 
     // Delete your own command.
     await message.delete().catch();
@@ -18,9 +21,9 @@ module.exports.run = async (client, message, arguments) => {
     // Delete messages.
     message.channel.bulkDelete(fetched.size)
     .then(() => {
-        message.channel.send(`${fetched.size} messages deleted`).then(msg => msg.delete(5000));
+        message.channel.send(response.chooseMessageResponse((personality.command.clear.notify), message, fetched.size)).then(msg => msg.delete(5000));
     }).catch((err) => {
-        message.channel.send(`Sorry coudn't delete the messages because of this error: ${err}`);
+        message.channel.send(response.chooseMessageResponse((personality.command.clear.error), message, err));
     }); 
 }
 

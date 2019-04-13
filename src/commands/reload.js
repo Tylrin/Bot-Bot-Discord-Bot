@@ -1,15 +1,18 @@
 const Discord = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 
+const response = require("../utilities/personalityhelperlibrary.js");
+const personality = require("../utilities/personalityresponse.json");
+
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.reload)) return message.reply("You don't have the right to reload a command file.");
+    if (!message.member.hasPermission(permissions.reload)) return message.reply(response.chooseMessageResponse(personality.command.reload.permission, message));
     
     // Delete your own command.
     await message.delete().catch();
 
     // Check if there is a file name.
-    if (!arguments[0]) return message.reply("Please provide a command to reload.");
+    if (!arguments[0]) return message.reply(response.chooseMessageResponse(personality.command.reload.nofile, message));
 
     // Try reloading the file.
     let commandFile = client.commands.get(arguments[0].toLowerCase()) || client.commands.get(client.aliases.get(arguments[0].toLowerCase())); // Get the command file
@@ -25,7 +28,7 @@ module.exports.run = async (client, message, arguments) => {
         return;
     }
 
-    message.channel.send(`The command ${commandName} has been reloaded.`)
+    message.channel.send(response.chooseMessageResponse(personality.command.reload.permission, message, commandName));
 }
 
 module.exports.config = {
