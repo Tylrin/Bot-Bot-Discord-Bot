@@ -9,9 +9,9 @@ module.exports.run = async (client, message, arguments) => {
     if (!message.member.hasPermission(permissions.removerole)) return message.reply(response.chooseMessageResponse(personality.command.removerole.permission, message));
 
     // Get mentioned user.
-    let roleUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0])); 
+    let targetUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0])); 
     // Check if the user exist.
-    if (!roleUser) return message.reply(response.chooseMessageResponse(personality.command.removerole.nouser, message));
+    if (!targetUser) return message.reply(response.chooseMessageResponse(personality.command.removerole.nouser, message));
     // Check mentioned user permission.
     if (rolenUser.hasPermission(permissions.removerole)) return message.reply(response.chooseMessageResponse(personality.command.removerole.nopermission, message));
 
@@ -27,14 +27,14 @@ module.exports.run = async (client, message, arguments) => {
     if (!guildRole) return message.reply(response.chooseMessageResponse(personality.command.removerole.unfoundrole, message));
 
     // Check if the don't have the role.
-    if (!roleUser.roles.has(guildRole.id)) return message.reply(response.chooseMessageResponse(personality.command.removerole.hasnotrole, message));
+    if (!targetUser.roles.has(guildRole.id)) return message.reply(response.chooseMessageResponse(personality.command.removerole.hasnotrole, message));
 
     // Remove the role from the user.
-    await (roleUser.removeRole(guildRole.id)); 
+    await (targetUser.removeRole(guildRole.id)); 
 
     try {
         // Informe user directly over their guild role remove.
-        await roleUser.send(response.chooseMessageResponse(personality.command.removerole.notify, message, guildRole.name));
+        await targetUser.send(response.chooseMessageResponse(personality.command.removerole.notify, message, guildRole.name));
     } catch(err) {
         console.log(`[error] ${roelUser.user.tag} couldn't be contacted because of this error: ${err}`);
     }

@@ -10,13 +10,13 @@ module.exports.run = async (client, message, arguments) => {
     if (!message.member.hasPermission(permissions.ban)) return message.reply(response.chooseMessageResponse(personality.command.ban.permission, message));
 
     // Get mentioned user.
-    let banUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0])); 
+    let targetUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0])); 
     // Check if the user exist.
-    if (!banUser) return message.reply(response.chooseMessageResponse(personality.command.ban.nouser, message));
+    if (!targetUser) return message.reply(response.chooseMessageResponse(personality.command.ban.nouser, message));
     // Check mentioned user permission.
-    if (banUser.hasPermission(permissions.ban)) return message.reply(response.chooseMessageResponse(personality.command.ban.nopermission, message));
+    if (targetUser.hasPermission(permissions.ban)) return message.reply(response.chooseMessageResponse(personality.command.ban.nopermission, message));
     // Is the client able to ban someone.
-    if (!banUser.bannable()) return message.reply(response.chooseMessageResponse(personality.command.ban.unbannable, message));
+    if (!targetUser.bannable()) return message.reply(response.chooseMessageResponse(personality.command.ban.unbannable, message));
 
     // Delete your own command.
     await message.delete().catch();
@@ -28,7 +28,7 @@ module.exports.run = async (client, message, arguments) => {
     let banEmbed = new Discord.RichEmbed()
     .setDescription("Ban")
     .setColor(color.ban)
-    .addField("Banned User", `${banUser} with ID ${banUser.id}`)
+    .addField("Banned User", `${targetUser} with ID ${targetUser.id}`)
     //.addField("Banned By", `<@${message.author.id}> with ID ${message.author.id}`)
     .addField("Channel", message.channel)
     .addField("Time", message.createdAt)
@@ -40,14 +40,14 @@ module.exports.run = async (client, message, arguments) => {
     if (!banChannel) return message.channel.send(response.chooseMessageResponse(personality.command.ban.nochannel, message));
 
     // Ban user and send embed.
-    message.guild.ban(banUser, { day: 1, reason: reason}).catch(err => console.log(err));
+    message.guild.ban(targetUser, { day: 1, reason: reason}).catch(err => console.log(err));
     banChannel.send(banEmbed).catch();
 
     try {
         // Informe user directly over their guild ban.
-        await banUser.send(response.chooseMessageResponse(personality.command.ban.notify, message));
+        await targetUser.send(response.chooseMessageResponse(personality.command.ban.notify, message));
     } catch(err) {
-        console.log(`[error] ${banUser.user.tag} couldn't be contacted because of this error: ${err}`);
+        console.log(`[error] ${targetUser.user.tag} couldn't be contacted because of this error: ${err}`);
     }
 }
 

@@ -10,11 +10,11 @@ module.exports.run = async (client, message, arguments) => {
     if (!message.member.hasPermission(permissions.report)) return message.reply(response.chooseMessageResponse(personality.command.report.permission, message));
 
     // Get mentioned user.
-    let reportUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0])); 
+    let targetUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0])); 
     // Check if the user exist.
-    if (!reportUser) return message.reply(response.chooseMessageResponse(personality.command.report.nouser, message));
+    if (!targetUser) return message.reply(response.chooseMessageResponse(personality.command.report.nouser, message));
     // Can the user be banned.
-    if (reportUser.hasPermission(permissions.report)) return message.reply(response.chooseMessageResponse(personality.command.report.nopermission, message));
+    if (targetUser.hasPermission(permissions.report)) return message.reply(response.chooseMessageResponse(personality.command.report.nopermission, message));
 
     // Delete your own command
     await message.delete().catch();
@@ -24,7 +24,7 @@ module.exports.run = async (client, message, arguments) => {
     let reportEmbed = new Discord.RichEmbed()
     .setDescription("Reports")
     .setColor(color.report)
-    .addField("Reported User", `${reportUser} with ID: ${reportUser.id}`)
+    .addField("Reported User", `${targetUser} with ID: ${targetUser.id}`)
     //.addField("Reported By", `${message.author} with ID: ${message.author.id}`)
     .addField("Channel", message.channel)
     .addField("Time", message.createdAt)

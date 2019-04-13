@@ -10,11 +10,11 @@ module.exports.run = async (client, message, arguments) => {
     if (!message.member.hasPermission(permissions.mute)) return message.reply(response.chooseMessageResponse(personality.command.mute.permission, message));
 
     // Get mentioned user.
-    let muteUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0]));
+    let targetUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0]));
     // Check if the user exist.
-    if (!muteUser) return message.reply(response.chooseMessageResponse(personality.command.mute.nouser, message));
+    if (!targetUser) return message.reply(response.chooseMessageResponse(personality.command.mute.nouser, message));
     // Check mentioned user permission.
-    if (muteUser.hasPermission(permissions.mute)) return  message.reply(response.chooseMessageResponse(personality.command.mute.nopermission, message));
+    if (targetUser.hasPermission(permissions.mute)) return  message.reply(response.chooseMessageResponse(personality.command.mute.nopermission, message));
 
     // Delete your own command.
     await message.delete().catch(); 
@@ -44,12 +44,12 @@ module.exports.run = async (client, message, arguments) => {
     if (!muteTime) return message.reply(response.chooseMessageResponse(personality.command.mute.notime, message));
 
     // Add the role to the user.
-    await (muteUser.addRole(muteRole.id));
+    await (targetUser.addRole(muteRole.id));
 
     try {(
-        await muteUser.send(response.chooseMessageResponse(personality.command.mute.notify, message, ms(ms(muteTime)))));
+        await targetUser.send(response.chooseMessageResponse(personality.command.mute.notify, message, ms(ms(muteTime)))));
     } catch(err) {
-        console.log(`[error] ${muteUser.user.tag} coudn't be DMed because of this error. ${err}`);
+        console.log(`[error] ${targetUser.user.tag} coudn't be DMed because of this error. ${err}`);
     }
 }
 

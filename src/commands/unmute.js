@@ -10,9 +10,9 @@ module.exports.run = async (client, message, arguments) => {
     if (!message.member.hasPermission(permissions.unmute)) return message.reply(response.chooseMessageResponse(personality.command.unmute.permission, message));
 
     // Get mentioned user.
-    let unmuteUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0]));
+    let targetUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0]));
     // Check if the user exist.
-    if (!unmuteUser) return message.reply(response.chooseMessageResponse(personality.command.unmute.nouser, message));
+    if (!targetUser) return message.reply(response.chooseMessageResponse(personality.command.unmute.nouser, message));
 
     // Delete your own command.
     await message.delete().catch();
@@ -23,12 +23,12 @@ module.exports.run = async (client, message, arguments) => {
     if (!muteRole) return message.channel.send(response.chooseMessageResponse(personality.command.unmute.norole, message));
 
     // Remove the role from the user.
-    await unmuteUser.removeRole(muteRole.id)
+    await targetUser.removeRole(muteRole.id)
 
     try {
-        await unmuteUser.send(response.chooseMessageResponse(personality.command.unmute.notify, message));
+        await targetUser.send(response.chooseMessageResponse(personality.command.unmute.notify, message));
     } catch(err) {
-        console.log(`[error] ${unmuteUser.user.tag} coudn't be DMed because of this error. ${err}`);
+        console.log(`[error] ${targetUser.user.tag} coudn't be DMed because of this error. ${err}`);
     }
 }
 

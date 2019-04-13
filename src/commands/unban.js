@@ -10,12 +10,12 @@ module.exports.run = async (client, message, arguments) => {
     if (!message.member.hasPermission(permissions.unban)) return message.reply(response.chooseMessageResponse(personality.command.unban.permission, message));
 
     // Get mentioned user.
-    let unbanUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0]));
+    let targetUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0]));
     // Check if the user exist.
     if (!unbannUser) return message.reply(response.chooseMessageResponse(personality.command.unban.nouser, message));
 
     // Can the user be unbanned.
-    if (unbanUser.hasPermission(permissions.unban)) return message.reply(response.chooseMessageResponse(personality.command.unban.nopermission, message));
+    if (targetUser.hasPermission(permissions.unban)) return message.reply(response.chooseMessageResponse(personality.command.unban.nopermission, message));
 
     // Delete your own command.
     await message.delete().catch(); 
@@ -25,7 +25,7 @@ module.exports.run = async (client, message, arguments) => {
     let unbanEmbed = new Discord.RichEmbed()
     .setDescription("Unban")
     .setColor(color.ban)
-    .addField("Unbanned User", `${unbanUser} with ID ${unbanUser.id}`)
+    .addField("Unbanned User", `${targetUser} with ID ${targetUser.id}`)
     .addField("Unbanned By", `<@${message.author.id}> with ID ${message.author.id}`)
     .addField("Channel", message.channel)
     .addField("Time", message.createdAt)
@@ -37,14 +37,14 @@ module.exports.run = async (client, message, arguments) => {
     if (!unbanChannel) return message.channel.send(response.chooseMessageResponse(personality.command.unban.nochannel, message));
 
     // Unban user and send embed.
-    message.guild.member(unbanUser).unban(reason);
+    message.guild.member(targetUser).unban(reason);
     unbanChannel.send(unbanEmbed).catch();
 
     try {
          // Informe user directly over their guild unban.
         await banUser.send(response.chooseMessageResponse(personality.command.unban.notify, message, reason));
     } catch(err) {
-        console.log(`[error] ${unbanUser.user.tag} couldn't be contacted because of this error: ${err}`);
+        console.log(`[error] ${targetUser.user.tag} couldn't be contacted because of this error: ${err}`);
     }
 }
 

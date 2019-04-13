@@ -10,13 +10,13 @@ module.exports.run = async (client, message, arguments) => {
     if (!message.member.hasPermission(permissions.kick)) return message.reply(response.chooseMessageResponse(personality.command.kick.permission, message));
 
     // Get mentioned user.
-    let kickUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0]));
+    let targetUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0]));
     // Check if the user exist.
-    if (!kickUser) return message.reply(response.chooseMessageResponse(personality.command.kick.nouser, message));
+    if (!targetUser) return message.reply(response.chooseMessageResponse(personality.command.kick.nouser, message));
     // Check mentioned user permission.
-    if (kickUser.hasPermission(permissions.kick)) return message.reply(response.chooseMessageResponse(personality.command.kick.nopermission, message));
+    if (targetUser.hasPermission(permissions.kick)) return message.reply(response.chooseMessageResponse(personality.command.kick.nopermission, message));
     // Is the client able to kick someone.
-    if (!kickUser.kickable()) return message.reply(response.chooseMessageResponse(personality.command.kick.unkickable, message));
+    if (!targetUser.kickable()) return message.reply(response.chooseMessageResponse(personality.command.kick.unkickable, message));
 
     // Delete your own command.
     await message.delete().catch();
@@ -28,7 +28,7 @@ module.exports.run = async (client, message, arguments) => {
     let kickEmbed = new Discord.RichEmbed()
     .setDescription("Kick")
     .setColor(color.kick)
-    .addField("Kick User", `${kickUser} with ID ${kickUser.id}`)
+    .addField("Kick User", `${targetUser} with ID ${targetUser.id}`)
     .addField("Kicked By", `<@${message.author.id}> with ID ${message.author.id}`)
     .addField("Channel", message.channel)
     .addField("Time", message.createdAt)
@@ -40,14 +40,14 @@ module.exports.run = async (client, message, arguments) => {
     if (!kickChannel) return  message.channel.send(response.chooseMessageResponse(personality.command.kick.nochannel, message));
     
     // Kick user and send embed.
-    message.guild.member(kickUser).kick(reason);
+    message.guild.member(targetUser).kick(reason);
     kickChannel.send(kickEmbed);
 
     try {
         // Informe user directly over their guild kick.
-        await kickUser.send(response.chooseMessageResponse(personality.command.kick.notify, message, reason));
+        await targetUser.send(response.chooseMessageResponse(personality.command.kick.notify, message, reason));
     } catch(err) {
-        console.log(`[error] ${kickUser.user.tag} couldn't be contacted because of this error: ${err}`);
+        console.log(`[error] ${targetUser.user.tag} couldn't be contacted because of this error: ${err}`);
     }
 }
 
