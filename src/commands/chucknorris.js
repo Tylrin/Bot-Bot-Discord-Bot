@@ -7,34 +7,52 @@ const response = require("../utilities/personalityhelperlibrary.js");
 const personality = require("../utilities/personalityresponse.json");
 
 module.exports.run = async (client, message, arguments) => {
-    // Check permission for the command.
-    if (!message.member.hasPermission(permissions.chucknorris)) return message.reply(response.command.chooseMessageResponse((personality.command.chucknorris.permission), message));
-        
-    // Delete your own command.
-    await message.delete().catch();
+	// Check permission for the command.
+	if (!message.member.hasPermission(permissions.chucknorris))
+		return message.reply(
+			response.command.chooseMessageResponse(
+				personality.command.chucknorris.permission,
+				message
+			)
+		);
 
-    // Send preperation message.
-    let msg = await message.channel.send(response.command.chooseMessageResponse((personality.command.chucknorris.load), message));
+	// Delete your own command.
+	await message.delete().catch();
 
-    // Get data url.
-    let {body} = await superagent
-    .get("https://api.chucknorris.io/jokes/random")
+	// Send preperation message.
+	let msg = await message.channel.send(
+		response.command.chooseMessageResponse(
+			personality.command.chucknorris.load,
+			message
+		)
+	);
 
-    // Check if body exist.
-    if (!body) return msg.reply(response.command.chooseMessageResponse((personality.command.chucknorris.errorload), message));
+	// Get data url.
+	let {body} = await superagent.get(
+		"https://api.chucknorris.io/jokes/random"
+	);
 
-    // Create embed.
-    let chuckEmbed = new Discord.RichEmbed()
-    .setTitle("Chuck Norris Joke")
-    .setDescription(body.value)
-    .setColor(color.cat);
-    
-    msg.edit(chuckEmbed);
-}
+	// Check if body exist.
+	if (!body)
+		return msg.reply(
+			response.command.chooseMessageResponse(
+				personality.command.chucknorris.errorload,
+				message
+			)
+		);
+
+	// Create embed.
+	let chuckEmbed = new Discord.RichEmbed()
+		.setTitle("Chuck Norris Joke")
+		.setDescription(body.value)
+		.setColor(color.cat);
+
+	msg.edit(chuckEmbed);
+};
 
 module.exports.config = {
-    name: "chucknorris",
-    aliases: ["chuck"],
-    usage: "<prefix>chucknorris",
-    description: ""
-}
+	name: "chucknorris",
+	aliases: ["chuck"],
+	usage: "<prefix>chucknorris",
+	description: ""
+};
