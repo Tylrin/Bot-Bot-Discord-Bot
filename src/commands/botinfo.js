@@ -7,7 +7,7 @@ const personality = require("../utilities/personalityresponse.json");
 
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.botinfo)) return message.reply(response.chooseMessageResponse((personality.command.botinfo.permission), message));
+    if (!message.member.hasPermission(permissions.botinfo)) return message.reply(response.command.chooseMessageResponse((personality.command.botinfo.permission), message));
 
     // Delete your own command.
     await message.delete().catch();
@@ -22,7 +22,8 @@ module.exports.run = async (client, message, arguments) => {
     .addField("Created On", client.user.createdAt)
     .addField("Version", client.botInfo.version)
     .addField("Author", client.botInfo.author)
-    .setTimestamp();
+    .setTimestamp()
+    .setFooter(`${client.botConfig.prefix}botinfo`, client.user.avatarURL);
 
     message.author.send(botEmbed);
 }

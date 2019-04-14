@@ -7,24 +7,26 @@ const personality = require("../utilities/personalityresponse.json");
 
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.eightball)) return message.reply(response.chooseMessageResponse(personality.command.eightball.permission, message));
+    if (!message.member.hasPermission(permissions.eightball)) return message.reply(response.command.chooseMessageResponse(personality.command.eightball.permission, message));
+    
     // Delete your own command.
     await message.delete().catch();
 
     // Get the question.
     let question = arguments.slice(0).join(" ").trim();
     // Was a valid question asked.
-    if (!question) return message.reply(response.chooseMessageResponse(personality.command.eightball.noquestion, message));
+    if (!question) return message.reply(response.command.chooseMessageResponse(personality.command.eightball.noquestion, message));
 
     // Calculate replies.
-    let replies =  response.chooseMessageResponse(personality.command.eightball.replies, message, question);
+    let replies =  response.command.chooseMessageResponse(personality.command.eightball.replies, message, question);
 
     // Create embed.
     let ballEmbed = new Discord.RichEmbed()
     .setAuthor(message.author.tag)
     .setColor(color.eightball)
     .addField("Question", question)
-    .addField("Answer", replies);
+    .addField("Answer", replies)
+    .setFooter(`${client.botConfig.prefix}8ball`, client.user.avatarURL);
 
     message.channel.send(ballEmbed);
 }

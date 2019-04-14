@@ -7,14 +7,14 @@ const personality = require("../utilities/personalityresponse.json");
 
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.mute)) return message.reply(response.chooseMessageResponse(personality.command.mute.permission, message));
+    if (!message.member.hasPermission(permissions.mute)) return message.reply(response.command.chooseMessageResponse(personality.command.mute.permission, message));
 
     // Get mentioned user.
     let targetUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0]));
     // Check if the user exist.
-    if (!targetUser) return message.reply(response.chooseMessageResponse(personality.command.mute.nouser, message));
+    if (!targetUser) return message.reply(response.command.chooseMessageResponse(personality.command.mute.nouser, message));
     // Check mentioned user permission.
-    if (targetUser.hasPermission(permissions.mute)) return  message.reply(response.chooseMessageResponse(personality.command.mute.nopermission, message));
+    if (targetUser.hasPermission(permissions.mute)) return  message.reply(response.command.chooseMessageResponse(personality.command.mute.nopermission, message));
 
     // Delete your own command.
     await message.delete().catch(); 
@@ -41,13 +41,13 @@ module.exports.run = async (client, message, arguments) => {
     }
     // Set mute time
     let muteTime = arguments[1];
-    if (!muteTime) return message.reply(response.chooseMessageResponse(personality.command.mute.notime, message));
+    if (!muteTime) return message.reply(response.command.chooseMessageResponse(personality.command.mute.notime, message));
 
     // Add the role to the user.
     await (targetUser.addRole(muteRole.id));
 
     try {(
-        await targetUser.send(response.chooseMessageResponse(personality.command.mute.notify, message, ms(ms(muteTime)))));
+        await targetUser.send(response.command.chooseMessageResponse(personality.command.mute.notify, message, ms(ms(muteTime)))));
     } catch(err) {
         console.log(`[error] ${targetUser.user.tag} coudn't be DMed because of this error. ${err}`);
     }

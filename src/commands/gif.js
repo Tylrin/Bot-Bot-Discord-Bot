@@ -10,13 +10,13 @@ module.exports.run = async (client, message, arguments) => {
     const giphy = require("giphy-api")(config.giphyToken);
     
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.gif)) return message.reply(response.chooseMessageResponse(personality.command.gif.permission, message));
+    if (!message.member.hasPermission(permissions.gif)) return message.reply(response.command.chooseMessageResponse(personality.command.gif.permission, message));
 
     // Delete your own command.
     await message.delete().catch();
 
     // Check if there is a search term.
-    if (!arguments[0]) return message.reply(response.chooseMessageResponse(personality.command.gif.nosearchterm, message));
+    if (!arguments[0]) return message.reply(response.command.chooseMessageResponse(personality.command.gif.nosearchterm, message));
     let searchTerm = arguments[0];
     // Get the rating.
     let rating = 'g';
@@ -25,7 +25,7 @@ module.exports.run = async (client, message, arguments) => {
     };
 
     // Send preperation message.
-    let msg = await message.channel.send(response.chooseMessageResponse(personality.command.gif.load, message));
+    let msg = await message.channel.send(response.command.chooseMessageResponse(personality.command.gif.load, message));
 
     // Get random gif with options.
     giphy.random({
@@ -45,8 +45,8 @@ module.exports.run = async (client, message, arguments) => {
 
         msg.edit(gifEmbed);
     }).catch((err) => {
-        await msg.delete().catch();
-        message.channel.send(response.chooseMessageResponse(personality.command.gif.errorload, message));
+        msg.delete().catch();
+        message.channel.send(response.command.chooseMessageResponse(personality.command.gif.errorload, message));
         console.log(`[error] Couldn't send gif because of this error: ${err}`);
     });
 }

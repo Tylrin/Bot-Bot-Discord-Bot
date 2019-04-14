@@ -127,6 +127,22 @@
                 "Sorry no dog image, there seems to be a problem with my connection."
             ]
         },
+        "forecast": {
+            "permission": [
+                "You don't have the right to see the weather forecast."
+            ],
+            "load": [
+                "Generating..."
+            ]
+        },
+        "geocode": {
+            "permission": [
+                "You don't have the right to look up the geocode."
+            ],
+            "load": [
+                "Generating..."
+            ]
+        },
         "gif": {
             "permission": [
                 "You don't have the right to post gifs."

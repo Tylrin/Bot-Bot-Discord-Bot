@@ -28,5 +28,7 @@
     "cat": [],
     "dog": [],
     "badmeme": [],
-    "chucknorris": []
+    "chucknorris": [],
+    "forecast": [],
+    "geocode": []
 }

@@ -7,7 +7,7 @@ const personality = require("../utilities/personalityresponse.json");
 
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.ping)) return message.reply(response.chooseMessageResponse(personality.command.ping.permission, message));
+    if (!message.member.hasPermission(permissions.ping)) return message.reply(response.command.chooseMessageResponse(personality.command.ping.permission, message));
 
     // Message channel.
     message.channel.send("Pinging...").then(msg => {
@@ -15,7 +15,7 @@ module.exports.run = async (client, message, arguments) => {
         let ping = msg.createdTimestamp - message.createdTimestamp;
 
         // Edit message
-        msg.edit((response.chooseMessageResponse(personality.command.ping.notify, message)));
+        msg.edit((response.command.chooseMessageResponse(personality.command.ping.notify, message)));
 
         // Create embed.
         let pingEmbed = new Discord.RichEmbed()

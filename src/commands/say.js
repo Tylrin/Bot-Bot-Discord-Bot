@@ -6,7 +6,7 @@ const personality = require("../utilities/personalityresponse.json");
 
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.say)) return  message.reply(response.chooseMessageResponse(personality.command.say.permission, message));
+    if (!message.member.hasPermission(permissions.say)) return  message.reply(response.command.chooseMessageResponse(personality.command.say.permission, message));
 
     // Delete your own command.
     await message.delete().catch(); 

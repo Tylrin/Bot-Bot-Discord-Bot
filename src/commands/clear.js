@@ -6,7 +6,7 @@ const personality = require("../utilities/personalityresponse.json");
 
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.clear)) return message.reply(response.chooseMessageResponse((personality.command.clear.permission), message));
+    if (!message.member.hasPermission(permissions.clear)) return message.reply(response.command.chooseMessageResponse((personality.command.clear.permission), message));
 
     // Delete your own command.
     await message.delete().catch();
@@ -21,9 +21,9 @@ module.exports.run = async (client, message, arguments) => {
     // Delete messages.
     message.channel.bulkDelete(fetched.size)
     .then(() => {
-        message.channel.send(response.chooseMessageResponse((personality.command.clear.notify), message, fetched.size)).then(msg => msg.delete(5000));
+        message.channel.send(response.command.chooseMessageResponse((personality.command.clear.notify), message, fetched.size)).then(msg => msg.delete(5000));
     }).catch((err) => {
-        message.channel.send(response.chooseMessageResponse((personality.command.clear.error), message, err));
+        message.channel.send(response.command.chooseMessageResponse((personality.command.clear.error), message, err));
     }); 
 }
 

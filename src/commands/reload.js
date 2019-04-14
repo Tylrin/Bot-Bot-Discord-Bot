@@ -6,13 +6,13 @@ const personality = require("../utilities/personalityresponse.json");
 
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.reload)) return message.reply(response.chooseMessageResponse(personality.command.reload.permission, message));
+    if (!message.member.hasPermission(permissions.eightball)) return message.reply(response.command.chooseMessageResponse(personality.command.reload.permission, message));
     
     // Delete your own command.
     await message.delete().catch();
 
     // Check if there is a file name.
-    if (!arguments[0]) return message.reply(response.chooseMessageResponse(personality.command.reload.nofile, message));
+    if (!arguments[0]) return message.reply(response.command.chooseMessageResponse(personality.command.reload.nofile, message));
 
     // Try reloading the file.
     let commandFile = client.commands.get(arguments[0].toLowerCase()) || client.commands.get(client.aliases.get(arguments[0].toLowerCase())); // Get the command file
@@ -28,7 +28,7 @@ module.exports.run = async (client, message, arguments) => {
         return;
     }
 
-    message.channel.send(response.chooseMessageResponse(personality.command.reload.permission, message, commandName));
+    message.channel.send(response.command.chooseMessageResponse(personality.command.reload.notify, message, commandName));
 }
 
 module.exports.config = {

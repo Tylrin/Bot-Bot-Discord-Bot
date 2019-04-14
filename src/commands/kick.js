@@ -7,16 +7,16 @@ const personality = require("../utilities/personalityresponse.json");
 
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.kick)) return message.reply(response.chooseMessageResponse(personality.command.kick.permission, message));
+    if (!message.member.hasPermission(permissions.kick)) return message.reply(response.command.chooseMessageResponse(personality.command.kick.permission, message));
 
     // Get mentioned user.
     let targetUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0]));
     // Check if the user exist.
-    if (!targetUser) return message.reply(response.chooseMessageResponse(personality.command.kick.nouser, message));
+    if (!targetUser) return message.reply(response.command.chooseMessageResponse(personality.command.kick.nouser, message));
     // Check mentioned user permission.
-    if (targetUser.hasPermission(permissions.kick)) return message.reply(response.chooseMessageResponse(personality.command.kick.nopermission, message));
+    if (targetUser.hasPermission(permissions.kick)) return message.reply(response.command.chooseMessageResponse(personality.command.kick.nopermission, message));
     // Is the client able to kick someone.
-    if (!targetUser.kickable()) return message.reply(response.chooseMessageResponse(personality.command.kick.unkickable, message));
+    if (!targetUser.kickable()) return message.reply(response.command.chooseMessageResponse(personality.command.kick.unkickable, message));
 
     // Delete your own command.
     await message.delete().catch();
@@ -37,7 +37,7 @@ module.exports.run = async (client, message, arguments) => {
     // Get channel location.
     let kickChannel = message.guild.channels.find(`name`, 'incidents');
     // Does the channel exist.
-    if (!kickChannel) return  message.channel.send(response.chooseMessageResponse(personality.command.kick.nochannel, message));
+    if (!kickChannel) return  message.channel.send(response.command.chooseMessageResponse(personality.command.kick.nochannel, message));
     
     // Kick user and send embed.
     message.guild.member(targetUser).kick(reason);
@@ -45,7 +45,7 @@ module.exports.run = async (client, message, arguments) => {
 
     try {
         // Informe user directly over their guild kick.
-        await targetUser.send(response.chooseMessageResponse(personality.command.kick.notify, message, reason));
+        await targetUser.send(response.command.chooseMessageResponse(personality.command.kick.notify, message, reason));
     } catch(err) {
         console.log(`[error] ${targetUser.user.tag} couldn't be contacted because of this error: ${err}`);
     }

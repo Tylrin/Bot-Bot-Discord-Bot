@@ -7,15 +7,15 @@ const personality = require("../utilities/personalityresponse.json");
 
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.unban)) return message.reply(response.chooseMessageResponse(personality.command.unban.permission, message));
+    if (!message.member.hasPermission(permissions.unban)) return message.reply(response.command.chooseMessageResponse(personality.command.unban.permission, message));
 
     // Get mentioned user.
     let targetUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(arguments[0]));
     // Check if the user exist.
-    if (!unbannUser) return message.reply(response.chooseMessageResponse(personality.command.unban.nouser, message));
+    if (!unbannUser) return message.reply(response.command.chooseMessageResponse(personality.command.unban.nouser, message));
 
     // Can the user be unbanned.
-    if (targetUser.hasPermission(permissions.unban)) return message.reply(response.chooseMessageResponse(personality.command.unban.nopermission, message));
+    if (targetUser.hasPermission(permissions.unban)) return message.reply(response.command.chooseMessageResponse(personality.command.unban.nopermission, message));
 
     // Delete your own command.
     await message.delete().catch(); 
@@ -34,7 +34,7 @@ module.exports.run = async (client, message, arguments) => {
     // Get channel location.
     let unbanChannel = message.guild.channels.find(`name`, 'incidents');
     // Does the channel exist.
-    if (!unbanChannel) return message.channel.send(response.chooseMessageResponse(personality.command.unban.nochannel, message));
+    if (!unbanChannel) return message.channel.send(response.command.chooseMessageResponse(personality.command.unban.nochannel, message));
 
     // Unban user and send embed.
     message.guild.member(targetUser).unban(reason);
@@ -42,7 +42,7 @@ module.exports.run = async (client, message, arguments) => {
 
     try {
          // Informe user directly over their guild unban.
-        await banUser.send(response.chooseMessageResponse(personality.command.unban.notify, message, reason));
+        await banUser.send(response.command.chooseMessageResponse(personality.command.unban.notify, message, reason));
     } catch(err) {
         console.log(`[error] ${targetUser.user.tag} couldn't be contacted because of this error: ${err}`);
     }

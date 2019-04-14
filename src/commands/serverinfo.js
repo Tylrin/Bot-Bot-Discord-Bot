@@ -7,7 +7,7 @@ const personality = require("../utilities/personalityresponse.json");
 
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.serverinfo)) return message.reply(response.chooseMessageResponse(personality.command.serverinfo.permission, message));
+    if (!message.member.hasPermission(permissions.serverinfo)) return message.reply(response.command.chooseMessageResponse(personality.command.serverinfo.permission, message));
 
     // Delete your own command.
     await message.delete().catch();
@@ -15,14 +15,15 @@ module.exports.run = async (client, message, arguments) => {
     // Create embed.
     let serverIcon = message.guild.iconURL;
     let serverEmbed = new Discord.RichEmbed()
-    .setDescription("Server Information")
+    .setTitle("Server Information")
     .setColor(color.serverinfo)
     .setThumbnail(serverIcon)
     .addField("Server Name", message.guild.name)
     .addField("Created On", message.guild.createdAt)
     .addField("You Joined", message.member.joinedAt)
     .addField("Total Members", message.guild.memberCount)
-    .setTimestamp();
+    .setTimestamp()
+    .setFooter(`${client.botConfig.prefix}serverinfo`, client.user.avatarURL);
 
     message.author.send(serverEmbed);
 };

@@ -1,4 +1,4 @@
-module.exports = {
+module.exports.command = {
     chooseMessageResponse: function (replies, message, custom) {
         const st = require("stjs");
 
@@ -23,8 +23,10 @@ module.exports = {
         // Get result.
         return result;
     }
+}
 
-    // chooseEventResponse: function (client) {}
+module.exports.event = {
+    chooseEventResponse: function (client) {
 
-    
+    }
 }

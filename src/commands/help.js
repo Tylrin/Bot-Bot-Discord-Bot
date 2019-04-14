@@ -8,13 +8,13 @@ const personality = require("../utilities/personalityresponse.json");
 
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.help)) return message.reply(response.chooseMessageResponse(personality.command.help.permission, message));
+    if (!message.member.hasPermission(permissions.help)) return message.reply(response.command.chooseMessageResponse(personality.command.help.permission, message));
 
     // Delete your own command.
     await message.delete().catch();
 
     // Reply with instructions if the command is !help help.
-    if (arguments[0] == "help") return message.author.send(response.chooseMessageResponse(personality.command.help.doublehelp, message, client.botConfig.prefix));
+    if (arguments[0] == "help") return message.author.send(response.command.chooseMessageResponse(personality.command.help.doublehelp, message, client.botConfig.prefix));
 
     // Reply with a list of all commands if there are no valid arguments.
     if (arguments[0] == "list" || arguments.length <= 0) {
@@ -40,7 +40,7 @@ module.exports.run = async (client, message, arguments) => {
                   name: client.user.username,
                   icon_url: client.user.avatarURL
                 },
-                description: "This is a test embed to showcase what they look like and what they can do.",
+                description: "Here is a list of all available commands the bot can execute.",
                 color: (color.help, 1),
                 fields: commandField,
                 timestamp: new Date(),

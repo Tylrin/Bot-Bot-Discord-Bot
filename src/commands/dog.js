@@ -8,20 +8,20 @@ const personality = require("../utilities/personalityresponse.json");
 
 module.exports.run = async (client, message, arguments) => {
     // Check permission for the command.
-    if (!message.member.hasPermission(permissions.dog)) return message.reply(response.chooseMessageResponse(personality.command.dog.permission, message));
+    if (!message.member.hasPermission(permissions.dog)) return message.reply(response.command.chooseMessageResponse(personality.command.dog.permission, message));
         
     // Delete your own command.
     await message.delete().catch();
 
     // Send preperation message.
-    let msg = await message.channel.send(response.chooseMessageResponse(personality.command.dog.load, message));
+    let msg = await message.channel.send(response.command.chooseMessageResponse(personality.command.dog.load, message));
 
     // Get data url.
     let {body} = await superagent
     .get("https://random.dog/woof.json")
 
     // Check if body exist.
-    if (!body) return msg.reply(response.chooseMessageResponse(personality.command.dog.errorload, message));
+    if (!body) return msg.reply(response.command.chooseMessageResponse(personality.command.dog.errorload, message));
 
     // Create embed.
     let dogEmbed = new Discord.RichEmbed()
