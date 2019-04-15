@@ -14,7 +14,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.gif.permission,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -26,7 +27,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.gif.nosearchterm,
-				message
+				message,
+				arguments
 			)
 		);
 	let searchTerm = arguments[0];
@@ -44,10 +46,7 @@ module.exports.run = async (client, message, arguments) => {
 
 	// Send preperation message.
 	let msg = await message.channel.send(
-		response.command.chooseMessageResponse(
-			personality.command.gif.load,
-			message
-		)
+		response.command.chooseMessageResponse(personality.command.gif.load, message, arguments)
 	);
 
 	// Get random gif with options.
@@ -74,12 +73,11 @@ module.exports.run = async (client, message, arguments) => {
 			message.channel.send(
 				response.command.chooseMessageResponse(
 					personality.command.gif.errorload,
-					message
+					message,
+					arguments
 				)
 			);
-			console.log(
-				`[error] Couldn't send gif because of this error: ${err}`
-			);
+			console.log(`[error] Couldn't send gif because of this error: ${err}`);
 		});
 };
 

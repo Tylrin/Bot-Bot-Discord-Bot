@@ -10,7 +10,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.reload.permission,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -22,7 +23,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.reload.nofile,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -46,6 +48,7 @@ module.exports.run = async (client, message, arguments) => {
 		response.command.chooseMessageResponse(
 			personality.command.reload.notify,
 			message,
+			arguments,
 			commandName
 		)
 	);

@@ -11,21 +11,22 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.mute.permission,
-				message
+				message,
+				arguments
 			)
 		);
 
 	// Get mentioned user.
 	let targetUser = message.guild.member(
-		message.mentions.users.first() ||
-			message.guild.members.get(arguments[0])
+		message.mentions.users.first() || message.guild.members.get(arguments[0])
 	);
 	// Check if the user exist.
 	if (!targetUser)
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.mute.nouser,
-				message
+				message,
+				arguments
 			)
 		);
 	// Check mentioned user permission.
@@ -33,7 +34,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.mute.nopermission,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -66,7 +68,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.mute.notime,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -82,11 +85,7 @@ module.exports.run = async (client, message, arguments) => {
 			)
 		);
 	} catch (err) {
-		console.log(
-			`[error] ${
-				targetUser.user.tag
-			} coudn't be DMed because of this error. ${err}`
-		);
+		console.log(`[error] ${targetUser.user.tag} coudn't be DMed because of this error. ${err}`);
 	}
 };
 

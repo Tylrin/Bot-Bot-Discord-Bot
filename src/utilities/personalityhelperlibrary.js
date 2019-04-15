@@ -1,5 +1,5 @@
 module.exports.command = {
-	chooseMessageResponse: function(replies, message, custom) {
+	chooseMessageResponse: function(replies, message, arguments, custom) {
 		const st = require("stjs");
 
 		// Check for valid replies.
@@ -8,7 +8,9 @@ module.exports.command = {
 		var data = {
 			author: `${message.author.username}`,
 			guild: `${message.guild.name}`,
-			user: message.guild.member(message.mentions.users.first()),
+			user:
+				message.guild.member(message.mentions.users.first()) ||
+				message.guild.members.get(arguments[0]),
 			channel: `${message.channel}`,
 			custom: custom
 		};

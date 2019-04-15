@@ -11,7 +11,9 @@
     "stjs": "0.0.5",
     "superagent": "^5.0.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "prettier": "1.17.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

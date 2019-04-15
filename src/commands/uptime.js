@@ -10,7 +10,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.uptime.permission,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -20,19 +21,17 @@ module.exports.run = async (client, message, arguments) => {
 		const min = Math.floor((ms / (1000 * 60)) % 60).toString();
 		const hrs = Math.floor((ms / (1000 * 60 * 60)) % 60).toString();
 		const day = Math.floor((ms / (1000 * 60 * 60 * 24)) % 60).toString();
-		return `${day.padStart(1, "0")} days, ${hrs.padStart(
+		return `${day.padStart(1, "0")} days, ${hrs.padStart(2, "0")} hours, ${min.padStart(
 			2,
 			"0"
-		)} hours, ${min.padStart(2, "0")} minutes, ${sec.padStart(
-			2,
-			"0"
-		)} seconds`;
+		)} minutes, ${sec.padStart(2, "0")} seconds`;
 	}
 
 	message.channel.send(
 		response.command.chooseMessageResponse(
 			personality.command.uptime.notify,
 			message,
+			arguments,
 			duration(client.uptime)
 		)
 	);

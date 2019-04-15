@@ -11,7 +11,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.coinflip.permission,
-				message
+				message,
+				arguments
 			)
 		);
 

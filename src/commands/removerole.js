@@ -10,21 +10,22 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.removerole.permission,
-				message
+				message,
+				arguments
 			)
 		);
 
 	// Get mentioned user.
 	let targetUser = message.guild.member(
-		message.mentions.users.first() ||
-			message.guild.members.get(arguments[0])
+		message.mentions.users.first() || message.guild.members.get(arguments[0])
 	);
 	// Check if the user exist.
 	if (!targetUser)
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.removerole.nouser,
-				message
+				message,
+				arguments
 			)
 		);
 	// Check mentioned user permission.
@@ -32,7 +33,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.removerole.nopermission,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -45,7 +47,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.removerole.norole,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -55,7 +58,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.removerole.unfoundrole,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -64,7 +68,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.removerole.hasnotrole,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -77,14 +82,13 @@ module.exports.run = async (client, message, arguments) => {
 			response.command.chooseMessageResponse(
 				personality.command.removerole.notify,
 				message,
+				arguments,
 				guildRole.name
 			)
 		);
 	} catch (err) {
 		console.log(
-			`[error] ${
-				roelUser.user.tag
-			} couldn't be contacted because of this error: ${err}`
+			`[error] ${roelUser.user.tag} couldn't be contacted because of this error: ${err}`
 		);
 	}
 };

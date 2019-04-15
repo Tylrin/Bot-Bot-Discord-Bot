@@ -11,21 +11,22 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.ban.permission,
-				message
+				message,
+				arguments
 			)
 		);
 
 	// Get mentioned user.
 	let targetUser = message.guild.member(
-		message.mentions.users.first() ||
-			message.guild.members.get(arguments[0])
+		message.mentions.users.first() || message.guild.members.get(arguments[0])
 	);
 	// Check if the user exist.
 	if (!targetUser)
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.ban.nouser,
-				message
+				message,
+				arguments
 			)
 		);
 	// Check mentioned user permission.
@@ -33,7 +34,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.ban.nopermission,
-				message
+				message,
+				arguments
 			)
 		);
 	// Is the client able to ban someone.
@@ -41,7 +43,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.ban.unbannable,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -71,14 +74,13 @@ module.exports.run = async (client, message, arguments) => {
 		return message.channel.send(
 			response.command.chooseMessageResponse(
 				personality.command.ban.nochannel,
-				message
+				message,
+				arguments
 			)
 		);
 
 	// Ban user and send embed.
-	message.guild
-		.ban(targetUser, {day: 1, reason: reason})
-		.catch(err => console.log(err));
+	message.guild.ban(targetUser, {day: 1, reason: reason}).catch(err => console.log(err));
 	banChannel.send(banEmbed).catch();
 
 	try {
@@ -86,14 +88,13 @@ module.exports.run = async (client, message, arguments) => {
 		await targetUser.send(
 			response.command.chooseMessageResponse(
 				personality.command.ban.notify,
-				message
+				message,
+				arguments
 			)
 		);
 	} catch (err) {
 		console.log(
-			`[error] ${
-				targetUser.user.tag
-			} couldn't be contacted because of this error: ${err}`
+			`[error] ${targetUser.user.tag} couldn't be contacted because of this error: ${err}`
 		);
 	}
 };

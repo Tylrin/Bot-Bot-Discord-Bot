@@ -11,7 +11,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.ping.permission,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -24,7 +25,8 @@ module.exports.run = async (client, message, arguments) => {
 		msg.edit(
 			response.command.chooseMessageResponse(
 				personality.command.ping.notify,
-				message
+				message,
+				arguments
 			)
 		);
 

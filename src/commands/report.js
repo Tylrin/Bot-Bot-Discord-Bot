@@ -11,21 +11,22 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.report.permission,
-				message
+				message,
+				arguments
 			)
 		);
 
 	// Get mentioned user.
 	let targetUser = message.guild.member(
-		message.mentions.users.first() ||
-			message.guild.members.get(arguments[0])
+		message.mentions.users.first() || message.guild.members.get(arguments[0])
 	);
 	// Check if the user exist.
 	if (!targetUser)
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.report.nouser,
-				message
+				message,
+				arguments
 			)
 		);
 	// Can the user be banned.
@@ -33,7 +34,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.report.nopermission,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -59,7 +61,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.channel.send(
 			response.command.chooseMessageResponse(
 				personality.command.report.nochannel,
-				message
+				message,
+				arguments
 			)
 		);
 

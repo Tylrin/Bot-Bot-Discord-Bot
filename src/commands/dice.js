@@ -10,7 +10,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.dice.permission,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -23,6 +24,7 @@ module.exports.run = async (client, message, arguments) => {
 		response.command.chooseMessageResponse(
 			personality.command.dice.replies,
 			message,
+			arguments,
 			diceNumber
 		)
 	);

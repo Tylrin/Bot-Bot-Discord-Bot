@@ -12,7 +12,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.help.permission,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -25,6 +26,7 @@ module.exports.run = async (client, message, arguments) => {
 			response.command.chooseMessageResponse(
 				personality.command.help.doublehelp,
 				message,
+				arguments,
 				client.botConfig.prefix
 			)
 		);
@@ -45,8 +47,8 @@ module.exports.run = async (client, message, arguments) => {
 				let commandName = f.split(".")[0];
 				commandField.push({
 					name: commandName,
-					value: `${props.config.description ||
-						"invalid description"}\n\`${props.config.usage ||
+					value: `${props.config.description || "invalid description"}\n\`${props.config
+						.usage ||
 						"invalid usage"}\`\n alternative commands: \`${props.config.aliases.join(
 						", "
 					) || "no aliases for this command"}\``
@@ -61,8 +63,7 @@ module.exports.run = async (client, message, arguments) => {
 						name: client.user.username,
 						icon_url: client.user.avatarURL
 					},
-					description:
-						"Here is a list of all available commands the bot can execute.",
+					description: "Here is a list of all available commands the bot can execute.",
 					color: (color.help, 1),
 					fields: commandField,
 					timestamp: new Date(),
@@ -87,26 +88,17 @@ module.exports.run = async (client, message, arguments) => {
 			let helpEmbed = new Discord.RichEmbed()
 				.setTitle(`${command.config.name} information`)
 				.setAuthor(client.user.username, client.user.avatarURL)
-				.setDescription(
-					`${command.config.description || "invalid description"}`
-				)
+				.setDescription(`${command.config.description || "invalid description"}`)
 				.setColor(color.help)
 				.addField("Prefix", `${client.botConfig.prefix}`)
 				.addField("Name", `${command.config.name}`)
-				.addField(
-					"Usage",
-					`${command.config.usage || "invalid usage description"}`
-				)
+				.addField("Usage", `${command.config.usage || "invalid usage description"}`)
 				.addField(
 					"Aliases",
-					`${command.config.aliases.join(", ") ||
-						"no aliases for this command"}`
+					`${command.config.aliases.join(", ") || "no aliases for this command"}`
 				)
 				.setTimestamp()
-				.setFooter(
-					`${client.botConfig.prefix}help`,
-					client.user.avatarURL
-				);
+				.setFooter(`${client.botConfig.prefix}help`, client.user.avatarURL);
 
 			message.author.send(helpEmbed);
 			return;

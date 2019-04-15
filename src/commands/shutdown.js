@@ -10,7 +10,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.shutdown.permission,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -21,7 +22,8 @@ module.exports.run = async (client, message, arguments) => {
 		await message.channel.send(
 			response.command.chooseMessageResponse(
 				personality.command.shutdown.notify,
-				message
+				message,
+				arguments
 			)
 		);
 		process.exit();

@@ -10,7 +10,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.say.permission,
-				message
+				message,
+				arguments
 			)
 		);
 

@@ -11,7 +11,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.serverinfo.permission,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -29,10 +30,7 @@ module.exports.run = async (client, message, arguments) => {
 		.addField("You Joined", message.member.joinedAt)
 		.addField("Total Members", message.guild.memberCount)
 		.setTimestamp()
-		.setFooter(
-			`${client.botConfig.prefix}serverinfo`,
-			client.user.avatarURL
-		);
+		.setFooter(`${client.botConfig.prefix}serverinfo`, client.user.avatarURL);
 
 	message.author.send(serverEmbed);
 };

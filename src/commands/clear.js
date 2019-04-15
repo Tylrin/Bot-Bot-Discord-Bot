@@ -10,7 +10,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.clear.permission,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -33,6 +34,7 @@ module.exports.run = async (client, message, arguments) => {
 					response.command.chooseMessageResponse(
 						personality.command.clear.notify,
 						message,
+						arguments,
 						fetched.size
 					)
 				)
@@ -43,6 +45,7 @@ module.exports.run = async (client, message, arguments) => {
 				response.command.chooseMessageResponse(
 					personality.command.clear.error,
 					message,
+					arguments,
 					err
 				)
 			);

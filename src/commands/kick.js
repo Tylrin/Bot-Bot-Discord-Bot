@@ -11,21 +11,22 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.kick.permission,
-				message
+				message,
+				arguments
 			)
 		);
 
 	// Get mentioned user.
 	let targetUser = message.guild.member(
-		message.mentions.users.first() ||
-			message.guild.members.get(arguments[0])
+		message.mentions.users.first() || message.guild.members.get(arguments[0])
 	);
 	// Check if the user exist.
 	if (!targetUser)
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.kick.nouser,
-				message
+				message,
+				arguments
 			)
 		);
 	// Check mentioned user permission.
@@ -33,7 +34,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.kick.nopermission,
-				message
+				message,
+				arguments
 			)
 		);
 	// Is the client able to kick someone.
@@ -41,7 +43,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.kick.unkickable,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -59,10 +62,7 @@ module.exports.run = async (client, message, arguments) => {
 		.setDescription("Kick")
 		.setColor(color.kick)
 		.addField("Kick User", `${targetUser} with ID ${targetUser.id}`)
-		.addField(
-			"Kicked By",
-			`<@${message.author.id}> with ID ${message.author.id}`
-		)
+		.addField("Kicked By", `<@${message.author.id}> with ID ${message.author.id}`)
 		.addField("Channel", message.channel)
 		.addField("Time", message.createdAt)
 		.addField("Reasons", reason);
@@ -74,7 +74,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.channel.send(
 			response.command.chooseMessageResponse(
 				personality.command.kick.nochannel,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -88,14 +89,13 @@ module.exports.run = async (client, message, arguments) => {
 			response.command.chooseMessageResponse(
 				personality.command.kick.notify,
 				message,
+				arguments,
 				reason
 			)
 		);
 	} catch (err) {
 		console.log(
-			`[error] ${
-				targetUser.user.tag
-			} couldn't be contacted because of this error: ${err}`
+			`[error] ${targetUser.user.tag} couldn't be contacted because of this error: ${err}`
 		);
 	}
 };

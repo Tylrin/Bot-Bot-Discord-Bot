@@ -12,7 +12,8 @@ module.exports.run = async (client, message, arguments) => {
 		return message.reply(
 			response.command.chooseMessageResponse(
 				personality.command.chucknorris.permission,
-				message
+				message,
+				arguments
 			)
 		);
 
@@ -23,21 +24,21 @@ module.exports.run = async (client, message, arguments) => {
 	let msg = await message.channel.send(
 		response.command.chooseMessageResponse(
 			personality.command.chucknorris.load,
-			message
+			message,
+			arguments
 		)
 	);
 
 	// Get data url.
-	let {body} = await superagent.get(
-		"https://api.chucknorris.io/jokes/random"
-	);
+	let {body} = await superagent.get("https://api.chucknorris.io/jokes/random");
 
 	// Check if body exist.
 	if (!body)
 		return msg.reply(
 			response.command.chooseMessageResponse(
 				personality.command.chucknorris.errorload,
-				message
+				message,
+				arguments
 			)
 		);
 
