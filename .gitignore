@@ -3,3 +3,10 @@
 config.json
 
 prettier.config.js
+
+/src/**/images
+
+*.ai
+*.psd
+*.idml
+*.indd

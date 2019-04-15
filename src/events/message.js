@@ -23,8 +23,7 @@ module.exports = (client, message) => {
 		console.log(`[cmd] Arguments: ${arguments}`);
 
 		let commandfile =
-			client.commands.get(command) ||
-			client.commands.get(client.aliases.get(command)); // Get the command file
+			client.commands.get(command) || client.commands.get(client.aliases.get(command)); // Get the command file
 		if (commandfile) {
 			commandfile.run(client, message, arguments); // If the file exists, call it
 		} else {

@@ -13,9 +13,7 @@
 			]
 		},
 		"addrole": {
-			"permission": [
-				"You don't have the right to add a role to someone."
-			],
+			"permission": ["You don't have the right to add a role to someone."],
 			"nouser": ["Couldn't find the user."],
 			"nopermission": ["You can add a role to {{user}}."],
 			"norole": ["Specify a role."],
@@ -26,9 +24,7 @@
 		"badmeme": {
 			"permission": ["You don't have the right to post a meme."],
 			"load": ["Generating..."],
-			"errorload": [
-				"Sorry no meme, there seems to be a problem with my connection"
-			]
+			"errorload": ["Sorry no meme, there seems to be a problem with my connection"]
 		},
 		"ban": {
 			"permission": ["You don't have the right to ban someone."],
@@ -39,16 +35,12 @@
 			"notify": ["You got banned from {{guild}} because: {{custom}}"]
 		},
 		"botinfo": {
-			"permission": [
-				"You don't have the right to see the bot information."
-			]
+			"permission": ["You don't have the right to see the bot information."]
 		},
 		"cat": {
 			"permission": ["You don't have the right to post a cat image."],
 			"load": ["Generating..."],
-			"errorload": [
-				"Sorry no cat image, there seems to be a problem with my connection."
-			]
+			"errorload": ["Sorry no cat image, there seems to be a problem with my connection."]
 		},
 		"chucknorris": {
 			"permission": ["You don't have the right to post a cat image."],
@@ -60,9 +52,7 @@
 		"clear": {
 			"permission": ["You don't have the right to clear the chat."],
 			"notify": ["{{custom}} messages deleted"],
-			"error": [
-				"Sorry coudn't delete the messages because of this error: {{custom}}"
-			]
+			"error": ["Sorry coudn't delete the messages because of this error: {{custom}}"]
 		},
 		"coinflip": {
 			"permission": ["You don't have the right to flip a coin."]
@@ -74,14 +64,10 @@
 		"dog": {
 			"permission": ["You don't have the right to post a dog image."],
 			"load": ["Generating..."],
-			"errorload": [
-				"Sorry no dog image, there seems to be a problem with my connection."
-			]
+			"errorload": ["Sorry no dog image, there seems to be a problem with my connection."]
 		},
 		"forecast": {
-			"permission": [
-				"You don't have the right to see the weather forecast."
-			],
+			"permission": ["You don't have the right to see the weather forecast."],
 			"load": ["Generating..."]
 		},
 		"geocode": {
@@ -95,15 +81,11 @@
 			"errorload": ["Error ugh!: {{custom}}"]
 		},
 		"git": {
-			"permission": [
-				"You don't have the right to see the server information."
-			]
+			"permission": ["You don't have the right to see the server information."]
 		},
 		"help": {
 			"permission": ["You don't have the right to call for help."],
-			"doublehelp": [
-				"Use {{custom}}help <command> or list to get the information you want."
-			]
+			"doublehelp": ["Use {{custom}}help <command> or list to get the information you want."]
 		},
 		"kick": {
 			"permission": ["You don't have the right to kick someone."],
@@ -123,19 +105,13 @@
 		"ping": {
 			"permission": ["You don't have the right to test the ping."],
 			"load": ["Pinging..."],
-			"notify": [
-				"Is it really my ping?",
-				"Is it okay? I can't look!",
-				"I hope it isn't bad!"
-			]
+			"notify": ["Is it really my ping?", "Is it okay? I can't look!", "I hope it isn't bad!"]
 		},
 		"poll": {
 			"permission": []
 		},
 		"reload": {
-			"permission": [
-				"You don't have the right to reload a command file."
-			],
+			"permission": ["You don't have the right to reload a command file."],
 			"nofile": ["Please provide a command to reload."],
 			"notify": ["The command {{custom}} has been reloaded."]
 		},
@@ -158,9 +134,7 @@
 			"permission": ["You can't use the !say command."]
 		},
 		"serverinfo": {
-			"permission": [
-				"You don't have the right to see the server information."
-			]
+			"permission": ["You don't have the right to see the server information."]
 		},
 		"shutdown": {
 			"permission": ["You don't have the right to shutdown the server."],

@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 const color = require("../utilities/commandcolor.json");
+const fs = require("fs");
 
 const response = require("../utilities/personalityhelperlibrary.js");
 const personality = require("../utilities/personalityresponse.json");

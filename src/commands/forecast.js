@@ -29,12 +29,12 @@ module.exports.run = async (client, message, arguments) => {
 	);
 
 	// Create embed.
-	let catEmbed = new Discord.RichEmbed()
+	let forecastEmbed = new Discord.RichEmbed()
 		.setTitle()
 		.setColor()
 		.setImage();
 
-	msg.edit(catEmbed);
+	msg.edit(forecastEmbed);
 };
 
 module.exports.config = {
