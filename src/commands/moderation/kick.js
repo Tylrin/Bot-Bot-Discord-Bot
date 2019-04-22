@@ -1,9 +1,9 @@
-const Discord = require("discord.js");
+const {RichEmbed} = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 const color = require("../utilities/commandcolor.json");
 
-const response = require("../../utilities/personalityhelperlibrary.js");
-const personality = require("../utilities/personalityresponse.json");
+const {command} = require("../../utilities/personalityhelperlibrary.js");
+const {kick} = require("../utilities/personalityresponse.json");
 
 module.exports = {
 	config: {
@@ -17,11 +17,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.kick))
 			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.kick.permission,
-					message,
-					arguments
-				)
+				command.chooseMessageResponse(kick.permission, message, arguments)
 			);
 
 		// Get mentioned user.
@@ -30,30 +26,16 @@ module.exports = {
 		);
 		// Check if the user exist.
 		if (!targetUser)
-			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.kick.nouser,
-					message,
-					arguments
-				)
-			);
+			return message.reply(command.chooseMessageResponse(kick.nouser, message, arguments));
 		// Check mentioned user permission.
 		if (targetUser.hasPermission(permissions.kick))
 			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.kick.nopermission,
-					message,
-					arguments
-				)
+				command.chooseMessageResponse(kick.nopermission, message, arguments)
 			);
 		// Is the client able to kick someone.
 		if (!targetUser.kickable())
 			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.kick.unkickable,
-					message,
-					arguments
-				)
+				command.chooseMessageResponse(kick.unkickable, message, arguments)
 			);
 
 		// Delete your own command.
@@ -80,11 +62,7 @@ module.exports = {
 		// Does the channel exist.
 		if (!kickChannel)
 			return message.channel.send(
-				response.command.chooseMessageResponse(
-					personality.command.kick.nochannel,
-					message,
-					arguments
-				)
+				command.chooseMessageResponse(kick.nochannel, message, arguments)
 			);
 
 		// Kick user and send embed.
@@ -94,12 +72,7 @@ module.exports = {
 		try {
 			// Informe user directly over their guild kick.
 			await targetUser.send(
-				response.command.chooseMessageResponse(
-					personality.command.kick.notify,
-					message,
-					arguments,
-					reason
-				)
+				command.chooseMessageResponse(kick.notify, message, arguments, reason)
 			);
 		} catch (err) {
 			console.log(

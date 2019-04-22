@@ -1,9 +1,9 @@
-const Discord = require("discord.js");
+const {RichEmbed} = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 const color = require("../utilities/commandcolor.json");
 
-const response = require("../utilities/personalityhelperlibrary.js");
-const personality = require("../utilities/personalityresponse.json");
+const {command} = require("../utilities/personalityhelperlibrary.js");
+const {unban} = require("../utilities/personalityresponse.json");
 
 module.exports = {
 	config: {
@@ -17,11 +17,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.unban))
 			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.unban.permission,
-					message,
-					arguments
-				)
+				command.chooseMessageResponse(unban.permission, message, arguments)
 			);
 
 		// Get mentioned user.
@@ -30,22 +26,12 @@ module.exports = {
 		);
 		// Check if the user exist.
 		if (!unbannUser)
-			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.unban.nouser,
-					message,
-					arguments
-				)
-			);
+			return message.reply(command.chooseMessageResponse(unban.nouser, message, arguments));
 
 		// Can the user be unbanned.
 		if (targetUser.hasPermission(permissions.unban))
 			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.unban.nopermission,
-					message,
-					arguments
-				)
+				command.chooseMessageResponse(unban.nopermission, message, arguments)
 			);
 
 		// Delete your own command.
@@ -56,7 +42,7 @@ module.exports = {
 			.join(" ")
 			.slice(22)
 			.trim();
-		let unbanEmbed = new Discord.RichEmbed()
+		let unbanEmbed = new RichEmbed()
 			.setDescription("Unban")
 			.setColor(color.ban)
 			.addField("Unbanned User", `${targetUser} with ID ${targetUser.id}`)
@@ -70,11 +56,7 @@ module.exports = {
 		// Does the channel exist.
 		if (!unbanChannel)
 			return message.channel.send(
-				response.command.chooseMessageResponse(
-					personality.command.unban.nochannel,
-					message,
-					arguments
-				)
+				command.chooseMessageResponse(unban.nochannel, message, arguments)
 			);
 
 		// Unban user and send embed.
@@ -83,13 +65,7 @@ module.exports = {
 
 		try {
 			// Informe user directly over their guild unban.
-			await banUser.send(
-				response.command.chooseMessageResponse(
-					personality.command.unban.notify,
-					message,
-					reason
-				)
-			);
+			await banUser.send(command.chooseMessageResponse(unban.notify, message, reason));
 		} catch (err) {
 			console.log(
 				`[error] ${targetUser.user.tag} couldn't be contacted because of this error: ${err}`

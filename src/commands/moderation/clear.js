@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 
-const response = require("../../utilities/personalityhelperlibrary.js");
-const personality = require("../utilities/personalityresponse.json");
+const {command} = require("../../utilities/personalityhelperlibrary.js");
+const {clear} = require("../utilities/personalityresponse.json");
 
 module.exports = {
 	config: {
@@ -16,11 +16,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.clear))
 			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.clear.permission,
-					message,
-					arguments
-				)
+				command.chooseMessageResponse(clear.permission, message, arguments)
 			);
 
 		// Delete your own command.
@@ -39,8 +35,8 @@ module.exports = {
 			.then(() => {
 				message.channel
 					.send(
-						response.command.chooseMessageResponse(
-							personality.command.clear.notify,
+						command.chooseMessageResponse(
+							clear.notify,
 							message,
 							arguments,
 							fetched.size
@@ -50,12 +46,7 @@ module.exports = {
 			})
 			.catch(err => {
 				message.channel.send(
-					response.command.chooseMessageResponse(
-						personality.command.clear.error,
-						message,
-						arguments,
-						err
-					)
+					command.chooseMessageResponse(clear.error, message, arguments, err)
 				);
 			});
 	}

@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 const Permissions = require("../utilities/commandpermission.json");
 
-const response = require("../../utilities/personalityhelperlibrary.js");
-const personality = require("../utilities/personalityresponse.json");
+const {command} = require("../../utilities/personalityhelperlibrary.js");
+const {uptime} = require("../utilities/personalityresponse.json");
 
 module.exports = {
 	config: {
@@ -16,11 +16,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(Permissions.uptime))
 			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.uptime.permission,
-					message,
-					arguments
-				)
+				command.chooseMessageResponse(uptime.permission, message, arguments)
 			);
 
 		// Calculate time as string.
@@ -36,8 +32,8 @@ module.exports = {
 		}
 
 		message.channel.send(
-			response.command.chooseMessageResponse(
-				personality.command.uptime.notify,
+			command.chooseMessageResponse(
+				uptime.notify,
 				message,
 				arguments,
 				duration(client.uptime)

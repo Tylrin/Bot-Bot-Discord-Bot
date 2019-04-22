@@ -1,9 +1,9 @@
-const Discord = require("discord.js");
+const {RichEmbed} = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 const color = require("../utilities/commandcolor.json");
 
-const response = require("../../utilities/personalityhelperlibrary.js");
-const personality = require("../utilities/personalityresponse.json");
+const {command} = require("../../utilities/personalityhelperlibrary.js");
+const {ping} = require("../utilities/personalityresponse.json");
 
 module.exports = {
 	config: {
@@ -17,11 +17,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.ping))
 			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.ping.permission,
-					message,
-					arguments
-				)
+				command.chooseMessageResponse(ping.permission, message, arguments)
 			);
 
 		// Message channel.
@@ -30,16 +26,10 @@ module.exports = {
 			let ping = msg.createdTimestamp - message.createdTimestamp;
 
 			// Edit message
-			msg.edit(
-				response.command.chooseMessageResponse(
-					personality.command.ping.notify,
-					message,
-					arguments
-				)
-			);
+			msg.edit(command.chooseMessageResponse(ping.notify, message, arguments));
 
 			// Create embed.
-			let pingEmbed = new Discord.RichEmbed()
+			let pingEmbed = new RichEmbed()
 				.setDescription("Latency")
 				.setColor(color.ping)
 				.addField("Bot Latency", ping)

@@ -1,9 +1,9 @@
-const Discord = require("discord.js");
+const {RichEmbed} = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 const color = require("../utilities/commandcolor.json");
 
-const response = require("../../utilities/personalityhelperlibrary.js");
-const personality = require("../utilities/personalityresponse.json");
+const {command} = require("../../utilities/personalityhelperlibrary.js");
+const {botinfo} = require("../utilities/personalityresponse.json");
 
 module.exports = {
 	config: {
@@ -17,11 +17,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.botinfo))
 			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.botinfo.permission,
-					message,
-					arguments
-				)
+				command.chooseMessageResponse(botinfo.permission, message, arguments)
 			);
 
 		// Delete your own command.
@@ -29,7 +25,7 @@ module.exports = {
 
 		// Create embed.
 		let botIcon = client.user.displayAvatarURL;
-		let botEmbed = new Discord.RichEmbed()
+		let botEmbed = new RichEmbed()
 			.setTitle("Bot Information")
 			.setColor(color.botinfo)
 			.setThumbnail(botIcon)

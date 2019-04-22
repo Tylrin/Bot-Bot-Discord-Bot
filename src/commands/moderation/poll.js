@@ -1,9 +1,9 @@
-const Discord = require("discord.js");
+const {RichEmbed} = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 const color = require("../utilities/commandcolor.json");
 
-const response = require("../../utilities/personalityhelperlibrary.js");
-const personality = require("../utilities/personalityresponse.json");
+const {command} = require("../../utilities/personalityhelperlibrary.js");
+const {poll} = require("../utilities/personalityresponse.json");
 
 module.exports = {
 	config: {
@@ -24,8 +24,6 @@ module.exports = {
 		// Reply if no question was asked.
 		if (arguments <= 0) return message.reply("Type in what this poll is about.");
 
-		let pollEmbed = new Discord.RichEmbed()
-			.setTitle("Poll")
-			.setDescription(arguments.join(" "));
+		let pollEmbed = new RichEmbed().setTitle("Poll").setDescription(arguments.join(" "));
 	}
 };

@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 
-const response = require("../../utilities/personalityhelperlibrary.js");
-const personality = require("../utilities/personalityresponse.json");
+const {command} = require("../../utilities/personalityhelperlibrary.js");
+const {dice} = require("../utilities/personalityresponse.json");
 
 module.exports = {
 	config: {
@@ -15,11 +15,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.dice))
 			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.dice.permission,
-					message,
-					arguments
-				)
+				command.chooseMessageResponse(dice.permission, message, arguments)
 			);
 
 		// Delete your own command.
@@ -28,12 +24,7 @@ module.exports = {
 		// Calculate response.
 		let diceNumber = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
 		message.channel.send(
-			response.command.chooseMessageResponse(
-				personality.command.dice.replies,
-				message,
-				arguments,
-				diceNumber
-			)
+			command.chooseMessageResponse(dice.replies, message, arguments, diceNumber)
 		);
 	}
 };

@@ -2,8 +2,8 @@ const Discord = require("discord.js");
 const ms = require("ms");
 const permissions = require("../utilities/commandpermission.json");
 
-const response = require("../../utilities/personalityhelperlibrary.js");
-const personality = require("../utilities/personalityresponse.json");
+const {command} = require("../../utilities/personalityhelperlibrary.js");
+const {mute} = require("../utilities/personalityresponse.json");
 
 module.exports = {
 	config: {
@@ -17,11 +17,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.mute))
 			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.mute.permission,
-					message,
-					arguments
-				)
+				command.chooseMessageResponse(mute.permission, message, arguments)
 			);
 
 		// Get mentioned user.
@@ -30,21 +26,11 @@ module.exports = {
 		);
 		// Check if the user exist.
 		if (!targetUser)
-			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.mute.nouser,
-					message,
-					arguments
-				)
-			);
+			return message.reply(command.chooseMessageResponse(mute.nouser, message, arguments));
 		// Check mentioned user permission.
 		if (targetUser.hasPermission(permissions.mute))
 			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.mute.nopermission,
-					message,
-					arguments
-				)
+				command.chooseMessageResponse(mute.nopermission, message, arguments)
 			);
 
 		// Delete your own command.
@@ -73,24 +59,14 @@ module.exports = {
 		// Set mute time
 		let muteTime = arguments[1];
 		if (!muteTime)
-			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.mute.notime,
-					message,
-					arguments
-				)
-			);
+			return message.reply(command.chooseMessageResponse(mute.notime, message, arguments));
 
 		// Add the role to the user.
 		await targetUser.addRole(muteRole.id);
 
 		try {
 			await targetUser.send(
-				response.command.chooseMessageResponse(
-					personality.command.mute.notify,
-					message,
-					ms(ms(muteTime))
-				)
+				command.chooseMessageResponse(mute.notify, message, ms(ms(muteTime)))
 			);
 		} catch (err) {
 			console.log(

@@ -1,10 +1,9 @@
-const Discord = require("discord.js");
+const {RichEmbed} = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 const color = require("../utilities/commandcolor.json");
-const superagent = require("superagent");
 
-const response = require("../../utilities/personalityhelperlibrary.js");
-const personality = require("../utilities/personalityresponse.json");
+const {command} = require("../../utilities/personalityhelperlibrary.js");
+const {dog} = require("../utilities/personalityresponse.json");
 
 module.exports = {
 	config: {
@@ -16,41 +15,33 @@ module.exports = {
 	run: async (client, message, arguments) => {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.dog))
-			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.dog.permission,
-					message,
-					arguments
-				)
-			);
+			return message.reply(command.chooseMessageResponse(dog.permission, message, arguments));
 
 		// Delete your own command.
 		await message.delete().catch();
 
 		// Send preperation message.
 		let msg = await message.channel.send(
-			response.command.chooseMessageResponse(personality.command.dog.load, message, arguments)
+			command.chooseMessageResponse(dog.load, message, arguments)
 		);
 
 		// Get data url.
-		let {body} = await superagent.get("https://random.dog/woof.json");
+		fetch("https://random.dog/woof.json")
+			.then(res => res.json())
+			.then(body => {
+				// Check if body exist.
+				if (!body)
+					return msg.reply(
+						command.chooseMessageResponse(dog.errorload, message, arguments)
+					);
 
-		// Check if body exist.
-		if (!body)
-			return msg.reply(
-				response.command.chooseMessageResponse(
-					personality.command.dog.errorload,
-					message,
-					arguments
-				)
-			);
+				// Create embed.
+				let dogEmbed = new RichEmbed()
+					.setTitle("Doggo :dog:")
+					.setColor(color.dog)
+					.setImage(body.url);
 
-		// Create embed.
-		let dogEmbed = new Discord.RichEmbed()
-			.setTitle("Doggo :dog:")
-			.setColor(color.dog)
-			.setImage(body.url);
-
-		msg.edit(dogEmbed);
+				msg.edit(dogEmbed);
+			});
 	}
 };

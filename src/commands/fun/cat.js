@@ -3,8 +3,8 @@ const permissions = require("../utilities/commandpermission.json");
 const color = require("../utilities/commandcolor.json");
 const fetch = require("node-fetch");
 
-const response = require("../utilities/personalityhelperlibrary.js");
-const personality = require("../utilities/personalityresponse.json");
+const {command} = require("../utilities/personalityhelperlibrary.js");
+const {cat} = require("../utilities/personalityresponse.json");
 
 module.exports = {
 	config: {
@@ -16,20 +16,14 @@ module.exports = {
 	run: async (client, message, arguments) => {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.cat))
-			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.cat.permission,
-					message,
-					arguments
-				)
-			);
+			return message.reply(command.chooseMessageResponse(cat.permission, message, arguments));
 
 		// Delete your own command.
 		await message.delete().catch();
 
 		// Send preperation message.
 		let msg = await message.channel.send(
-			response.command.chooseMessageResponse(personality.command.cat.load, message, arguments)
+			command.chooseMessageResponse(cat.load, message, arguments)
 		);
 
 		// Get data url.
@@ -39,11 +33,7 @@ module.exports = {
 				// Check if body exist.
 				if (!body)
 					return msg.reply(
-						response.command.chooseMessageResponse(
-							personality.command.cat.errorload,
-							message,
-							arguments
-						)
+						command.chooseMessageResponse(cat.errorload, message, arguments)
 					);
 
 				// Create embed.

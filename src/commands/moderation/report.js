@@ -1,9 +1,9 @@
-const Discord = require("discord.js");
+const {RichEmbed} = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 const color = require("../utilities/commandcolor.json");
 
-const response = require("../../utilities/personalityhelperlibrary.js");
-const personality = require("../utilities/personalityresponse.json");
+const {command} = require("../../utilities/personalityhelperlibrary.js");
+const {report} = require("../utilities/personalityresponse.json");
 
 module.exports = {
 	config: {
@@ -17,11 +17,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.report))
 			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.report.permission,
-					message,
-					arguments
-				)
+				command.chooseMessageResponse(report.permission, message, arguments)
 			);
 
 		// Get mentioned user.
@@ -30,21 +26,11 @@ module.exports = {
 		);
 		// Check if the user exist.
 		if (!targetUser)
-			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.report.nouser,
-					message,
-					arguments
-				)
-			);
+			return message.reply(command.chooseMessageResponse(report.nouser, message, arguments));
 		// Can the user be banned.
 		if (targetUser.hasPermission(permissions.report))
 			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.report.nopermission,
-					message,
-					arguments
-				)
+				command.chooseMessageResponse(report.nopermission, message, arguments)
 			);
 
 		// Delete your own command
@@ -55,7 +41,7 @@ module.exports = {
 			.slice(22)
 			.trim();
 
-		let reportEmbed = new Discord.RichEmbed()
+		let reportEmbed = new RichEmbed()
 			.setDescription("Reports")
 			.setColor(color.report)
 			.addField("Reported User", `${targetUser} with ID: ${targetUser.id}`)
@@ -67,11 +53,7 @@ module.exports = {
 		let reportsChannel = message.guild.channels.find(`name`, "reports");
 		if (!reportsChannel)
 			return message.channel.send(
-				response.command.chooseMessageResponse(
-					personality.command.report.nochannel,
-					message,
-					arguments
-				)
+				command.chooseMessageResponse(report.nochannel, message, arguments)
 			);
 
 		reportsChannel.send(reportEmbed);

@@ -1,10 +1,9 @@
-const Discord = require("discord.js");
+const {RichEmbed} = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 const color = require("../utilities/commandcolor.json");
-const fs = require("fs");
 
-const response = require("../../utilities/personalityhelperlibrary.js");
-const personality = require("../utilities/personalityresponse.json");
+const {command} = require("../../utilities/personalityhelperlibrary.js");
+const {git} = require("../utilities/personalityresponse.json");
 
 module.exports = {
 	config: {
@@ -17,19 +16,13 @@ module.exports = {
 	run: async (client, message, arguments) => {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.serverinfo))
-			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.git.permission,
-					message,
-					arguments
-				)
-			);
+			return message.reply(command.chooseMessageResponse(git.permission, message, arguments));
 
 		// Delete your own command.
 		await message.delete().catch();
 
 		// Create embed.
-		let gitEmbed = new Discord.RichEmbed()
+		let gitEmbed = new RichEmbed()
 			.setTitle(`${client.botInfo.name} Git reposetory`)
 			.setDescription(
 				"This is the reposetory where you can find the code that is used by this bot."

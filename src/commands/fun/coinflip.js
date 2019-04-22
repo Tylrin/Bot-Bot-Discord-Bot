@@ -2,8 +2,8 @@ const {RichEmbed} = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 const color = require("../utilities/commandcolor.json");
 
-const response = require("../../utilities/personalityhelperlibrary.js");
-const personality = require("../utilities/personalityresponse.json");
+const {command} = require("../../utilities/personalityhelperlibrary.js");
+const {coinflip} = require("../utilities/personalityresponse.json");
 
 module.exports = {
 	config: {
@@ -16,11 +16,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.coinflip))
 			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.coinflip.permission,
-					message,
-					arguments
-				)
+				command.chooseMessageResponse(coinflip.permission, message, arguments)
 			);
 
 		// Delete your own command.

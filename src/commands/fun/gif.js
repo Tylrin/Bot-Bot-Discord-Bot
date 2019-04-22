@@ -2,8 +2,8 @@ const Discord = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 const color = require("../utilities/commandcolor.json");
 
-const response = require("../../utilities/personalityhelperlibrary.js");
-const personality = require("../utilities/personalityresponse.json");
+const {command} = require("../../utilities/personalityhelperlibrary.js");
+const {gif} = require("../utilities/personalityresponse.json");
 
 module.exports = {
 	config: {
@@ -19,13 +19,7 @@ module.exports = {
 
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.gif))
-			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.gif.permission,
-					message,
-					arguments
-				)
-			);
+			return message.reply(command.chooseMessageResponse(gif.permission, message, arguments));
 
 		// Delete your own command.
 		await message.delete().catch();
@@ -33,11 +27,7 @@ module.exports = {
 		// Check if there is a search term.
 		if (!arguments[0])
 			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.gif.nosearchterm,
-					message,
-					arguments
-				)
+				command.chooseMessageResponse(gif.nosearchterm, message, arguments)
 			);
 		let searchTerm = arguments[0];
 		// Get the rating.
@@ -79,11 +69,7 @@ module.exports = {
 			.catch(err => {
 				msg.delete().catch();
 				message.channel.send(
-					response.command.chooseMessageResponse(
-						personality.command.gif.errorload,
-						message,
-						arguments
-					)
+					command.chooseMessageResponse(gif.errorload, message, arguments)
 				);
 				console.log(`[error] Couldn't send gif because of this error: ${err}`);
 			});

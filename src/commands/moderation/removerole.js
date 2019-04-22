@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 
-const response = require("../../utilities/personalityhelperlibrary.js");
-const personality = require("../utilities/personalityresponse.json");
+const {command} = require("../../utilities/personalityhelperlibrary.js");
+const {removerole} = require("../utilities/personalityresponse.json");
 
 module.exports = {
 	config = {
@@ -16,8 +16,8 @@ module.exports = {
 	// Check permission for the command.
 	if (!message.member.hasPermission(permissions.removerole))
 		return message.reply(
-			response.command.chooseMessageResponse(
-				personality.command.removerole.permission,
+			command.chooseMessageResponse(
+				removerole.permission,
 				message,
 				arguments
 			)
@@ -30,8 +30,8 @@ module.exports = {
 	// Check if the user exist.
 	if (!targetUser)
 		return message.reply(
-			response.command.chooseMessageResponse(
-				personality.command.removerole.nouser,
+			command.chooseMessageResponse(
+				removerole.nouser,
 				message,
 				arguments
 			)
@@ -39,8 +39,8 @@ module.exports = {
 	// Check mentioned user permission.
 	if (rolenUser.hasPermission(permissions.removerole))
 		return message.reply(
-			response.command.chooseMessageResponse(
-				personality.command.removerole.nopermission,
+			command.chooseMessageResponse(
+				removerole.nopermission,
 				message,
 				arguments
 			)
@@ -53,8 +53,8 @@ module.exports = {
 	let role = arguments.join("").slice(22);
 	if (!role)
 		return message.reply(
-			response.command.chooseMessageResponse(
-				personality.command.removerole.norole,
+			command.chooseMessageResponse(
+				removerole.norole,
 				message,
 				arguments
 			)
@@ -64,8 +64,8 @@ module.exports = {
 	let guildRole = message.guild.roles.find(`name`, role);
 	if (!guildRole)
 		return message.reply(
-			response.command.chooseMessageResponse(
-				personality.command.removerole.unfoundrole,
+			command.chooseMessageResponse(
+				removerole.unfoundrole,
 				message,
 				arguments
 			)
@@ -74,8 +74,8 @@ module.exports = {
 	// Check if the don't have the role.
 	if (!targetUser.roles.has(guildRole.id))
 		return message.reply(
-			response.command.chooseMessageResponse(
-				personality.command.removerole.hasnotrole,
+			command.chooseMessageResponse(
+				removerole.hasnotrole,
 				message,
 				arguments
 			)
@@ -87,8 +87,8 @@ module.exports = {
 	try {
 		// Informe user directly over their guild role remove.
 		await targetUser.send(
-			response.command.chooseMessageResponse(
-				personality.command.removerole.notify,
+			command.chooseMessageResponse(
+				removerole.notify,
 				message,
 				arguments,
 				guildRole.name

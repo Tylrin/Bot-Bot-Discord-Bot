@@ -1,10 +1,9 @@
-const Discord = require("discord.js");
+const {RichEmbed} = require("discord.js");
 const permissions = require("../utilities/commandpermission.json");
 const color = require("../utilities/commandcolor.json");
-const superagent = require("superagent");
 
-const response = require("../../utilities/personalityhelperlibrary.js");
-const personality = require("../utilities/personalityresponse.json");
+const {command} = require("../../utilities/personalityhelperlibrary.js");
+const {chucknorris} = require("../utilities/personalityresponse.json");
 
 module.exports = {
 	config: {
@@ -17,11 +16,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.chucknorris))
 			return message.reply(
-				response.command.chooseMessageResponse(
-					personality.command.chucknorris.permission,
-					message,
-					arguments
-				)
+				command.chooseMessageResponse(chucknorris.permission, message, arguments)
 			);
 
 		// Delete your own command.
@@ -29,32 +24,26 @@ module.exports = {
 
 		// Send preperation message.
 		let msg = await message.channel.send(
-			response.command.chooseMessageResponse(
-				personality.command.chucknorris.load,
-				message,
-				arguments
-			)
+			command.chooseMessageResponse(chucknorris.load, message, arguments)
 		);
 
 		// Get data url.
-		let {body} = await superagent.get("https://api.chucknorris.io/jokes/random");
+		fetch("https://api.chucknorris.io/jokes/random")
+			.then(res => res.json())
+			.then(body => {
+				// Check if body exist.
+				if (!body)
+					return msg.reply(
+						command.chooseMessageResponse(chucknorris.errorload, message, arguments)
+					);
 
-		// Check if body exist.
-		if (!body)
-			return msg.reply(
-				response.command.chooseMessageResponse(
-					personality.command.chucknorris.errorload,
-					message,
-					arguments
-				)
-			);
+				// Create embed.
+				let chuckEmbed = new RichEmbed()
+					.setTitle("Chuck Norris Joke")
+					.setDescription(body.value)
+					.setColor(color.cat);
 
-		// Create embed.
-		let chuckEmbed = new Discord.RichEmbed()
-			.setTitle("Chuck Norris Joke")
-			.setDescription(body.value)
-			.setColor(color.cat);
-
-		msg.edit(chuckEmbed);
+				msg.edit(chuckEmbed);
+			});
 	}
 };
