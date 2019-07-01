@@ -1,9 +1,10 @@
 const {RichEmbed} = require("discord.js");
-const permissions = require("../utilities/commandpermission.json");
-const color = require("../utilities/commandcolor.json");
+const permissions = require("../../utilities/commandpermission.json");
+const color = require("../../utilities/commandcolor.json");
 
 const {command} = require("../../utilities/personalityhelperlibrary.js");
-const {git} = require("../utilities/personalityresponse.json");
+const response = require("../../utilities/personalityresponse.json");
+const git = response.command.git;
 
 module.exports = {
 	config: {

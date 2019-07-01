@@ -1,8 +1,9 @@
 const Discord = require("discord.js");
-const Permissions = require("../utilities/commandpermission.json");
+const Permissions = require("../../utilities/commandpermission.json");
 
 const {command} = require("../../utilities/personalityhelperlibrary.js");
-const {uptime} = require("../utilities/personalityresponse.json");
+const response = require("../../utilities/personalityresponse.json");
+const uptime = response.command.uptime;
 
 module.exports = {
 	config: {

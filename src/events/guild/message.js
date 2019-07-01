@@ -1,4 +1,4 @@
-const {prefix} = require("../../config.bot.json");
+const {prefix} = require("../../../config.bot.json");
 
 module.exports = async (client, message) => {
 	// On all messages
