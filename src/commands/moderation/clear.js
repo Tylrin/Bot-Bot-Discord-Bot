@@ -3,7 +3,7 @@ const permissions = require("../../utilities/commandpermission.json");
 
 const {command} = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
-const clear = response.command.clear;
+const clearPath = response.command.clear;
 
 module.exports = {
 	config: {
@@ -17,7 +17,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.clear))
 			return message.reply(
-				command.chooseMessageResponse(clear.permission, message, arguments)
+				command.chooseMessageResponse(clearPath.permission, message, arguments)
 			);
 
 		// Delete your own command.
@@ -37,7 +37,7 @@ module.exports = {
 				message.channel
 					.send(
 						command.chooseMessageResponse(
-							clear.notify,
+							clearPath.notify,
 							message,
 							arguments,
 							fetched.size
@@ -47,7 +47,7 @@ module.exports = {
 			})
 			.catch(err => {
 				message.channel.send(
-					command.chooseMessageResponse(clear.error, message, arguments, err)
+					command.chooseMessageResponse(clearPath.error, message, arguments, err)
 				);
 			});
 	}

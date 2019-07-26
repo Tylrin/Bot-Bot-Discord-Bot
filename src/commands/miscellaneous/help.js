@@ -1,11 +1,10 @@
 const {RichEmbed} = require("discord.js");
 const permissions = require("../../utilities/commandpermission.json");
 const color = require("../../utilities/commandcolor.json");
-const {readdir, readdirSync} = require("fs");
 
 const {command} = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
-const help = response.command.help;
+const helpPath = response.command.help;
 
 module.exports = {
 	config: {
@@ -19,7 +18,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.help))
 			return message.reply(
-				command.chooseMessageResponse(help.permission, message, arguments)
+				command.chooseMessageResponse(helpPath.permission, message, arguments)
 			);
 
 		// Delete your own command.
@@ -29,7 +28,7 @@ module.exports = {
 		if (arguments[0] == "help")
 			return message.author.send(
 				command.chooseMessageResponse(
-					help.doublehelp,
+					helpPath.doublehelp,
 					message,
 					arguments,
 					client.botConfig.prefix

@@ -3,7 +3,7 @@ const permissions = require("../../utilities/commandpermission.json");
 
 const {command} = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
-const dice = response.command.dice;
+const dicePath = response.command.dice;
 
 module.exports = {
 	config: {
@@ -16,7 +16,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.dice))
 			return message.reply(
-				command.chooseMessageResponse(dice.permission, message, arguments)
+				command.chooseMessageResponse(dicePath.permission, message, arguments)
 			);
 
 		// Delete your own command.
@@ -25,7 +25,7 @@ module.exports = {
 		// Calculate response.
 		let diceNumber = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
 		message.channel.send(
-			command.chooseMessageResponse(dice.replies, message, arguments, diceNumber)
+			command.chooseMessageResponse(dicePath.replies, message, arguments, diceNumber)
 		);
 	}
 };

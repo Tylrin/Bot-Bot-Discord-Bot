@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const permissions = require("../../utilities/commandpermission.json");
 const {command} = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
-const reload = response.command.reload;
+const reloadPath = response.command.reload;
 
 module.exports = {
 	config: {
@@ -16,7 +16,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.reload))
 			return message.reply(
-				command.chooseMessageResponse(reload.permission, message, arguments)
+				command.chooseMessageResponse(reloadPath.permission, message, arguments)
 			);
 
 		// Delete your own command.
@@ -24,7 +24,9 @@ module.exports = {
 
 		// Check if there is a file name.
 		if (!arguments[0])
-			return message.reply(command.chooseMessageResponse(reload.nofile, message, arguments));
+			return message.reply(
+				command.chooseMessageResponse(reloadPath.nofile, message, arguments)
+			);
 
 		// Try reloading the file.
 		let commandFile =
@@ -38,12 +40,12 @@ module.exports = {
 			const pull = require(`./${commandName}.js`);
 			client.commands.set(commandName, pull);
 		} catch (err) {
-			message.reply(command.chooseMessageResponse(reload.error, message, commandName));
+			message.reply(command.chooseMessageResponse(reloadPath.error, message, commandName));
 			return;
 		}
 
 		message.channel.send(
-			command.chooseMessageResponse(reload.notify, message, arguments, commandName)
+			command.chooseMessageResponse(reloadPath.notify, message, arguments, commandName)
 		);
 	}
 };

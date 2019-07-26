@@ -4,7 +4,7 @@ const color = require("../../utilities/commandcolor.json");
 
 const {command} = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
-const gif = response.command.gif;
+const gifPath = response.command.gif;
 
 module.exports = {
 	config: {
@@ -20,7 +20,9 @@ module.exports = {
 
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.gif))
-			return message.reply(command.chooseMessageResponse(gif.permission, message, arguments));
+			return message.reply(
+				command.chooseMessageResponse(gifPath.permission, message, arguments)
+			);
 
 		// Delete your own command.
 		await message.delete().catch();
@@ -28,7 +30,7 @@ module.exports = {
 		// Check if there is a search term.
 		if (!arguments[0])
 			return message.reply(
-				command.chooseMessageResponse(gif.nosearchterm, message, arguments)
+				command.chooseMessageResponse(gifPath.nosearchterm, message, arguments)
 			);
 		let searchTerm = arguments[0];
 		// Get the rating.
@@ -45,7 +47,7 @@ module.exports = {
 
 		// Send preperation message.
 		let msg = await message.channel.send(
-			response.command.chooseMessageResponse(personality.command.gif.load, message, arguments)
+			command.chooseMessageResponse(gifPath.load, message, arguments)
 		);
 
 		// Get random gif with options.
@@ -70,7 +72,7 @@ module.exports = {
 			.catch(err => {
 				msg.delete().catch();
 				message.channel.send(
-					command.chooseMessageResponse(gif.errorload, message, arguments)
+					command.chooseMessageResponse(gifPath.errorload, message, arguments)
 				);
 				console.log(`[error] Couldn't send gif because of this error: ${err}`);
 			});

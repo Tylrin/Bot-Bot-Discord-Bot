@@ -4,7 +4,7 @@ const color = require("../../utilities/commandcolor.json");
 
 const {command} = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
-const git = response.command.git;
+const gitPath = response.command.git;
 
 module.exports = {
 	config: {
@@ -17,7 +17,9 @@ module.exports = {
 	run: async (client, message, arguments) => {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.serverinfo))
-			return message.reply(command.chooseMessageResponse(git.permission, message, arguments));
+			return message.reply(
+				command.chooseMessageResponse(gitPath.permission, message, arguments)
+			);
 
 		// Delete your own command.
 		await message.delete().catch();

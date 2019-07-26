@@ -4,7 +4,7 @@ const color = require("../../utilities/commandcolor.json");
 
 const {command} = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
-const serverinfo = response.command.serverinfo;
+const serverinfoPath = response.command.serverinfo;
 
 module.exports = {
 	config: {
@@ -18,7 +18,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.serverinfo))
 			return message.reply(
-				command.chooseMessageResponse(serverinfo.permission, message, arguments)
+				command.chooseMessageResponse(serverinfoPath.permission, message, arguments)
 			);
 
 		// Delete your own command.

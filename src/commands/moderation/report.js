@@ -4,7 +4,7 @@ const color = require("../../utilities/commandcolor.json");
 
 const {command} = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
-const report = response.command.report;
+const reportPath = response.command.report;
 
 module.exports = {
 	config: {
@@ -18,7 +18,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.report))
 			return message.reply(
-				command.chooseMessageResponse(report.permission, message, arguments)
+				command.chooseMessageResponse(reportPath.permission, message, arguments)
 			);
 
 		// Get mentioned user.
@@ -27,11 +27,13 @@ module.exports = {
 		);
 		// Check if the user exist.
 		if (!targetUser)
-			return message.reply(command.chooseMessageResponse(report.nouser, message, arguments));
+			return message.reply(
+				command.chooseMessageResponse(reportPath.nouser, message, arguments)
+			);
 		// Can the user be banned.
 		if (targetUser.hasPermission(permissions.report))
 			return message.reply(
-				command.chooseMessageResponse(report.nopermission, message, arguments)
+				command.chooseMessageResponse(reportPath.nopermission, message, arguments)
 			);
 
 		// Delete your own command
@@ -54,7 +56,7 @@ module.exports = {
 		let reportsChannel = message.guild.channels.find(`name`, "reports");
 		if (!reportsChannel)
 			return message.channel.send(
-				command.chooseMessageResponse(report.nochannel, message, arguments)
+				command.chooseMessageResponse(reportPath.nochannel, message, arguments)
 			);
 
 		reportsChannel.send(reportEmbed);

@@ -3,7 +3,7 @@ const Permissions = require("../../utilities/commandpermission.json");
 
 const {command} = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
-const uptime = response.command.uptime;
+const uptimePath = response.command.uptime;
 
 module.exports = {
 	config: {
@@ -17,7 +17,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(Permissions.uptime))
 			return message.reply(
-				command.chooseMessageResponse(uptime.permission, message, arguments)
+				command.chooseMessageResponse(uptimePath.permission, message, arguments)
 			);
 
 		// Calculate time as string.
@@ -34,7 +34,7 @@ module.exports = {
 
 		message.channel.send(
 			command.chooseMessageResponse(
-				uptime.notify,
+				uptimePath.notify,
 				message,
 				arguments,
 				duration(client.uptime)

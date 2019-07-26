@@ -4,7 +4,7 @@ const color = require("../../utilities/commandcolor.json");
 
 const {command} = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
-const ban = response.command.ban;
+const banPath = response.command.ban;
 
 module.exports = {
 	config: {
@@ -17,7 +17,9 @@ module.exports = {
 	run: async (client, message, arguments) => {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.ban))
-			return message.reply(command.chooseMessageResponse(ban.permission, message, arguments));
+			return message.reply(
+				command.chooseMessageResponse(banPath.permission, message, arguments)
+			);
 
 		// Get mentioned user.
 		let targetUser = message.guild.member(
@@ -25,15 +27,17 @@ module.exports = {
 		);
 		// Check if the user exist.
 		if (!targetUser)
-			return message.reply(command.chooseMessageResponse(ban.nouser, message, arguments));
+			return message.reply(command.chooseMessageResponse(banPath.nouser, message, arguments));
 		// Check mentioned user permission.
 		if (targetUser.hasPermission(permissions.ban))
 			return message.reply(
-				command.chooseMessageResponse(ban.nopermission, message, arguments)
+				command.chooseMessageResponse(banPath.nopermission, message, arguments)
 			);
 		// Is the client able to ban someone.
 		if (!targetUser.bannable())
-			return message.reply(command.chooseMessageResponse(ban.unbannable, message, arguments));
+			return message.reply(
+				command.chooseMessageResponse(banPath.unbannable, message, arguments)
+			);
 
 		// Delete your own command.
 		await message.delete().catch();
@@ -59,7 +63,7 @@ module.exports = {
 		// Does the channel exist.
 		if (!banChannel)
 			return message.channel.send(
-				command.chooseMessageResponse(ban.nochannel, message, arguments)
+				command.chooseMessageResponse(banPath.nochannel, message, arguments)
 			);
 
 		// Ban user and send embed.
@@ -68,7 +72,9 @@ module.exports = {
 
 		try {
 			// Informe user directly over their guild ban.
-			await targetUser.send(command.chooseMessageResponse(ban.notify, message, arguments));
+			await targetUser.send(
+				command.chooseMessageResponse(banPath.notify, message, arguments)
+			);
 		} catch (err) {
 			console.log(
 				`[error] ${targetUser.user.tag} couldn't be contacted because of this error: ${err}`

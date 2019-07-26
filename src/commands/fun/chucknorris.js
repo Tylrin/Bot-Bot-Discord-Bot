@@ -4,7 +4,7 @@ const color = require("../../utilities/commandcolor.json");
 
 const {command} = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
-const chucknorris = response.command.chucknorris;
+const chucknorrisPath = response.command.chucknorris;
 
 module.exports = {
 	config: {
@@ -17,7 +17,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.chucknorris))
 			return message.reply(
-				command.chooseMessageResponse(chucknorris.permission, message, arguments)
+				command.chooseMessageResponse(chucknorrisPath.permission, message, arguments)
 			);
 
 		// Delete your own command.
@@ -25,7 +25,7 @@ module.exports = {
 
 		// Send preperation message.
 		let msg = await message.channel.send(
-			command.chooseMessageResponse(chucknorris.load, message, arguments)
+			command.chooseMessageResponse(chucknorrisPath.load, message, arguments)
 		);
 
 		// Get data url.
@@ -36,7 +36,7 @@ module.exports = {
 				// Check if body exist.
 				if (!body)
 					return msg.reply(
-						command.chooseMessageResponse(chucknorris.errorload, message, arguments)
+						command.chooseMessageResponse(chucknorrisPath.errorload, message, arguments)
 					);
 
 				// Create embed.

@@ -4,7 +4,7 @@ const color = require("../../utilities/commandcolor.json");
 
 const {command} = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
-const kick = response.command.kick;
+const kickPath = response.command.kick;
 
 module.exports = {
 	config: {
@@ -18,7 +18,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.kick))
 			return message.reply(
-				command.chooseMessageResponse(kick.permission, message, arguments)
+				command.chooseMessageResponse(kickPath.permission, message, arguments)
 			);
 
 		// Get mentioned user.
@@ -27,16 +27,18 @@ module.exports = {
 		);
 		// Check if the user exist.
 		if (!targetUser)
-			return message.reply(command.chooseMessageResponse(kick.nouser, message, arguments));
+			return message.reply(
+				command.chooseMessageResponse(kickPath.nouser, message, arguments)
+			);
 		// Check mentioned user permission.
 		if (targetUser.hasPermission(permissions.kick))
 			return message.reply(
-				command.chooseMessageResponse(kick.nopermission, message, arguments)
+				command.chooseMessageResponse(kickPath.nopermission, message, arguments)
 			);
 		// Is the client able to kick someone.
 		if (!targetUser.kickable())
 			return message.reply(
-				command.chooseMessageResponse(kick.unkickable, message, arguments)
+				command.chooseMessageResponse(kickPath.unkickable, message, arguments)
 			);
 
 		// Delete your own command.
@@ -63,7 +65,7 @@ module.exports = {
 		// Does the channel exist.
 		if (!kickChannel)
 			return message.channel.send(
-				command.chooseMessageResponse(kick.nochannel, message, arguments)
+				command.chooseMessageResponse(kickPath.nochannel, message, arguments)
 			);
 
 		// Kick user and send embed.
@@ -73,7 +75,7 @@ module.exports = {
 		try {
 			// Informe user directly over their guild kick.
 			await targetUser.send(
-				command.chooseMessageResponse(kick.notify, message, arguments, reason)
+				command.chooseMessageResponse(kickPath.notify, message, arguments, reason)
 			);
 		} catch (err) {
 			console.log(

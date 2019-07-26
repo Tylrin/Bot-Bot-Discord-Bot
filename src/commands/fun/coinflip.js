@@ -4,7 +4,7 @@ const color = require("../../utilities/commandcolor.json");
 
 const {command} = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
-const coinflip = response.command.coinflip;
+const coinflipPath = response.command.coinflip;
 
 module.exports = {
 	config: {
@@ -17,7 +17,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.coinflip))
 			return message.reply(
-				command.chooseMessageResponse(coinflip.permission, message, arguments)
+				command.chooseMessageResponse(coinflipPath.permission, message, arguments)
 			);
 
 		// Delete your own command.

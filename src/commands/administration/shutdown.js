@@ -3,7 +3,7 @@ const permissions = require("../../utilities/commandpermission.json");
 
 const {command} = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
-const shutdown = response.command.shutdown;
+const shutdownPath = response.command.shutdown;
 
 module.exports = {
 	config: {
@@ -17,7 +17,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.shutdown))
 			return message.reply(
-				command.chooseMessageResponse(shutdown.permission, message, arguments)
+				command.chooseMessageResponse(shutdownPath.permission, message, arguments)
 			);
 
 		// Delete your own command.
@@ -25,7 +25,7 @@ module.exports = {
 
 		try {
 			await message.channel.send(
-				command.chooseMessageResponse(shutdown.notify, message, arguments)
+				command.chooseMessageResponse(shutdownPath.notify, message, arguments)
 			);
 			process.exit();
 		} catch (err) {

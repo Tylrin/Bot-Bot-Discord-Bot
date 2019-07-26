@@ -4,7 +4,7 @@ const color = require("../../utilities/commandcolor.json");
 
 const {command} = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
-const unban = response.command.unban;
+const unbanPath = response.command.unban;
 
 module.exports = {
 	config: {
@@ -18,7 +18,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.unban))
 			return message.reply(
-				command.chooseMessageResponse(unban.permission, message, arguments)
+				command.chooseMessageResponse(unbanPath.permission, message, arguments)
 			);
 
 		// Get mentioned user.
@@ -27,12 +27,14 @@ module.exports = {
 		);
 		// Check if the user exist.
 		if (!unbannUser)
-			return message.reply(command.chooseMessageResponse(unban.nouser, message, arguments));
+			return message.reply(
+				command.chooseMessageResponse(unbanPath.nouser, message, arguments)
+			);
 
 		// Can the user be unbanned.
 		if (targetUser.hasPermission(permissions.unban))
 			return message.reply(
-				command.chooseMessageResponse(unban.nopermission, message, arguments)
+				command.chooseMessageResponse(unbanPath.nopermission, message, arguments)
 			);
 
 		// Delete your own command.
@@ -57,7 +59,7 @@ module.exports = {
 		// Does the channel exist.
 		if (!unbanChannel)
 			return message.channel.send(
-				command.chooseMessageResponse(unban.nochannel, message, arguments)
+				command.chooseMessageResponse(unbanPath.nochannel, message, arguments)
 			);
 
 		// Unban user and send embed.
@@ -66,7 +68,7 @@ module.exports = {
 
 		try {
 			// Informe user directly over their guild unban.
-			await banUser.send(command.chooseMessageResponse(unban.notify, message, reason));
+			await banUser.send(command.chooseMessageResponse(unbanPath.notify, message, reason));
 		} catch (err) {
 			console.log(
 				`[error] ${targetUser.user.tag} couldn't be contacted because of this error: ${err}`

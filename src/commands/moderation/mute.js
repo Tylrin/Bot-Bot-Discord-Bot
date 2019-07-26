@@ -4,7 +4,7 @@ const permissions = require("../../utilities/commandpermission.json");
 
 const {command} = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
-const mute = response.command.mute;
+const mutePath = response.command.mute;
 
 module.exports = {
 	config: {
@@ -18,7 +18,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.mute))
 			return message.reply(
-				command.chooseMessageResponse(mute.permission, message, arguments)
+				command.chooseMessageResponse(mutePath.permission, message, arguments)
 			);
 
 		// Get mentioned user.
@@ -27,11 +27,13 @@ module.exports = {
 		);
 		// Check if the user exist.
 		if (!targetUser)
-			return message.reply(command.chooseMessageResponse(mute.nouser, message, arguments));
+			return message.reply(
+				command.chooseMessageResponse(mutePath.nouser, message, arguments)
+			);
 		// Check mentioned user permission.
 		if (targetUser.hasPermission(permissions.mute))
 			return message.reply(
-				command.chooseMessageResponse(mute.nopermission, message, arguments)
+				command.chooseMessageResponse(mutePath.nopermission, message, arguments)
 			);
 
 		// Delete your own command.
@@ -60,14 +62,16 @@ module.exports = {
 		// Set mute time
 		let muteTime = arguments[1];
 		if (!muteTime)
-			return message.reply(command.chooseMessageResponse(mute.notime, message, arguments));
+			return message.reply(
+				command.chooseMessageResponse(mutePath.notime, message, arguments)
+			);
 
 		// Add the role to the user.
 		await targetUser.addRole(muteRole.id);
 
 		try {
 			await targetUser.send(
-				command.chooseMessageResponse(mute.notify, message, ms(ms(muteTime)))
+				command.chooseMessageResponse(mutePath.notify, message, ms(ms(muteTime)))
 			);
 		} catch (err) {
 			console.log(

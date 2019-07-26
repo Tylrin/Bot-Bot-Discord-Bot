@@ -4,7 +4,7 @@ const color = require("../../utilities/commandcolor.json");
 
 const {command} = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
-const eightball = response.command.eightball;
+const eightballPath = response.command.eightball;
 
 module.exports = {
 	config: {
@@ -17,7 +17,7 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.eightball))
 			return message.reply(
-				command.chooseMessageResponse(eightball.permission, message, arguments)
+				command.chooseMessageResponse(eightballPath.permission, message, arguments)
 			);
 
 		// Delete your own command.
@@ -31,12 +31,12 @@ module.exports = {
 		// Was a valid question asked.
 		if (!question)
 			return message.reply(
-				command.chooseMessageResponse(eightball.noquestion, message, arguments)
+				command.chooseMessageResponse(eightballPath.noquestion, message, arguments)
 			);
 
 		// Calculate replies.
 		let replies = command.chooseMessageResponse(
-			eightball.replies,
+			eightballPath.replies,
 			message,
 			arguments,
 			question

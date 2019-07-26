@@ -4,7 +4,7 @@ const color = require("../../utilities/commandcolor.json");
 
 const {command} = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
-const dog = response.command.dog;
+const dogPath = response.command.dog;
 
 module.exports = {
 	config: {
@@ -16,14 +16,16 @@ module.exports = {
 	run: async (client, message, arguments) => {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.dog))
-			return message.reply(command.chooseMessageResponse(dog.permission, message, arguments));
+			return message.reply(
+				command.chooseMessageResponse(dogPath.permission, message, arguments)
+			);
 
 		// Delete your own command.
 		await message.delete().catch();
 
 		// Send preperation message.
 		let msg = await message.channel.send(
-			command.chooseMessageResponse(dog.load, message, arguments)
+			command.chooseMessageResponse(dogPath.load, message, arguments)
 		);
 
 		// Get data url.
@@ -34,7 +36,7 @@ module.exports = {
 				// Check if body exist.
 				if (!body)
 					return msg.reply(
-						command.chooseMessageResponse(dog.errorload, message, arguments)
+						command.chooseMessageResponse(dogPath.errorload, message, arguments)
 					);
 
 				// Create embed.
