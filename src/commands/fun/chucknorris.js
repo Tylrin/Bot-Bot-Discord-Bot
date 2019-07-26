@@ -30,6 +30,7 @@ module.exports = {
 
 		// Get data url.
 		fetch("https://api.chucknorris.io/jokes/random")
+			.catch(err => console.error(err))
 			.then(res => res.json())
 			.then(body => {
 				// Check if body exist.

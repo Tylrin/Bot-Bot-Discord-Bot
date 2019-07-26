@@ -38,21 +38,36 @@ module.exports = {
 
 		// Reply with a list of all commands if there are no valid arguments.
 		if (arguments[0] == "list" || arguments.length <= 0) {
+			// test of testicals
+			let direntList = [];
 			let commandField = [];
+			let filesNames;
+			let getfiles = dir => {
+				const dirents = readdirSync(`./src/commands/${dir}`, {withFileTypes: true});
+				filesNames = dirents
+					.filter(dirent => !dirent.isDirectory())
+					.map(dirent => dirent.name);
+				direntList.push(dirents);
+			};
 
-			// Get commands from client
-			client.commands.forEach((f, i) => {
-				let command = f;
-				let name = command.config.name;
+			const filecat = readdirSync("./src/commands");
+			filecat.forEach(x => getfiles(x));
+
+			if (direntList.length <= 0) return;
+			direntList.forEach((f, i) => {
+				let props = direntList[i];
+				let commandName = filesNames;
+				console.log(`${props}`);
 				commandField.push({
-					name: name,
-					value: `${command.config.description || "invalid description"}\n\`${command
-						.config.usage ||
-						"invalid usage"}\`\n alternative commands: \`${command.config.aliases.join(
+					name: commandName,
+					value: `${props.config.description || "invalid description"}\n\`${props.config
+						.usage ||
+						"invalid usage"}\`\n alternative commands: \`${props.config.aliases.join(
 						", "
 					) || "no aliases for this command"}\``
 				});
 			});
+			console.log(`command Field: ${commandField}`);
 
 			// Create embed as json object.
 			message.author.send({
@@ -73,6 +88,52 @@ module.exports = {
 				}
 			});
 			return;
+
+			// Check the file direktory for console commands
+			readdir("./src/commands/administration/", (err, files) => {
+				let commandField = [];
+				console.log(files);
+				if (err) {
+					console.log(err);
+					return;
+				}
+
+				let jsfile = files.filter(f => f.split(".").pop() == "js");
+				if (jsfile.length <= 0) return;
+				jsfile.forEach((f, i) => {
+					let props = require(`./${f}`);
+					let commandName = f.split(".")[0];
+					commandField.push({
+						name: commandName,
+						value: `${props.config.description || "invalid description"}\n\`${props
+							.config.usage ||
+							"invalid usage"}\`\n alternative commands: \`${props.config.aliases.join(
+							", "
+						) || "no aliases for this command"}\``
+					});
+				});
+
+				// Create embed as json object.
+				message.author.send({
+					embed: {
+						title: "A list of all commands",
+						author: {
+							name: client.user.username,
+							icon_url: client.user.avatarURL
+						},
+						description:
+							"Here is a list of all available commands the bot can execute.",
+						color: (color.help, 1),
+						fields: commandField,
+						timestamp: new Date(),
+						footer: {
+							icon_url: client.user.avatarURL,
+							text: `${client.botConfig.prefix}help`
+						}
+					}
+				});
+				return;
+			});
 		}
 
 		// Reply with the information of a specified command.

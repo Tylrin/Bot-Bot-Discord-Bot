@@ -38,7 +38,7 @@ module.exports = {
 			const pull = require(`./${commandName}.js`);
 			client.commands.set(commandName, pull);
 		} catch (err) {
-			message.reply(`Could not reload ${commandName}.js`);
+			message.reply(command.chooseMessageResponse(reload.error, message, commandName));
 			return;
 		}
 

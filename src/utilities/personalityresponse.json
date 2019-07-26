@@ -9,7 +9,7 @@
 				"Maybe",
 				"I don't know",
 				"Ask me later!",
-				"I have to think out it"
+				"I have to think about it"
 			]
 		},
 		"addrole": {
@@ -113,7 +113,8 @@
 		"reload": {
 			"permission": ["You don't have the right to reload a command file."],
 			"nofile": ["Please provide a command to reload."],
-			"notify": ["The command {{custom}} has been reloaded."]
+			"notify": ["The command {{custom}} has been reloaded."],
+			"error": ["Could not reload {{custom}}.js"]
 		},
 		"removerole": {
 			"permission": ["You don't have the right to remove someones role."],

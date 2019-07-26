@@ -31,7 +31,7 @@ module.exports = {
 			.setURL("https://github.com/Tylrin/The-Source-Bot")
 			.setColor(color.git)
 			.setTimestamp()
-			.setFooter("Git Command", client.user.avatarURL);
+			.setFooter(`${client.botConfig.prefix}git`, client.user.avatarURL);
 
 		message.author.send(gitEmbed);
 	}

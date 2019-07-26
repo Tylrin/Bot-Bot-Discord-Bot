@@ -12,5 +12,6 @@ module.exports = client => {
 			}
 		}
 	};
-	["administration", "fun", "miscellaneous", "moderation"].forEach(x => load(x));
+	const categories = readdirSync("./src/commands/");
+	categories.forEach(x => load(x));
 };

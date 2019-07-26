@@ -1,6 +1,7 @@
 module.exports = client => {
 	// Initialize Bot
 	const botConfig = client.botConfig;
+	const botpackage = require("../../../package.json");
 
 	// Change status activity
 	let statuses = [
@@ -18,6 +19,14 @@ module.exports = client => {
 		// Change activity
 		client.user.setActivity(status, {type: "WATCHING"});
 	}, statusIntervalTime);
+
+	if (client.user.username !== botpackage.name) {
+		// Set username
+		client.user
+			.setUsername(`${botpackage.name}`)
+			.then(user => console.log(`My new username is ${user.username}`))
+			.catch(console.error);
+	}
 
 	console.log(`${client.user.username} is online!`);
 };

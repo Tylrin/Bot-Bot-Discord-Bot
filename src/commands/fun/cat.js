@@ -29,6 +29,7 @@ module.exports = {
 
 		// Get data url.
 		fetch("http://aws.random.cat/meow")
+			.catch(err => console.error(err))
 			.then(res => res.json())
 			.then(body => {
 				// Check if body exist.

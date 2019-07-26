@@ -31,6 +31,7 @@ module.exports = {
 
 		// Get data url.
 		fetch("https://api-to.get-a.life/meme")
+			.catch(err => console.error(err))
 			.then(res => res.json())
 			.then(body => {
 				// Check if body exist.
