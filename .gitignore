@@ -4,6 +4,8 @@ config.json
 
 prettier.config.js
 
+templatecommand.js
+
 /src/**/images
 
 *.ai
