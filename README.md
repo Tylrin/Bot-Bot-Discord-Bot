@@ -20,16 +20,13 @@ discord.js is a powerful [Node.js](https://nodejs.org) module that allows you to
 
 ## Installation
 
-**Node.js 8.0.0 or newer is required.**  
-Ignore any warnings about unmet peer dependencies, as they're all optional.
+**Node.js 8.0.0 or newer is required.**
 
 ```bash
-npm install discord.js
-npm install ms
-npm install giphy-api --save
-npm install node-fetch --save
-npm install stjs
+npm install
 ```
+
+or use the install.bat
 
 ### Token
 
