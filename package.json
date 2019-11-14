@@ -1,23 +1,18 @@
 {
-  "name": "The Source Bot",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "author": "Tylrin",
-  "dependencies": {
-    "discord.js": "^11.5.1",
-    "giphy-api": "^2.0.1",
-    "ms": "^2.1.1",
-    "node-fetch": "^2.3.0",
-    "stjs": "0.0.5",
-    "superagent": "^5.0.2"
-  },
-  "devDependencies": {
-    "prettier": "1.17.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "license": "ISC"
+	"name": "TheSourceBot",
+	"version": "1.0.0",
+	"main": "index.js",
+	"repository": "https://github.com/Tylrin/Bot-Bot-Discord-Bot.git",
+	"author": "Tylrin <tylrin@outlook.com>",
+	"license": "MIT",
+	"dependencies": {
+		"discord.js": "^11.5.1",
+		"giphy-api": "^2.0.1",
+		"ms": "^2.1.2",
+		"node-fetch": "^2.6.0",
+		"stjs": "^0.0.5"
+	},
+	"devDependencies": {
+		"prettier": "^1.18.2"
+	}
 }

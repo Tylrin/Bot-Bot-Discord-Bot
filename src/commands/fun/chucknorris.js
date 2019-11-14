@@ -1,8 +1,8 @@
-const {RichEmbed} = require("discord.js");
+const { RichEmbed } = require("discord.js");
 const permissions = require("../../utilities/commandpermission.json");
 const color = require("../../utilities/commandcolor.json");
 
-const {command} = require("../../utilities/personalityhelperlibrary.js");
+const { command } = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
 const chucknorrisPath = response.command.chucknorris;
 
@@ -17,7 +17,11 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.chucknorris))
 			return message.reply(
-				command.chooseMessageResponse(chucknorrisPath.permission, message, arguments)
+				command.chooseMessageResponse(
+					chucknorrisPath.permission,
+					message,
+					arguments
+				)
 			);
 
 		// Delete your own command.
@@ -25,18 +29,35 @@ module.exports = {
 
 		// Send preperation message.
 		let msg = await message.channel.send(
-			command.chooseMessageResponse(chucknorrisPath.load, message, arguments)
+			command.chooseMessageResponse(
+				chucknorrisPath.load,
+				message,
+				arguments
+			)
 		);
 
 		// Get data url.
 		fetch("https://api.chucknorris.io/jokes/random")
-			.catch(err => console.error(err))
+			.catch(err => {
+				console.error(err);
+				msg.edit(
+					command.chooseMessageResponse(
+						chucknorrisPath.errorload,
+						message,
+						arguments
+					)
+				);
+			})
 			.then(res => res.json())
 			.then(body => {
 				// Check if body exist.
 				if (!body)
 					return msg.reply(
-						command.chooseMessageResponse(chucknorrisPath.errorload, message, arguments)
+						command.chooseMessageResponse(
+							chucknorrisPath.errorload,
+							message,
+							arguments
+						)
 					);
 
 				// Create embed.

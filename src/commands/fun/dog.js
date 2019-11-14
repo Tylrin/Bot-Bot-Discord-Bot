@@ -1,8 +1,9 @@
-const {RichEmbed} = require("discord.js");
+const { RichEmbed } = require("discord.js");
 const permissions = require("../../utilities/commandpermission.json");
 const color = require("../../utilities/commandcolor.json");
+const fetch = require("node-fetch");
 
-const {command} = require("../../utilities/personalityhelperlibrary.js");
+const { command } = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
 const dogPath = response.command.dog;
 
@@ -17,7 +18,11 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.dog))
 			return message.reply(
-				command.chooseMessageResponse(dogPath.permission, message, arguments)
+				command.chooseMessageResponse(
+					dogPath.permission,
+					message,
+					arguments
+				)
 			);
 
 		// Delete your own command.
@@ -30,13 +35,26 @@ module.exports = {
 
 		// Get data url.
 		fetch("https://random.dog/woof.json")
-			.catch(err => console.error(err))
+			.catch(err => {
+				console.error(err);
+				msg.edit(
+					command.chooseMessageResponse(
+						dogPath.errorload,
+						message,
+						arguments
+					)
+				);
+			})
 			.then(res => res.json())
 			.then(body => {
 				// Check if body exist.
 				if (!body)
 					return msg.reply(
-						command.chooseMessageResponse(dogPath.errorload, message, arguments)
+						command.chooseMessageResponse(
+							dogPath.errorload,
+							message,
+							arguments
+						)
 					);
 
 				// Create embed.

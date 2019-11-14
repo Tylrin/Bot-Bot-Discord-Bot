@@ -1,9 +1,9 @@
-const {RichEmbed} = require("discord.js");
+const { RichEmbed } = require("discord.js");
 const permissions = require("../../utilities/commandpermission.json");
 const color = require("../../utilities/commandcolor.json");
 const fetch = require("node-fetch");
 
-const {command} = require("../../utilities/personalityhelperlibrary.js");
+const { command } = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
 const catPath = response.command.cat;
 
@@ -18,7 +18,11 @@ module.exports = {
 		// Check permission for the command.
 		if (!message.member.hasPermission(permissions.cat))
 			return message.reply(
-				command.chooseMessageResponse(catPath.permission, message, arguments)
+				command.chooseMessageResponse(
+					catPath.permission,
+					message,
+					arguments
+				)
 			);
 
 		// Delete your own command.
@@ -31,13 +35,26 @@ module.exports = {
 
 		// Get data url.
 		fetch("http://aws.random.cat/meow")
-			.catch(err => console.error(err))
+			.catch(err => {
+				console.error(err);
+				msg.edit(
+					command.chooseMessageResponse(
+						catPath.errorload,
+						message,
+						arguments
+					)
+				);
+			})
 			.then(res => res.json())
 			.then(body => {
 				// Check if body exist.
 				if (!body)
 					return msg.reply(
-						command.chooseMessageResponse(catPath.errorload, message, arguments)
+						command.chooseMessageResponse(
+							catPath.errorload,
+							message,
+							arguments
+						)
 					);
 
 				// Create embed.

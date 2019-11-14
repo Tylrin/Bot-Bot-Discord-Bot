@@ -32,7 +32,7 @@ module.exports = {
 
 		// Delete messages.
 		message.channel
-			.bulkDelete(fetched.size)
+			.bulkDelete(fetched.size, true)
 			.then(() => {
 				message.channel
 					.send(

@@ -5,6 +5,7 @@ const color = require("../../utilities/commandcolor.json");
 const {command} = require("../../utilities/personalityhelperlibrary.js");
 const response = require("../../utilities/personalityresponse.json");
 const kickPath = response.command.kick;
+const channelToPostTo = "reports";
 
 module.exports = {
 	config: {
@@ -61,7 +62,7 @@ module.exports = {
 			.addField("Reasons", reason);
 
 		// Get channel location.
-		let kickChannel = message.guild.channels.find(`name`, "incidents");
+		let kickChannel = message.guild.channels.find(`name`, channelToPostTo);
 		// Does the channel exist.
 		if (!kickChannel)
 			return message.channel.send(
