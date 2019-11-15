@@ -23,7 +23,7 @@ discord.js is a powerful [Node.js](https://nodejs.org) module that allows you to
 **Node.js 8.0.0 or newer is required.**
 
 ```bash
-npm install
+yarn install
 ```
 
 or use the install.bat
