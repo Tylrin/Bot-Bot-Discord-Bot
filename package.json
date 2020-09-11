@@ -9,7 +9,7 @@
 		"discord.js": "^11.5.1",
 		"giphy-api": "^2.0.1",
 		"ms": "^2.1.2",
-		"node-fetch": "^2.6.0",
+		"node-fetch": "^2.6.1",
 		"stjs": "^0.0.5"
 	},
 	"devDependencies": {
